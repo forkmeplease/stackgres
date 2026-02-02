@@ -21,7 +21,11 @@ kubectl get sgclusters.stackgres.io -A --template '
   {{- end }}
 {{- end }}'
 ```
-<!-- TODO output -->
+
+Example output when a restart is pending:
+```
+default.my-cluster PendingRestart=True
+```
 
 **The restart procedure will generate a service disruption**. The service disruption will start for the
  read write connections when the primary pod is deleted and will end when Patroni elect the new

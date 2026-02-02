@@ -14,20 +14,13 @@ Only some basic extensions are installed by default, like `plpgsql`.
 
 ## List Extensions
 
-We can list the basic extensions by connecting to the cluster (here `cluster`), and executing the following SQL:
-
-<!-- TODO see if it's still up-to-date -->
+We can list the available extensions by connecting to the cluster and executing the following SQL:
 
 ```
-postgres=# select * from pg_available_extensions();
-        name        | default_version |                           comment                            
---------------------+-----------------+--------------------------------------------------------------
- dblink             | 1.2             | connect to other PostgreSQL databases from within a database
- plpgsql            | 1.0             | PL/pgSQL procedural language
- pg_stat_statements | 1.7             | track execution statistics of all SQL statements executed
- plpython3u         | 1.0             | PL/Python3U untrusted procedural language
-(4 rows)
+postgres=# SELECT * FROM pg_available_extensions ORDER BY name LIMIT 10;
 ```
+
+> **Note**: The list of available extensions depends on your PostgreSQL version and the extensions you have configured in your cluster spec.
 
 ## Simple Extension Installation
 

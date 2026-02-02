@@ -7,10 +7,6 @@ description: Details about the components of the "stack".
 showToc: true
 ---
 
-<!-- TODO
-- maybe move the text / simplify a bit
--->
-
 Running Postgres successfully in production requires a whole stack of components related to PostgreSQL -- a curated set of open source components built, verified, and packaged together.
 There is an ecosystem of tools built around Postgres that can be used to create a Postgres distribution.
 This is what we call the stack of components.

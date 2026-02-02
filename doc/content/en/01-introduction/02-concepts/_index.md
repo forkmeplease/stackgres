@@ -21,7 +21,7 @@ StackGres enables all common (and some uncommon) database management operations 
 While doing so, StackGres sticks to production-grade behavior.
 This means that certain operations aren't just blindly followed (for example when a user updates the target state of a database instance), but in a way that minimizes disruption of applications and users, in the same way as a good DBA would.
 
-<!-- TODO example: updates -->
+For example, when you change the PostgreSQL version or configuration, StackGres performs a rolling update that maintains cluster availability throughout the process.
 
 So you can think of StackGres as the Kubernetes version of your friendly DBA – just with a Kubernetes API, much faster response time, and fewer coffee breaks.
 

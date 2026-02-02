@@ -20,4 +20,9 @@ This means, for example, that required Postgres cluster restarts are not just pe
 
 StackGres aims to provide the best combination of a DBA expert and Kubernetes operator.
 
-<!-- TODO guide for examples -->
+## Available Operations
+
+For detailed guides on each operation, see:
+
+- [Database Operations Guide]({{% relref "04-administration-guide/06-database-operations" %}})
+- [SGDbOps Reference]({{% relref "06-crd-reference/08-sgdbops" %}})

@@ -15,4 +15,7 @@ If you prefer to further tune Postgres, you can create custom configuration via 
 > [OnGres](https://ongres.com/), the creators of StackGres are obsessed with tuning Postgres adequately.
 > So much that they have built [postgresqlCO.NF](https://postgresqlco.nf/), a website that helps hundreds of thousands of Postgres users on how to better tune their database.
 
-<!-- TODO examples -->
+## Learn More
+
+- [PostgreSQL Configuration Guide]({{% relref "04-administration-guide/04-configuration/02-postgres-configuration" %}})
+- [SGPostgresConfig Reference]({{% relref "06-crd-reference/03-sgpostgresconfig" %}})

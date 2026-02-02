@@ -6,13 +6,6 @@ description: Details about StackGres' architecture.
 showToc: true
 ---
 
-<!-- TODO
-show the broad architecture in a diagram:
-- operator
-- cluster
--> not too much detail
--->
-
 ## The Cluster
 
 A StackGres cluster is basically a StatefulSet where each pod is a database instance. The
@@ -22,12 +15,6 @@ A StackGres cluster is basically a StatefulSet where each pod is a database inst
 ### StackGres Cluster Architecture diagram
 
 ![SG Architecture](SG_StackGres_Architecture.png "StackGres-General_Architecture")
-
-
-<!-- TODO
-show the anatomy of a pod
--->
-
 
 ### StackGres Pod Architecture diagram
 
