@@ -489,7 +489,11 @@ spec:
         columnMaskHash:
           SHA-256:
             salt123:
+<<<<<<< HEAD
             - "public\\.users\\.email"
+=======
+              - "public\\.users\\.email"
+>>>>>>> d2ea493362 (docs: add SGStream CDC streaming documentation)
   target:
     type: SGCluster
     sgCluster:
@@ -523,3 +527,4 @@ spec:
 ## Next Steps
 
 - [Monitoring Streams]({{% relref "04-administration-guide/17-cdc-streaming/03-monitoring-streams" %}}) - Track stream progress and health
+

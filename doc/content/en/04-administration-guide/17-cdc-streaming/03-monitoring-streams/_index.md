@@ -336,3 +336,4 @@ FROM pg_replication_slots;
 ## Next Steps
 
 - [Stream Configuration]({{% relref "04-administration-guide/17-cdc-streaming/02-stream-configuration" %}}) - Tune performance settings
+
