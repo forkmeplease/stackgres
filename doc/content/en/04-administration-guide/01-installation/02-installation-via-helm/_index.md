@@ -89,3 +89,71 @@ stackgres-restapi-6ffd694fd5-hcpgp    2/2     Running   0          3m30s
 ```
 
 Now we can continue with [creating a StackGres cluster]({{% relref "04-administration-guide/02-cluster-creation" %}}).
+
+## Operator Architecture
+
+The operator Helm chart creates the following components:
+
+- A Deployment called `stackgres-operator` with 1 Pod in the `stackgres` namespace. This is the main operator component that manages all StackGres resources.
+- Custom Resource Definitions (CRDs) that extend Kubernetes functionalities by providing custom resources like SGCluster to create Postgres clusters.
+- Mutating and validating webhooks that provide functionalities like defaults and custom validations on the new custom resources.
+- A Deployment called `stackgres-restapi` that provides the Web Console component, allowing you to interact with StackGres custom resources using a web interface.
+
+When SGClusters are created with monitoring capabilities, a Deployment called `stackgres-collector` is created to collect metrics. The metrics are discarded if not sent to any metric storage. StackGres offers an integration with the Prometheus operator so that metrics can be collected by the Prometheus resource installed in your Kubernetes cluster.
+
+## Upgrading the Operator
+
+Upgrading the operator Helm chart is needed whenever any setting is changed or when you need to upgrade the operator version.
+
+```
+helm upgrade --namespace stackgres stackgres-operator stackgres-charts/stackgres-operator --version <version> -f values.yaml
+```
+
+> **Best Practice:** It is recommended to always fix the version in your `values.yaml` or installation command to ensure reproducible deployments.
+
+For more information see the [upgrade section]({{% relref "04-administration-guide/16-upgrade" %}}).
+
+## Configuration with Helmfile
+
+For a more DevOps-oriented experience, the installation may be managed by tools like [Helmfile](https://github.com/helmfile/helmfile) that wraps the Helm CLI, allowing you to set even the command parameters as a configuration file. Helmfile also allows separating environments using a Go templating engine similar to the one used for Helm charts.
+
+Example `helmfile.yaml`:
+
+```yaml
+environments:
+  training:
+---
+
+repositories:
+  - name: stackgres-charts
+    url: https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/
+
+releases:
+- name: stackgres-operator
+  namespace: stackgres
+  version: 1.16.1
+  chart: stackgres-charts/stackgres-operator
+  # Helmfile allows to specify a set of environments and to bind a Helm chart
+  # to a specific values.yaml file based on the environment name by using Go templating
+  values:
+    - values/stackgres-{{ .Environment.Name }}-values.yaml
+
+# Helmfile allows to specify other Helm command options
+helmDefaults:
+  wait: true
+  timeout: 120
+  createNamespace: true
+  cleanupOnFail: true
+```
+
+To apply and update the above configuration for the `training` environment:
+
+```
+helmfile -e training -f helmfile.yaml apply
+```
+
+## SGConfig Custom Resource
+
+Helm chart values are (mostly) mapped to the SGConfig custom resource that is stored during the installation/upgrade of the Helm chart. For detailed configuration options, see the [SGConfig reference]({{% relref "06-crd-reference/12-sgconfig" %}}).
+
+> **Tip:** Users of the operator should not create an SGConfig directly. Instead, modify it to change some of the configuration (configuration that cannot be changed by editing the SGConfig is specified in the documentation). In general, it is better to always use the Helm chart `values.yaml` to configure the operator in order for the changes to not be overwritten during upgrades.
