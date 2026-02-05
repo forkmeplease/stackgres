@@ -24,5 +24,5 @@ StackGres aims to provide the best combination of a DBA expert and Kubernetes op
 
 For detailed guides on each operation, see:
 
-- [Database Operations Guide]({{% relref "04-administration-guide/06-database-operations" %}})
+- [Database Operations Guide]({{% relref "04-administration-guide/06-database-operations/01-benchmarking" %}})
 - [SGDbOps Reference]({{% relref "06-crd-reference/08-sgdbops" %}})

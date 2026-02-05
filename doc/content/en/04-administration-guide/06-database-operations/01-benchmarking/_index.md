@@ -482,5 +482,5 @@ kubectl describe pod -l stackgres.io/cluster-name=my-cluster
 ## Related Documentation
 
 - [SGDbOps Reference]({{% relref "06-crd-reference/08-sgdbops" %}})
-- [Database Operations]({{% relref "04-administration-guide/06-database-operations" %}})
+- [Database Operations]({{% relref "04-administration-guide/06-database-operations/01-benchmarking" %}})
 - [Monitoring]({{% relref "04-administration-guide/08-monitoring" %}})

@@ -289,7 +289,7 @@ spec:
 
 ### Istio
 
-For Istio service mesh integration, see the [Istio guide]({{% relref "04-administration-guide/02-cluster-creation/02-service-mesh-integration/01-istio" %}}).
+For Istio service mesh integration, see the [Istio guide]({{% relref "04-administration-guide/02-cluster-creation/05-service-mesh-integration/01-istio" %}}).
 
 Key configurations:
 - mTLS for all traffic

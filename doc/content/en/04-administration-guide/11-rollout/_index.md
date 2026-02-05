@@ -139,7 +139,7 @@ Even when `type` is set to `Never`, SGDbOps operations of type `restart`, `secur
 
 The `method` setting in the update strategy serves as the default method for SGDbOps operations. However, you can override this by specifying a different method directly in the SGDbOps resource.
 
-For more information about restart operations, see the [Restart Operations]({{% relref "04-administration-guide/21-restart" %}}) section.
+For more information about restart operations, see the [Manual Cluster Restart]({{% relref "04-administration-guide/11-rollout/01-manual-restart" %}}) section.
 
 ### Detecting Pending Updates
 
@@ -368,7 +368,7 @@ Status fields include:
 
 ### Integration with Update Strategy
 
-The restart SGDbOps operation works in conjunction with the cluster's [update strategy]({{% relref "04-administration-guide/04-configuration/07-update-strategy" %}}). Key points:
+The restart SGDbOps operation works in conjunction with the cluster's [update strategy](#update-strategy-configuration). Key points:
 
 1. **Method inheritance**: If you don't specify a `method` in the SGDbOps, the cluster's `updateStrategy.method` is used.
 
@@ -412,6 +412,6 @@ For more troubleshooting information, refer to the [Cluster Restart Troubleshoot
 
 ## Related Documentation
 
-- [Manual Cluster Restart]({{% relref "04-administration-guide/11-cluster-manual-restart" %}})
+- [Manual Cluster Restart]({{% relref "04-administration-guide/11-rollout/01-manual-restart" %}})
 - [SGDbOps CRD Reference]({{% relref "06-crd-reference/08-sgdbops" %}})
 - [SGCluster CRD Reference]({{% relref "06-crd-reference/01-sgcluster" %}})

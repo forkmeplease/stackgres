@@ -323,4 +323,4 @@ kubectl exec my-cluster-0 -c postgres-util -- psql -c "SELECT * FROM pg_availabl
 
 - [PostgreSQL Extensions Guide]({{% relref "04-administration-guide/07-postgres-extensions" %}})
 - [Extension Versions]({{% relref "04-administration-guide/07-postgres-extensions/02-extension-versions" %}})
-- [SGPostgresConfig Reference]({{% relref "06-crd-reference/03-sgpgconfig" %}})
+- [SGPostgresConfig Reference]({{% relref "06-crd-reference/03-sgpostgresconfig" %}})

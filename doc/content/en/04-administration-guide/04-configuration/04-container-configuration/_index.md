@@ -312,6 +312,6 @@ spec:
 
 ## Related Documentation
 
-- [Instance Profiles]({{% relref "04-administration-guide/04-configuration/01-instance-profiles" %}})
+- [Instance Profiles]({{% relref "04-administration-guide/04-configuration/01-instance-profile" %}})
 - [Connection Pooling]({{% relref "04-administration-guide/04-configuration/03-connection-pooling" %}})
 - [Monitoring]({{% relref "04-administration-guide/08-monitoring" %}})
