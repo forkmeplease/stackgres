@@ -7,12 +7,12 @@ description: Details about default and custom configurations.
 showToc: true
 ---
 
-StackGres clusters can be configured in various ways. In this section we will detail hot to configure the following aspects:
+StackGres clusters can be configured in various ways. In this section we will detail how to configure the following aspects:
 
 * the resources requirements of the Pods
 * the PostgreSQL configuration
-* the connection pooling (PgBouncer) configuration.
-* the cluster profile configuration.
+* the connection pooling (PgBouncer) configuration
+* the cluster profile configuration
 
 The first three configurations listed above (i.e. excluding the profile configuration) are defined in Kubernetes as custom resource definitions (CRDs): `SGInstanceProfile`, `SGPostgresConfig`, and `SGPoolingConfig`. The cluster profile configuration is defined as the `SGCluster.spec.profile` field.
 
