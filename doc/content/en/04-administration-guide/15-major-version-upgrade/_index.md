@@ -18,6 +18,27 @@ The process is meant to be straightforward, however, you need to perform some pr
 4. Make sure you have [SGPostgresConfig]({{% relref "06-crd-reference/03-sgpostgresconfig" %}}) for the postgres version you're planning to migrate to.
 5. Performed the upgrade in a test environment.
 
+## Upgrade Process Flow
+
+The major version upgrade operation follows these steps:
+
+1. Store the status of the operation in the SGCluster status
+2. Disable sync replication mode (if enabled)
+3. Perform a CHECKPOINT
+4. Downscale the cluster to only the primary instance
+5. Change the version in the SGCluster
+6. Restart (re-create) the primary Pod with the `major-version-upgrade` init container that runs the `pg_upgrade` command
+7. If any container fails (configurable with `maxErrorsAfterUpgrade` field), a rollback is performed: the SGCluster is restored to its previous status and the operation terminates with an error
+8. If no container fails and the Pod becomes ready, the operation is considered valid (pg_upgrade was successful and Patroni was able to start Postgres). The old data is then removed.
+9. Upscale the cluster to the previous number of instances
+10. Re-enable the previous sync replication mode (if different from async)
+11. Remove the operation status from the SGCluster status
+
+**Important notes:**
+- Rollback is **not possible** when `link` field is set to `true`
+- When `check` field is set to `true`, the data is never touched, just checked, and the cluster is brought back to its previous state after the operation completes
+- If your filesystem supports it, use `clone` to greatly reduce the duration of the major version upgrade operation and allow a functional rollback in case of error by using file cloning (reflinks)
+
 ## Steps to perform a Major version upgrade using de Web Console.
 
 1. Go to `Database Operations` 
@@ -112,3 +133,41 @@ At the end of the logs you should see something like:
 + echo 'Major version upgrade performed'
 Major version upgrade performed
 ```
+
+## Extensions and Major Version Upgrade
+
+When upgrading with extensions, the rule of thumb is to read the documentation of each specific extension to check if there is any special procedure to follow.
+
+**Core and contrib extensions:** Do not require any special treatment. They are updated to the next version together with the PostgreSQL version.
+
+**Timescaledb:** It is required to:
+1. Upgrade timescaledb to the latest available version compatible with the current Postgres major version
+2. Upgrade Postgres major version
+3. Upgrade timescaledb to the latest version for the new Postgres major version
+
+**Citus:** Similar requirements to timescaledb:
+1. Upgrade citus extension to the latest supported version
+2. Upgrade Postgres major version
+3. Upgrade citus extension to the latest version
+
+### Specifying Extension Versions
+
+Some extensions allow specifying the target version in the SGDbOps:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGDbOps
+metadata:
+  name: major-upgrade
+spec:
+  sgCluster: my-cluster
+  op: majorVersionUpgrade
+  majorVersionUpgrade:
+    postgresVersion: "17.4"
+    sgPostgresConfig: postgres-17
+    extensions:
+    - name: pg_cron
+      version: "1.6"
+```
+
+> **Important:** StackGres only installs extension binaries to the specified (or latest) version. The user must execute `ALTER EXTENSION ... UPDATE TO` commands, including any custom procedure required by each particular extension.
