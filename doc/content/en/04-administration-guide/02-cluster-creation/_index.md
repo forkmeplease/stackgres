@@ -9,6 +9,103 @@ showToc: true
 
 This page will guide you though the creation of a production-ready StackGres cluster using your custom configuration.
 
+## Understanding SGCluster
+
+An SGCluster is a custom resource that represents a Postgres cluster in StackGres. It is important not to confuse this with the PostgreSQL term "database cluster", which refers to a single Postgres instance (a collection of databases managed by a single Postgres server process). In StackGres, an SGCluster represents a high-availability cluster composed of multiple Postgres instances.
+
+When you create an SGCluster, the operator creates N Pods (where N is defined by `.spec.instances`). One of these Pods is elected by [Patroni](https://patroni.readthedocs.io/en/latest/) to be the primary, which receives all read/write queries. The remaining Pods become replicas that use PostgreSQL streaming replication (and/or WAL shipping if backups are configured) to stay synchronized with the primary.
+
+StackGres creates Services to route traffic to the appropriate Pods:
+
+- The main Service (named after the cluster) points to the primary Pod for read/write operations
+- The `-replicas` Service distributes read-only queries across the replica Pods (useful for queries that are resilient to slightly out-of-date data)
+
+## Minimal SGCluster Specification
+
+The simplest SGCluster you can create requires only a few fields:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: my-cluster
+spec:
+  instances: 1
+  postgres:
+    version: latest
+  pods:
+    persistentVolume:
+      size: 10Gi
+```
+
+When you apply this minimal specification, the StackGres operator automatically adds default values for many fields, including default configurations for PostgreSQL, connection pooling, resource profiles, and other settings required for a functional cluster.
+
+When you specify `latest` for the Postgres version, the operator materializes this to the actual latest available Postgres version. Each Pod is attached to a PersistentVolume of the specified size using the default StorageClass when one is not specified.
+
+## Pod Architecture
+
+Each Pod in an SGCluster contains several containers that work together to provide a fully functional Postgres instance:
+
+**Init Container:**
+
+- `setup-filesystem`: Creates the postgres user based on the UID provided by the Kubernetes cluster (important for OpenShift) and copies the filesystem inside the persistent volume for the extensions subsystem and major version upgrade mechanism
+
+**Main Container:**
+
+- `patroni`: Runs Patroni, which is responsible for high availability and controls the Postgres start/stop lifecycle and manages the primary/replica role assignment. The Postgres process runs in the same container as Patroni.
+
+**Controller Sidecar:**
+
+- `cluster-controller`: Initializes aspects of the patroni container, reconciles configurations, updates SGCluster status, and manages extension installation
+
+**Optional Sidecars:**
+
+- `envoy`: Edge proxy for connection routing (may be deprecated in future versions)
+- `pgbouncer`: Connection pooling for improved connection scalability (port 5432)
+- `prometheus-postgres-exporter`: Exports Postgres metrics for Prometheus monitoring
+- `postgres-util`: Debugging and manual operations container (no active process, waits for user connection)
+- `fluent-bit`: Sends logs to configured SGDistributedLogs instance when distributed logs are configured
+
+## Cluster Profiles
+
+StackGres provides three cluster profiles that control Pod scheduling and resource constraints. You can set the profile using `.spec.profile`:
+
+**production (default):**
+
+The production profile enforces strict operational requirements:
+- Pod anti-affinity rules prevent Pods from running on the same Kubernetes node
+- Resource requests are enforced for all containers
+- Resource limits are enforced for the `patroni` container
+
+**testing:**
+
+The testing profile relaxes some restrictions for non-production environments:
+- Pod anti-affinity restrictions are relaxed, allowing Pods on the same node
+- Resource limits are still enforced but not resource requests
+
+**development:**
+
+The development profile removes all restrictions for local development:
+- No Pod anti-affinity requirements
+- No mandatory resource requests or limits
+
+Example configuration:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: my-cluster
+spec:
+  profile: development
+  instances: 1
+  postgres:
+    version: latest
+  pods:
+    persistentVolume:
+      size: 10Gi
+```
+
 ## Customizing Your Postgres Clusters
 
 The following shows examples of StackGres versatile configuration options.
