@@ -2,7 +2,7 @@
 title: Sharded Cluster Best Practices
 weight: 4
 url: /administration/sharded-cluster/creation/best-practices
-description: Recommendations about how organize all configuration files.
+description: Recommendations about how to organize all configuration files.
 showToc: true
 ---
 
@@ -53,9 +53,9 @@ This directory is mainly for the `SGShardedCluster` manifest and other cluster-r
 
 ## Configurations
 
-This directory contains configuration required by the `SGShardedCluster`, such as Postgres configurarion, pooling, instance profiles, backups, and distributed logs, but also Kubernetes namespaces or storage classes.
+This directory contains configuration required by the `SGShardedCluster`, such as Postgres configuration, pooling, instance profiles, backups, and distributed logs, but also Kubernetes namespaces or storage classes.
 The YAML files in this directory will be applied before the cluster resources.
-The file name numbering helps ensuring that the resources are created in the correct order.
+The file name numbering helps ensure that the resources are created in the correct order.
 
 ## Maintenance jobs 
 

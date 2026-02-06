@@ -255,7 +255,7 @@ sgpoolingconfig.stackgres.io "generated-from-default-1609864616550" deleted
 
 ## Uninstall the Operator
 
-See also the section about [uninstalling unnamespaced resources](#cleanup-unamespaced-resources)
+See also the section about [uninstalling unnamespaced resources](#cleanup-unnamespaced-resources)
 
 ### When installed with Helm
 
@@ -332,7 +332,7 @@ Finally delete the SGConfig StackGres custom resource:
 kubectl delete sgconfig -n openshift-operators stackgres
 ```
 
-## Cleanup unamespaced resources
+## Cleanup unnamespaced resources
 
 Follow this section in order to remove unnamespaced resources.
 
