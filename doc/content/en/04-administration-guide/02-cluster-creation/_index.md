@@ -7,7 +7,7 @@ description: Details about how to create a production StackGres cluster.
 showToc: true
 ---
 
-This page will guide you though the creation of a production-ready StackGres cluster using your custom configuration.
+This page will guide you through the creation of a production-ready StackGres cluster using your custom configuration.
 
 ## Understanding SGCluster
 
@@ -190,7 +190,7 @@ EOF
 
 The [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRs are used to configure how backups are being taken.
 
-The following command shows and example configuration using [Google Cloud Storage](https://cloud.google.com/storage/):
+The following command shows an example configuration using [Google Cloud Storage](https://cloud.google.com/storage/):
 
 ```yaml
 cat << EOF | kubectl apply -f -
@@ -293,7 +293,7 @@ Note that we could equally well define the SQL script in a ConfigMap, however, s
 
 ## Creating the Cluster
 
-All the required steps were performed in order to allow create our production ready SGCluster:
+All the required steps were performed in order to allow creating our production ready SGCluster:
 
 ```yaml
 cat << EOF | kubectl apply -f -
@@ -332,7 +332,7 @@ The order of the CR creation is relevant to successfully create a cluster, that 
 
 Another helpful configuration is the [`prometheusAutobind`]({{% relref "04-administration-guide/01-installation/02-installation-via-helm/01-operator-parameters" %}}) set to `true`.
 This parameter automatically enables monitoring for our cluster by integrating with the Prometheus operator.
-The StackGres operator will breate the necessary PodMonitor to scrape the cluster's Pods.
+The StackGres operator will create the necessary PodMonitor to scrape the cluster's Pods.
 
 Awesome, now you can sit back and relax while the SGCluster's Pods are spinning up.
 

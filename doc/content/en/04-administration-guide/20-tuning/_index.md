@@ -2,11 +2,11 @@
 title: Tuning
 weight: 19
 url: /administration/tuning
-description: How to configure your system and PostgreSQL in StackGres to improve perfromance.
+description: How to configure your system and PostgreSQL in StackGres to improve performance.
 showToc: true
 ---
 
-Exists mutiple kind and level of tuning and optimization for the system and PostgreSQL. This section will try to explain all of them briefly.
+There exist multiple kinds and levels of tuning and optimization for the system and PostgreSQL. This section will try to explain all of them briefly.
 
 ## OS-Level Tuning
 
@@ -106,4 +106,4 @@ Using synchronous replication allows consistent reads from replicas while freein
 
 ## Horizontal Write Scaling
 
-After trying out all the other optimization you should consider sharding the database. Sharind is a technique that allow to scale horizontally a database by splitting its data into shards distributed among multiple database but capable of being used as a single database. This is achieved by defining a distribution key in each of the table so that the data for a specific distribution key is all contained in a single database. For more information about sharding and sharding technologies offered by StackGres see the [sharded cluster section]({{% relref "04-administration-guide/14-sharded-cluster" %}})..
+After trying out all the other optimizations, you should consider sharding the database. Sharding is a technique that allows scaling horizontally a database by splitting its data into shards distributed among multiple database but capable of being used as a single database. This is achieved by defining a distribution key in each of the table so that the data for a specific distribution key is all contained in a single database. For more information about sharding and sharding technologies offered by StackGres see the [sharded cluster section]({{% relref "04-administration-guide/14-sharded-cluster" %}}).

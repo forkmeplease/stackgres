@@ -9,7 +9,7 @@ showToc: true
 
 ## DigitalOcean Setup
 
-This section shows to set up backups using DigitalOcean Spaces.
+This section shows how to set up backups using DigitalOcean Spaces.
 You will need to have [s3Cmd](https://s3tools.org/download) installed.
 You need to configure `s3cmd` following the [instructions in the official docs](https://docs.digitalocean.com/products/spaces/resources/s3cmd/).
 
@@ -37,8 +37,8 @@ kubectl create secret generic \
 ```
 
 Having the credentials secret created, we now need to create the object storage configuration and set the backup configuration.
-The object storage configuration it is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
-This CRD allows to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
+The object storage configuration is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
+This CRD allows you to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
 
 ```yaml
 apiVersion: stackgres.io/v1beta1

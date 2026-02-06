@@ -12,7 +12,7 @@ The web UI is available inside the cluster via the service `stackgres-restapi.st
 
 To expose the web UI to a local environment, we can forward a local port to the `stackgres-restapi` pod.
 This is only for local test purposes.
-It is not recommended to expose the web UI to the public internet without protecting it with additional security measure.
+It is not recommended to expose the web UI to the public internet without protecting it with additional security measures.
 
 You can forward the port using the following command:
 

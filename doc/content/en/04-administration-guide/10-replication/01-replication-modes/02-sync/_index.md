@@ -9,7 +9,7 @@ The `replication.mode` *sync* option instructs to create one or more cluster mem
 
 ## Setting up a Cluster with Synchronous replica
 
-Lets move forward to the next step by creating a synchronous replication cluster:
+Let's move forward to the next step by creating a synchronous replication cluster:
 
 ```yaml
 $ cat << EOF | kubectl apply -f -

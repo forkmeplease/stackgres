@@ -45,7 +45,7 @@ For more information, have a look at the [SGCluster backups section]({{% relref 
 
 ## Backup Storage
 
-StackGres support backups with the following storage options:
+StackGres supports backups with the following storage options:
 
 * [AWS S3](https://aws.amazon.com/s3/)
 * [Google Cloud Storage](https://cloud.google.com/storage)
@@ -81,7 +81,7 @@ spec:
     azureBlob: {}
 ```
 
-StackGres supports also backup based on Volume Snapshot that, in general, are faster that object storage for big volumes of data. This feature requires the VolumeSnapshot CRDs and controller to be installed in the Kubernetes cluster and to use a StorageClass for disks that supports the volume snapshot functionality. A backup based on VolumeSnapshot still requires WAL files that will be stored in the object storage defined by the SGObjectStorage.
+StackGres supports also backup based on Volume Snapshot that, in general, are faster than object storage for big volumes of data. This feature requires the VolumeSnapshot CRDs and controller to be installed in the Kubernetes cluster and to use a StorageClass for disks that supports the volume snapshot functionality. A backup based on VolumeSnapshot still requires WAL files that will be stored in the object storage defined by the SGObjectStorage.
 
 ## Backups
 
@@ -91,7 +91,7 @@ Removing an SGBackup also triggers the removal of the actual backup associated w
 
 ### Scheduled backups
 
-When field `SGCluster.spce.configurations.backups[0].cronSchedule` is set the operator will create a CronJob that will be scheduling backup Jobs based on the [cron expression](https://en.wikipedia.org/wiki/Cron) specified in such field. These backup Job will create an SGBackup with managed lifecycle and will perform the backup. When the SGBackup completes successfully it will set the field `SGBackup.status.process.status` to `Completed` and the backup will be available to be restored (see [Restoring from a Backup](#restoring-from-a-backup) section). If the SGBackup fails the field `SGBackup.status.process.status` will be set to `Failed` and the field `SGBackup.status.process.failure` will contain the failure message. The Job of a failed scheduled SGBackup is maintained (only for the latest 10 Jobs) in order for the user to inspect its content.
+When field `SGCluster.spec.configurations.backups[0].cronSchedule` is set the operator will create a CronJob that will be scheduling backup Jobs based on the [cron expression](https://en.wikipedia.org/wiki/Cron) specified in such field. These backup Job will create an SGBackup with managed lifecycle and will perform the backup. When the SGBackup completes successfully it will set the field `SGBackup.status.process.status` to `Completed` and the backup will be available to be restored (see [Restoring from a Backup](#restoring-from-a-backup) section). If the SGBackup fails the field `SGBackup.status.process.status` will be set to `Failed` and the field `SGBackup.status.process.failure` will contain the failure message. The Job of a failed scheduled SGBackup is maintained (only for the latest 10 Jobs) in order for the user to inspect its content.
 
 ### Creating a Manual Backup
 
@@ -114,7 +114,7 @@ When a SGBackup is created manually the operator will generate a Job that will p
 A backup is only accessible from the namespace in which it is located.
 In order to use it in another namespace, you need to copy it by modifying the resource. In particular, apart from the obvious part of having to change the namespace, you will have to prepend the referenced cluster name with the source namespace and a dot (`.`).
 
-The following is shows how to copy an SGBackup from the `source` namespace to the `target` namespace using `kubectl` and [`jq`](https://stedolan.github.io/jq/):
+The following shows how to copy an SGBackup from the `source` namespace to the `target` namespace using `kubectl` and [`jq`](https://stedolan.github.io/jq/):
 
 ```
 kubectl get sgbackup -n source source -o json \

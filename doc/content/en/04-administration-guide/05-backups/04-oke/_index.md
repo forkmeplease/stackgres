@@ -60,7 +60,7 @@ Create a policy to allow the created group to use the bucket:
 ```
   oci iam policy create \
   --compartment-id $s3compartment_id \
-  --name stackfres-backup-policy \
+  --name stackgres-backup-policy \
   --description 'Policy to use the bucket for StackGres backups' \
   --statements '["Allow group stackgres-backup-group to use bucket on compartment id '$s3compartment_id' where target.bucket.name = '/''my-stackgres-bucket'/''"]'
 ```
@@ -93,8 +93,8 @@ kubectl create secret generic oke-backup-secret \
 ```
 
 Having the credential secret created, we now need to create the object storage configuration and to set the backup configuration.
-The object storage configuration it is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
-This CRD allows to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
+The object storage configuration is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
+This CRD allows you to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
 
 ```yaml
 apiVersion: stackgres.io/v1beta1

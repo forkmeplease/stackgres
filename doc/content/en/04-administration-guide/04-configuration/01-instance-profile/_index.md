@@ -179,7 +179,7 @@ spec:
         memory: 8Gi
 ```
 
-This allows unexperienced users to create an SGInstanceProfile without requiring much knowledge on the usage of all the containers.
+This allows inexperienced users to create an SGInstanceProfile without requiring much knowledge on the usage of all the containers.
 
 You may set any value of `cpu` and `memory` in any of the above sections to `null` in order to remove the corresponding resources limits or requests assignment.
 
@@ -326,4 +326,4 @@ Each configuration, once applied, require a restart of the SGCluster's Pods by r
 
 ## Custom containers
 
-Any custom container (or init cunstom containers) resources limits and huge pages can be configured by creating a section `SGInstanceProfile.spec.containers.custom-<custom container name>` (or `SGInstanceProfile.spec.initContainers.custom-<custom init container name>`) and specifying `cpu`, `memory` and/or `hugePages`.
+Any custom container (or init custom containers) resources limits and huge pages can be configured by creating a section `SGInstanceProfile.spec.containers.custom-<custom container name>` (or `SGInstanceProfile.spec.initContainers.custom-<custom init container name>`) and specifying `cpu`, `memory` and/or `hugePages`.

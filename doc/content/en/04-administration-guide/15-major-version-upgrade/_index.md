@@ -39,7 +39,7 @@ The major version upgrade operation follows these steps:
 - When `check` field is set to `true`, the data is never touched, just checked, and the cluster is brought back to its previous state after the operation completes
 - If your filesystem supports it, use `clone` to greatly reduce the duration of the major version upgrade operation and allow a functional rollback in case of error by using file cloning (reflinks)
 
-## Steps to perform a Major version upgrade using de Web Console.
+## Steps to perform a Major version upgrade using the Web Console.
 
 1. Go to `Database Operations` 
 
@@ -76,9 +76,9 @@ The major version upgrade operation follows these steps:
 
   - **Check Cluster:** If true does some checks to see if the cluster can perform a major version upgrade without changing any data. Defaults to: false.
 
-  - **Backup path:** The path were the backup is stored. If not set this field is filled up by the operator.
+  - **Backup path:** The path where the backup is stored. If not set this field is filled up by the operator.
 
-    When provided will indicate were the backups and WAL files will be stored.
+    When provided will indicate where the backups and WAL files will be stored.
 
     The path should be different from the current `.spec.configurations.backups[].path` value for the target SGCluster in order to avoid mixing WAL files of two distinct major versions of postgres.
 
@@ -87,7 +87,7 @@ The major version upgrade operation follows these steps:
   - **Target Postgres Configuration:** The postgres config ([SGPostgresConfig]({{% relref "06-crd-reference/03-sgpostgresconfig" %}})) that must have the same major version of the target postgres version.
 
 
-9. Once you select the apropiate options click on `Create Operation`
+9. Once you select the appropriate options click on `Create Operation`
 
 
 ## Major version upgrade using the kubectl CLI

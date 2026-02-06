@@ -17,7 +17,7 @@ If no custom pooling configuration is specified at cluster creation, StackGres w
  This default configuration will also be used for those parameters that are not specified during the
  creation or modification of the resource.
 
-Some of the configuration's parameters are part of a blocklist and specifying them will is possible during
+Some of the configuration's parameters are part of a blocklist and specifying them is possible during
  the creation or modification of the resource but those values will be ignored. For the complete list of those
  parameters see the [blocked parameters table](#blocked-parameters).
 

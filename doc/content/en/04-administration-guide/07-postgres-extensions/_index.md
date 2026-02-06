@@ -93,14 +93,14 @@ CREATE EXTENSION
 Some extensions need extra files to be installed and configured before they can be used.
 This varies depending on the extension and, in some cases, requires the cluster to be configured and restarted:
 
-* Extensions that requires to add an entry to [`shared_preload_libraries`](https://postgresqlco.nf/en/doc/param/shared_preload_libraries/) configuration parameter.
-* Upgrading extensions that overwrite any file that is not the extension''s control file or extension''s script file.
-* Removing extensions. Until the cluster is not restarted a removed extension will still be available.
-* Install of extensions that require extra mount. After installed the cluster will require to be restarted.
+* Extensions that require adding an entry to [`shared_preload_libraries`](https://postgresqlco.nf/en/doc/param/shared_preload_libraries/) configuration parameter.
+* Upgrading extensions that overwrite any file that is not the extension's control file or extension's script file.
+* Removing extensions. Until the cluster is restarted, a removed extension will still be available.
+* Installation of extensions that require extra mounts. After installation, the cluster will need to be restarted.
 
 ### Update the Configuration for the New Extensions
 
-Some extensions, such as `timescale` needs to update some configuration to work, as shown in the error below:
+Some extensions, such as `timescaledb`, need to update some configuration to work, as shown in the error below:
 
 ```
 postgres=# create extension timescaledb;
@@ -129,14 +129,14 @@ To fix that, it is necessary to find the configuration used in the `SGCluster`, 
 
 ### Editing the `PostgresConfig`
 
-Assuming that my cluster name is named `cluster`, execute the command below to find its current postgres configuration:
+Assuming that my cluster is named `cluster`, execute the command below to find its current postgres configuration:
 
 ```
 $ kubectl get sgcluster/cluster -o jsonpath="{ .spec.configurations.sgPostgresConfig }"
 postgres-12-generated-from-default-1622494739858
 ```
 
-Once found the config, edit it, adding the extra configs:
+Once you find the config, edit it, adding the extra configs:
 
 ```
 kubectl edit sgPgConfig/postgres-12-generated-from-default-1622494739858
@@ -163,7 +163,7 @@ spec:
 
 ### Reloading and Testing
 
-Once updated the configuration is necessary to reload the cluster to update the configuration. To 
+Once the configuration is updated, it is necessary to reload the cluster to apply the changes. To 
  do so, a `restart` `SGDbOps` can be created:
 
 ```yaml

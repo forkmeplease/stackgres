@@ -2,15 +2,15 @@
 title: Cluster rollout
 weight: 21
 url: /administration/rollout
-description: Details about how rollout of an SGCluster.
+description: Details about the rollout of an SGCluster.
 showToc: true
 ---
 
-The rollout of the SGCluster's Pods is orchestrated automatically bu the operator with the cluster's update strategy configuration.
+The rollout of the SGCluster's Pods is orchestrated automatically by the operator with the cluster's update strategy configuration.
 
 The `SGCluster.spec.pods.updateStrategy` section allows you to control how and when Pod updates are performed in your StackGres cluster. This configuration is essential for managing rolling updates, maintenance windows, and minimizing service disruption during cluster operations.
 
-By default a rollout can be perfromed only by creating a `restart` (or `securityUpgrade` or `minorVersionUpgrade`) SGDbOps.
+By default a rollout can be performed only by creating a `restart` (or `securityUpgrade` or `minorVersionUpgrade`) SGDbOps.
 
 ## Update strategy configuration
 

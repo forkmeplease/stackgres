@@ -3,7 +3,7 @@ title: Postgres Configuration
 weight: 2
 url: /administration/configuration/postgres
 aliases: [ /administration/custom/postgres/config , /tutorial/complete-cluster/postgres-config ]
-description: Details about how the PostgresSQL configuration works and how to customize it.
+description: Details about how the PostgreSQL configuration works and how to customize it.
 ---
 
 The [SGPostgresConfig]({{% relref "06-crd-reference/03-sgpostgresconfig" %}}) CRD allows you to specify and manage your Postgres configurations.
@@ -57,7 +57,7 @@ spec:
 
 StackGres already ships with an expertly tuned Postgres configuration (aka `postgresql.conf`) by default.
 However, it's absolutely possible to specify your own configuration.
-If you need guidance regarding configuration, consider using the [postgresqlCONF](https://postgresqlco.nf) service, which gives you detailed parameter information in several langauges, recommendations, a tuning guide, and even a facility to store and manage your Postgres configurations online.
+If you need guidance regarding configuration, consider using the [postgresqlCONF](https://postgresqlco.nf) service, which gives you detailed parameter information in several languages, recommendations, a tuning guide, and even a facility to store and manage your Postgres configurations online.
 
 ## Apply Configuration changes
 

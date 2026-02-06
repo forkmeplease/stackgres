@@ -62,9 +62,9 @@ kubectl get --namespace monitoring deployments prometheus-grafana -o json | jq -
 
 ### Re-Routing Services to Different Ports
 
-In a production setup, is very likely that you will be installing all the resources in a remote location, so you'll need to route the services through specific interfaces and ports.
+In a production setup, it is very likely that you will be installing all the resources in a remote location, so you'll need to route the services through specific interfaces and ports.
 
-> For sake of simplicity, we will port-forward to the pods on all local interfaces (`0.0.0.0`).
+> For the sake of simplicity, we will port-forward to the pods on all local interfaces (`0.0.0.0`).
 > This is only for testing purposes, and we strongly recommend to only expose through secure or internal network interfaces when dealing with production workloads.
 
 
@@ -140,7 +140,7 @@ Some manual steps are required in order to manually integrate Grafana.
 
 ## Installing Grafana and Creating Basic Dashboards
 
-If you already installed the `prometheus-community/kube-prometheus-stack`, you can skip this session.
+If you already installed the `prometheus-community/kube-prometheus-stack`, you can skip this section.
 
 Add the Grafana charts' source repository:
 
@@ -172,7 +172,7 @@ You will need the admin credential to log into the Web Console (at `localhost:30
 
 > NOTE: take note of the Grafana's URL `grafana.monitoring`, which will be used when configuring StackGres Operator.
 
-The following script, will create a basic PostgreSQL dashboard using Grafana's API (you can change the `grafana_host` to point to your remote location):
+The following script will create a basic PostgreSQL dashboard using Grafana's API (you can change the `grafana_host` to point to your remote location):
 
 ```
 grafana_host=http://localhost:3000

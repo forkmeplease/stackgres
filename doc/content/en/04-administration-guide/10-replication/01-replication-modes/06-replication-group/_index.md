@@ -56,7 +56,7 @@ $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list
 +----------------+------------------+--------------+-----------+----+-----------+
 ```
 
-## Updating the `repligation.group.role` to `ha`
+## Updating the `replication.groups.role` to `ha`
 
 The next example include some changes to the cluster in order to show labels applied to a group with ha role:
 
@@ -159,7 +159,7 @@ The same as the latest example but using the `readonly` role that adds the Patro
 
 ## Combining roles!
 
-The next example explains how creating many group within the cluster is supported
+The next example explains how creating many groups within the cluster is supported.
 
 ```yaml
 cat << EOF | kubectl apply -f -
@@ -212,4 +212,4 @@ $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list
 +----------------+------------------+--------------+-----------+----+-----------+---------------------+
 ```
 
-Now we have three groups where each took a different role and act based on the role defined in the cluster YAML
+Now we have three groups where each took a different role and act based on the role defined in the cluster YAML.

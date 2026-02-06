@@ -3,10 +3,10 @@ title: Replication
 weight: 10
 url: /administration/replication
 aliases: [ /tutorial/admin/replication ]
-description: This page contains details about how to create different cluster arquitecture topologies by using the replication features.
+description: This page contains details about how to create different cluster architecture topologies by using the replication features.
 ---
 
-StackGres supports all Postgres and Patroni features to set the different replication options that come with these technologies. Indeed, StackGres don't use any custom owned replication mechanism or protocol, it fully relies upon the official Postgres replication development. Furthermore, StackGres relies upon the Patroni HA development, therefore, failover, switchover, and replication should work as any other Postgres cluster managed by Patroni.
+StackGres supports all Postgres and Patroni features to set the different replication options that come with these technologies. Indeed, StackGres doesn't use any custom replication mechanism or protocol, it fully relies upon the official Postgres replication development. Furthermore, StackGres relies upon the Patroni HA development, therefore, failover, switchover, and replication should work as any other Postgres cluster managed by Patroni.
 
 ## Available Replication Modes
 

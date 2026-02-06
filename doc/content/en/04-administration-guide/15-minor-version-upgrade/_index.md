@@ -6,9 +6,9 @@ description: Perform a postgres minor version upgrade
 showToc: true
 ---
 
-Performing a minor version upgrade is a simple process, this type of upgrade only requires to upgrade the executable files (binaries) while the server is down. Once the files where replaced the server must be restarted. 
+Performing a minor version upgrade is a simple process, this type of upgrade only requires to upgrade the executable files (binaries) while the server is down. Once the files were replaced the server must be restarted. 
 
-Minor releases never change the internal storage format and are always compatible with earlier and later minor releases of the same major version number. For example, version 10.1 is compatible with version 10.0 and version 10.6. Similarly. [Check Official Postgres documentation](https://www.postgresql.org/docs/current/upgrading.html).
+Minor releases never change the internal storage format and are always compatible with earlier and later minor releases of the same major version number. For example, version 10.1 is compatible with version 10.0 and version 10.6. Similarly, check the [official Postgres documentation](https://www.postgresql.org/docs/current/upgrading.html).
 
 StackGres simplify the process to perform a minor version upgrade providing two different methods to accomplish this, using the Web Console or by the `kubectl`  CLI. 
 
@@ -93,4 +93,4 @@ You can check the operation log by checking the pods logs:
 ❯ kubectl logs minor-v-upgrade-g7jf8 
 ```
 
-output ommited for presentation purpose.
+Output omitted for presentation purposes.

@@ -70,8 +70,8 @@ kubectl create secret generic s3-backup-secret \
 ```
 
 Having the credentials secret created, we now need to create the object storage configuration and to set the backup configuration.
-The object storage configuration it is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
-This CRD allows to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
+The object storage configuration is governed by the [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRD.
+This CRD allows you to specify the object storage technology, required parameters, as well as a reference to the credentials secret.
 
 ```yaml
 apiVersion: stackgres.io/v1beta1

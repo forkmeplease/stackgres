@@ -14,7 +14,7 @@ A sharded cluster is a cluster that implements database sharding. Database shard
 
 ## How is Sharded Cluster implemented
 
-A sharded cluster is implemented by creting an SGCluster called coordinator and one or more SGCluster called shards. The coordinator, as the name implies, coordinates the shards where the data is
+A sharded cluster is implemented by creating an SGCluster called coordinator and one or more SGCluster called shards. The coordinator, as the name implies, coordinates the shards where the data is
  actually stored. StackGres takes care of creating the dependent SGCluster by following the specification set in the SGShardedCluster.
 
 The SGShardedCluster can define the type of sharding (that is the internal sharding implementation used) and the database to be sharded.
@@ -189,7 +189,7 @@ EOF
 
 This configuration will create a coordinator with 2 Pods and 4 shards with 2 Pods each.
 
-By default the coordintor node has a synchronous replica to avoid losing any metadata that could break the sharded cluster.
+By default the coordinator node has a synchronous replica to avoid losing any metadata that could break the sharded cluster.
 
 The shards are where sharded data lives and have a replica in order to provide high availability to the cluster.
 

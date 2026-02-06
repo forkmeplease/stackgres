@@ -20,15 +20,15 @@ The first three configurations listed above (i.e. excluding the profile configur
 
 By default an SGCluster is created with the `production` profile that will enforce some best practices suited for a production environment.
 
-Since the `production` profile enforce strict rule, that may be inconvenient in a testing or development environment, you may chose any of the other existing profile.
+Since the `production` profile enforces strict rules that may be inconvenient in a testing or development environment, you may choose any of the other existing profiles.
 
 The available profiles are:
 
-* `production`: enforces resources requests and limits and add a Pod anti-affinity rules to prevent a Postgres instance to run in the same Kubernetes node.
-* `testing`: enforces resources limits but disables resources requests and removes the Pod anti-affinity rules that prevents a Postgres instance to run in the same Kubernetes node.
-* `development`: disables resources requests and limits and removes the Pod anti-affinity rules that prevents a Postgres instance to run in the same Kubernetes node.
+* `production`: enforces resources requests and limits and add Pod anti-affinity rules to prevent a Postgres instance to run in the same Kubernetes node.
+* `testing`: enforces resources limits but disables resources requests and removes the Pod anti-affinity rules that prevent Postgres instances from running in the same Kubernetes node.
+* `development`: disables resources requests and limits and removes the Pod anti-affinity rules that prevent Postgres instances from running in the same Kubernetes node.
 
-The above rules may still be affected by other configurations. Details will can be found in the [CRD reference about SGCluster profile]({{% relref "06-crd-reference/01-sgcluster#sgclusterspec" %}}).
+The above rules may still be affected by other configurations. Details can be found in the [CRD reference about SGCluster profile]({{% relref "06-crd-reference/01-sgcluster#sgclusterspec" %}}).
 
 ## Default Configuration
 

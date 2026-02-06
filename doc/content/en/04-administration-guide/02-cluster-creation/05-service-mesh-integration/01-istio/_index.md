@@ -27,4 +27,4 @@ spec:
 # [...]
 ```
 
-This will avoid that your pods enter a `CrashLoopBackOff` state.
+This will prevent your pods from entering a `CrashLoopBackOff` state.
