@@ -26,7 +26,7 @@ requirements in different areas required by the Postgres production distribution
 ## Core
 
 The main container used for a Postgres cluster node uses an UBI 8 minimal image as its base image to which a
-vanilla PostgreSQL is added. The container uses a persistent storage configured via storage class. Is always deployed with a
+vanilla PostgreSQL is added. The container uses persistent storage configured via a storage class. It is always deployed with a
 sidecar util container to allow access for a system/database administrator.
 
 ## Configuration
@@ -45,7 +45,7 @@ change the configuration based on their needs.
 ## Connection Pooling
 
 Connecting directly to PostgreSQL does not scale very well.
-Once you reach the configured `max_connections` limit (100 per default), connections above this number will be rejected, which must be avoided.
+Once you reach the configured `max_connections` limit (100 by default), connections above this number will be rejected, which must be avoided.
 While a lot of enterprise application frameworks offer functionalities to pool their database connections, multiple application deployments hardly ever share their connection pools.
 
 Configuring a very high number of allowed connections doesn't quite solve this issue, as we'll notice that the connection latency increases disproportionately to the load, as shown in the following graph (the green line):
@@ -75,7 +75,7 @@ If a Postgres instance goes down or is not working properly, we want our cluster
 to convert to the new primary and configure all the other instances and the application to point to this new primary. We want
 all this to happen without manual intervention.
 
-A high availability solution allows to achieve this. There are multiple solutions to this problem, and it is challenging to chose
+A high availability solution allows to achieve this. There are multiple solutions to this problem, and it is challenging to choose
 one among them:
 
 * [PgPool](https://www.pgpool.net)
@@ -121,10 +121,10 @@ all the logs in Postgres using [Timescale](https://github.com/timescale/timescal
 ## Proxy
 
 How do I locate the primary instance, and what if it changes? How do I obtain traffic [metrics]({{% relref "04-administration-guide/08-monitoring" %}})?
-It is possible to manage the traffic: duplicate, A/B to test cluster, or event inspect it?
+It is possible to manage the traffic: duplicate, A/B to test cluster, or even inspect it?
 
 [Envoy](https://www.envoyproxy.io/) is an open source edge and service proxy, designed for cloud-native applications. It is
-extensible in order to provide advanced functionality based on the actual traffic or on connection characteristic.
+extensible in order to provide advanced functionality based on the actual traffic or on connection characteristics.
 For example, the Postgres metrics could be parsed in order to offer stats, or the TLS certificate can be configured.
 
 Envoy is also capable of [exporting metrics]({{% relref "04-administration-guide/08-monitoring/01-envoy-metrics/" %}}) using the well-established Prometheus format.
@@ -144,7 +144,7 @@ Which monitoring solution can we use to monitor a Postgres cluster?
 * [DataDog](https://www.datadoghq.com/)
 * [Prometheus](https://prometheus.io/)
 
-StackGres' approach here is to enable as much monitoring solution as possible. Currently, only Prometheus can connect
+StackGres' approach here is to enable as many monitoring solutions as possible. Currently, only Prometheus can connect
 to StackGres stats using the [PostgreSQL Server Exporter](https://github.com/wrouesnel/postgres_exporter)
 and integrates as a sidecar offering an auto binding mechanism if Prometheus is installed using the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator).
 
@@ -173,7 +173,7 @@ Some manual steps are required in order to achieve such integration.
 ## User Interface
 
 There are some user interfaces available to interact with Postgres, such as [DBeaver](https://dbeaver.io/) which allows looking at the database content
-and configuration. We need a user interface that is capable of manage an entire cluster. How do I list the clusters?
+and configuration. We need a user interface that is capable of managing an entire cluster. How do I list the clusters?
 How many nodes does a cluster have? What is the replication status? How many computing resources are used by a node? How to get
 the monitoring information of a particular node?
 

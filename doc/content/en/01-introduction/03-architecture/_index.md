@@ -10,7 +10,7 @@ showToc: true
 
 A StackGres cluster is basically a StatefulSet where each pod is a database instance. The
  StatefulSet guarantees that each pod is always bound to its own persistent volume. Therefore, the
- database instance data will be mapped to the state of a Patroni instance inside kubernetes.
+ database instance data will be mapped to the state of a Patroni instance inside Kubernetes.
 
 ### StackGres Cluster Architecture diagram
 

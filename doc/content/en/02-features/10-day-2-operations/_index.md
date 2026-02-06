@@ -12,7 +12,7 @@ Management operations such as version upgrades or restarts can easily create str
 StackGres performs the day-2 operations in a controlled, production-grade manner.
 
 In general, the engineers define the desired target state in the StackGres CRDs, apply changes via the Kubernetes API (or alternatively the Web Console), and the StackGres operator takes care of the rest.
-This approach minimizes careless mistakes from the users side since no procedural steps are required but declarative definitions.
+This approach minimizes careless mistakes from the user's side since no procedural steps are required but declarative definitions.
 The StackGres CRDs provide a type-safe way to define resources, configurations, and cluster actions, and are understood and validated by the StackGres operator.
 
 Depending on the desired change, StackGres performs changes in a reasonable way, with production-readiness in mind.

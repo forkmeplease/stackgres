@@ -28,12 +28,12 @@ So you can think of StackGres as the Kubernetes version of your friendly DBA –
 
 ## Kubernetes Centered
 
-StackGres comes as a Kubernetes-based platform that provides production-grade PostgreSQL in form of a Kubernetes operator.
+StackGres comes as a Kubernetes-based platform that provides production-grade PostgreSQL in the form of a Kubernetes operator.
 So everything StackGres is heavily tied to Kubernetes.
 
 > A Kubernetes operator is a method of packaging, deploying, and managing a Kubernetes-based application or platform.
-> Some workloads, such as databases, required more hand-holding, and a cloud-native Postgres deployment requires additional knowledge of how to maintain state and integrate all the components.
-> The StackGres operator allow to deploy a StackGres cluster using a few custom resources created by the user.
+> Some workloads, such as databases, require more hand-holding, and a cloud-native Postgres deployment requires additional knowledge of how to maintain state and integrate all the components.
+> The StackGres operator allows you to deploy a StackGres cluster using a few custom resources created by the user.
 
 Besides that, StackGres also follows the usability and look-and-feel that engineers know and like about using Kubernetes.
 User-defined StackGres resources are meant to be used in the same convenient declarative model that we know from Kubernetes.
@@ -55,7 +55,7 @@ All different ways enable the full range of features.
 
 The components of the StackGres "stack" are provided by sidecar containers that are deployed alongside the main Postgres container.
 
-All container base images are build and provided by StackGres.
+All container base images are built and provided by StackGres.
 The lightweight and secure container images are based on RedHat's UBI 8.
 
 
