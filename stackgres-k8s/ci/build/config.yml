@@ -489,6 +489,7 @@ modules:
       - doc/demo
       - doc/LICENSE.md
       - doc/themes
+      - doc/CRD.tmpl
       - stackgres-k8s/src/pom.xml
       - stackgres-k8s/src/common/src/main/resources/crds
     build_image: *ci_image
