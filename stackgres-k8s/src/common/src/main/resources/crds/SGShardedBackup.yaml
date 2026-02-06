@@ -40,17 +40,17 @@ spec:
           type: object
           required: [metadata, spec]
           description: |
-            A manual or automatically generated sharded backup of an SGCluster configured with an SGBackupConfig.
+            A manual or automatically generated sharded backup of an SGShardedCluster configured with an SGObjectStorage.
 
-            When a SGBackup is created a Job will perform a full sharded backup of the database and update the status of the SGBackup
-             with the all the information required to restore it and some stats (or a failure message in case something unexpected
+            When an SGShardedBackup is created a Job will perform a full sharded backup of the database and update the status of the SGShardedBackup
+             with all the information required to restore it and some stats (or a failure message in case something unexpected
              happened).
-            After an SGBackup is created the same Job performs a reconciliation of the sharded backups by applying the retention window
-             that has been configured in the SGBackupConfig and removing the sharded backups with managed lifecycle and the WAL files older
+            After an SGShardedBackup is created the same Job performs a reconciliation of the sharded backups by applying the retention window
+             that has been configured in the SGObjectStorage and removing the sharded backups with managed lifecycle and the WAL files older
              than the ones that fit in the retention window. The reconciliation also removes sharded backups (excluding WAL files) that do
-             not belongs to any SGBackup. If the target storage of the SGBackupConfig is changed deletion of an SGBackup sharded backups
+             not belong to any SGBackup. If the target storage of the SGObjectStorage is changed deletion of an SGBackup sharded backups
              with managed lifecycle and the WAL files older than the ones that fit in the retention window and of sharded backups that do
-             not belongs to any SGBackup will not be performed anymore on the previous storage, only on the new target storage.
+             not belong to any SGBackup will not be performed anymore on the previous storage, only on the new target storage.
           properties:
             metadata:
               type: object
@@ -85,19 +85,19 @@ spec:
                   description: |
                     Allow to set a timeout for the backup creation.
                     
-                    If not set it will be disabled and the backup operation will continue until the backup completes or fail. If set to 0 is the same as not being set.
+                    If not set it will be disabled and the backup operation will continue until the backup completes or fails. If set to 0 is the same as not being set.
                     
-                    Make sure to set a reasonable high value in order to allow for any unexpected delays during backup creation (network low bandwidth, disk low throughput and so forth).
+                    Make sure to set a reasonably high value in order to allow for any unexpected delays during backup creation (network low bandwidth, disk low throughput and so forth).
                 reconciliationTimeout:
                   type: integer
                   default: 300
                   description: |
-                    Allow to set a timeout for the reconciliation process that take place after the backup.
+                    Allow to set a timeout for the reconciliation process that takes place after the backup.
                     
                     If not set defaults to 300 (5 minutes). If set to 0 it will disable timeout.
                     
                     Failure of reconciliation will not make the backup fail and will be re-tried the next time a SGBackup
-                     or shecduled backup Job take place.
+                     or scheduled backup Job takes place.
                 maxRetries:
                   type: integer
                   description: |

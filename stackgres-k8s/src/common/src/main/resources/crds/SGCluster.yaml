@@ -83,7 +83,7 @@ spec:
                 description: |
                   The profile allow to change in a convenient place a set of configuration defaults that affect how the cluster is generated.
                   
-                  All those defaults can be overwritten by setting the correspoinding fields.
+                  All those defaults can be overwritten by setting the corresponding fields.
                   
                   Available profiles are:
                   
@@ -95,13 +95,13 @@ spec:
                   
                   * `testing`:
                   
-                    Allows two Pods to running in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
+                    Allows two Pods to run in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
                     Sets both limits and requests using `SGInstanceProfile` for `patroni` container that runs both Patroni and Postgres (set `.spec.nonProductionOptions.disablePatroniResourceRequirements` to `false` by default).
                     Sets requests using the referenced `SGInstanceProfile` for sidecar containers other than `patroni` (set `.spec.nonProductionOptions.disableClusterResourceRequirements` to `false` by default).
                   
                   * `development`:
                   
-                    Allows two Pods from running in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
+                    Allows two Pods to run in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
                     Unset both limits and requests for `patroni` container that runs both Patroni and Postgres (set `.spec.nonProductionOptions.disablePatroniResourceRequirements` to `true` by default).
                     Unsets requests for sidecar containers other than `patroni` (set `.spec.nonProductionOptions.disableClusterResourceRequirements` to `true` by default).
 
@@ -266,10 +266,10 @@ spec:
                   This section allows to configure horizontal and vertical Pod autoscaling for the SGCluster's Pods.
                   
                   Horizontal Pod Autoscaling will use replicas connections usage (active connections / max connections) as the metric to control the upscale or downscale of the replicas.
-                  Horizontal Pod Autoscaling require the [KEDA operator](https://github.com/kedacore/keda) to be installed in the Kuberentes cluster.
+                  Horizontal Pod Autoscaling require the [KEDA operator](https://github.com/kedacore/keda) to be installed in the Kubernetes cluster.
                   
                   Vertical Pod Autoscaling will use cpu and memory usage as the metric to control the upscale or downscale of the Pod requests and limits resources.
-                  Vertical Pod Autoscaling requires the [Vertical Pod Autoscaler operator](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) to be installed in the Kuberentes cluster.
+                  Vertical Pod Autoscaling requires the [Vertical Pod Autoscaler operator](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) to be installed in the Kubernetes cluster.
                 properties:
                   mode:
                     type: string
@@ -493,7 +493,7 @@ spec:
                     minimum: 1
                     description: |
                       Number of synchronous standby instances. Must be less than the total number of instances. It is set to 1 by default.
-                        Only setteable if mode is `sync` or `strict-sync`.
+                        Only settable if mode is `sync` or `strict-sync`.
                   groups:
                     type: array
                     description: |
@@ -564,7 +564,7 @@ spec:
                       backupNewerThan:
                         type: string
                         description: |
-                          An ISO 8601 duration in the format `PnDTnHnMn.nS`, that specifies how old an SGBackup have to be in order to be seleceted
+                          An ISO 8601 duration in the format `PnDTnHnMn.nS`, that specifies how old an SGBackup has to be in order to be selected
                            to initialize a replica.
                           
                           When `FromExistingBackup` mode is set this field restrict the selection of SGBackup to be used for recovery newer than the
@@ -736,8 +736,8 @@ spec:
                           "NodePort" builds on ClusterIP and allocates a port on every node.
                           "LoadBalancer" builds on NodePort and creates
                           an external load-balancer (if supported in the current cloud).
-                          "None" creates an headless service that can be use in conjunction with `.spec.pods.disableEnvoy`
-                           set to `true` in order to acces the database using a DNS.
+                          "None" creates a headless service that can be used in conjunction with `.spec.pods.disableEnvoy`
+                           set to `true` in order to access the database using a DNS.
                           More info:
                           * https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
                           * https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
@@ -891,7 +891,7 @@ spec:
                     type: boolean
                     default: true
                     description: |
-                      If set to `false`, creates the `envoy` sidecar. This sidecar is used as the endge proxy for the cluster's Pods providing extra metrics to the monitoring layer.
+                      If set to `false`, creates the `envoy` sidecar. This sidecar is used as the edge proxy for the cluster's Pods providing extra metrics to the monitoring layer.
 
                       **Changing this field may require a restart.**
                   resources:
@@ -911,7 +911,7 @@ spec:
                         type: boolean
                         default: false
                         description: |
-                          When enabled resource limits for containers other than the patroni container wil be set just like for patroni contianer as specified in the SGInstanceProfile.
+                          When enabled resource limits for containers other than the patroni container will be set just like for patroni container as specified in the SGInstanceProfile.
 
                           **Changing this field may require a restart.**
                       disableResourcesRequestsSplitFromTotal:
@@ -933,7 +933,7 @@ spec:
                   scheduling:
                     type: object
                     description: |
-                      Pod custom scheduling, affinity and topology spread constratins configuration.
+                      Pod custom scheduling, affinity and topology spread constraints configuration.
 
                       **Changing this field may require a restart.**
                     properties:
@@ -1315,7 +1315,7 @@ spec:
                           
                           The queries defined here will overwrite those created by the operator.
                           
-                          **WARNING**: Changing this may beak some of the functionality that depend on the query overwritten.
+                          **WARNING**: Changing this may break some of the functionality that depend on the query overwritten.
                         "x-kubernetes-preserve-unknown-fields": true
                   observability:
                     type: object
@@ -1408,13 +1408,13 @@ spec:
                           description: |
                             Name of the [SGObjectStorage](https://stackgres.io/doc/latest/reference/crd/sgobjectstorage) to use for the cluster.
 
-                            It defines the location in which the the backups will be stored.
+                            It defines the location in which the backups will be stored.
                         path:
                           type: string
                           description: |
-                            The path were the backup is stored. If not set this field is filled up by the operator.
+                            The path where the backup is stored. If not set this field is filled up by the operator.
 
-                            When provided will indicate were the backups and WAL files will be stored.
+                            When provided will indicate where the backups and WAL files will be stored.
                             
                             > **WARNING**: Most users should leave this field empty since having it manually set could be dangerous. If the value is repeated due to re-creating an SGCluster or
                              re-using the same value in another SGCluster and you may get a mixed WAL history with unrecoverable backups.
@@ -1429,7 +1429,7 @@ spec:
                         volumeSnapshotClass:
                           type: string
                           description: |
-                            The name of the VolumeSnaphostClass to use to create the VolumeSnapshot for backups.
+                            The name of the VolumeSnapshotClass to use to create the VolumeSnapshot for backups.
                             
                             See also https://kubernetes.io/docs/concepts/storage/volume-snapshots/
                         fastVolumeSnapshot:

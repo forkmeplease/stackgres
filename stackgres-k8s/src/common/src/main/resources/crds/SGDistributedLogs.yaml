@@ -47,7 +47,7 @@ spec:
                 description: |
                   The profile allow to change in a convenient place a set of configuration defaults that affect how the cluster is generated.
                   
-                  All those defaults can be overwritten by setting the correspoinding fields.
+                  All those defaults can be overwritten by setting the corresponding fields.
                   
                   Available profiles are:
                   
@@ -59,13 +59,13 @@ spec:
                   
                   * `testing`:
                   
-                    Allows two Pods to running in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
+                    Allows two Pods to run in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
                     Sets both limits and requests using `SGInstanceProfile` for `patroni` container that runs both Patroni and Postgres (set `.spec.nonProductionOptions.disablePatroniResourceRequirements` to `false` by default).
                     Sets requests using the referenced `SGInstanceProfile` for sidecar containers other than `patroni` (set `.spec.nonProductionOptions.disableClusterResourceRequirements` to `false` by default).
                   
                   * `development`:
                   
-                    Allows two Pods from running in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
+                    Allows two Pods to run in the same Node (set `.spec.nonProductionOptions.disableClusterPodAntiAffinity` to `true` by default).
                     Unset both limits and requests for `patroni` container that runs both Patroni and Postgres (set `.spec.nonProductionOptions.disablePatroniResourceRequirements` to `true` by default).
                     Unsets requests for sidecar containers other than `patroni` (set `.spec.nonProductionOptions.disableClusterResourceRequirements` to `true` by default).
 
@@ -119,8 +119,8 @@ spec:
                           "NodePort" builds on ClusterIP and allocates a port on every node.
                           "LoadBalancer" builds on NodePort and creates
                           an external load-balancer (if supported in the current cloud).
-                          "None" creates an headless service that can be use in conjunction with `.spec.pods.disableEnvoy`
-                           set to `true` in order to acces the database using a DNS.
+                          "None" creates a headless service that can be used in conjunction with `.spec.pods.disableEnvoy`
+                           set to `true` in order to access the database using a DNS.
                           More info:
                           * https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
                           * https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
@@ -178,7 +178,7 @@ spec:
                   enableClusterLimitsRequirements:
                     type: boolean
                     description: |
-                      When set to `true` resources limits for containers other than the patroni container wil be set just like for patroni contianer as specified in the SGInstanceProfile.
+                      When set to `true` resources limits for containers other than the patroni container will be set just like for patroni container as specified in the SGInstanceProfile.
 
                       **Changing this field may require a restart.**
                   disableResourcesRequestsSplitFromTotal:
@@ -452,7 +452,7 @@ spec:
                       description: The `sgcluster` name
                     config:
                       type: object
-                      description: The configuration for `sgdistributedlgos` of this `sgcluster`
+                      description: The configuration for `sgdistributedlogs` of this `sgcluster`
                       properties:
                         sgDistributedLogs:
                           type: string

@@ -47,7 +47,7 @@ spec:
                 maxLength: 57
                 pattern: "^[a-z]([-a-z0-9]*[a-z0-9])?$"
                 description: |
-                  Name of the Sharded Database Operation. A database operation represents a ""kind"" of operation on a StackGres cluster, classified by a given name. The operation reference one SGCluster by its name. Following [Kubernetes naming conventions](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/architecture/identifiers.md), it must be an rfc1035/rfc1123 `label`, an alphanumeric (a-z, and 0-9) string, with the '-' character allowed anywhere except the first or last character.
+                  Name of the Sharded Database Operation. A database operation represents a ""kind"" of operation on a StackGres cluster, classified by a given name. The operation references one SGShardedCluster by its name. Following [Kubernetes naming conventions](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/architecture/identifiers.md), it must be an rfc1035/rfc1123 `label`, an alphanumeric (a-z, and 0-9) string, with the '-' character allowed anywhere except the first or last character.
 
                   The name must be unique across all database operations in the same namespace."
           spec:
@@ -80,7 +80,7 @@ spec:
               op:
                 type: string
                 description: |
-                  The kind of operation that will be performed on the SGCluster. Available operations are:
+                  The kind of operation that will be performed on the SGShardedCluster. Available operations are:
 
                   * `resharding`: perform a resharding of the cluster.
                   * `restart`: perform a restart of the cluster.
@@ -92,13 +92,13 @@ spec:
                 description: |
                   An ISO 8601 date, that holds UTC scheduled date of the operation execution.
 
-                  If not specified or if the date it's in the past, it will be interpreted ASAP.
+                  If not specified or if the date is in the past, it will be interpreted ASAP.
               timeout:
                 type: string
                 description: |
                   An ISO 8601 duration in the format `PnDTnHnMn.nS`, that specifies a timeout after which the operation execution will be canceled.
 
-                  If the operation can not be performed due to timeout expiration, the condition `Failed` will have a status of `True` and the reason will be `OperationTimedOut`.
+                  If the operation cannot be performed due to timeout expiration, the condition `Failed` will have a status of `True` and the reason will be `OperationTimedOut`.
 
                   If not specified the operation will never fail for timeout expiration.
               maxRetries:
@@ -126,7 +126,7 @@ spec:
                       drainOnly:
                         type: boolean
                         description: |
-                          A float number between 0.0 and 1.0 which indicates the maximum difference ratio of node utilization from average utilization.
+                          When set to `true`, shard groups will be moved off nodes that have `shouldhaveshards` set to false. When set to `false` (the default), all shard groups will be balanced across nodes.
                           See also https://docs.citusdata.com/en/stable/develop/api_udf.html#citus-rebalance-start
                       rebalanceStrategy:
                         type: string
@@ -194,14 +194,14 @@ spec:
 
                       * `InPlace`: the in-place method does not require more resources than those that are available.
                         In case only an instance of the StackGres cluster for the coordinator or any shard is present
-                        this mean the service disruption will last longer so we encourage use the reduced impact restart
+                        this means the service disruption will last longer so we encourage using the reduced impact restart
                          and especially for a production environment.
-                      * `ReducedImpact`: this procedure is the same as the in-place method but require additional
+                      * `ReducedImpact`: this procedure is the same as the in-place method but requires additional
                         resources in order to spawn a new updated replica that will be removed when the procedure completes.
                   onlyPendingRestart:
                     type: boolean
                     description: |
-                      By default all Pods are restarted. Setting this option to `true` allow to restart only those Pods which
+                      By default all Pods are restarted. Setting this option to `true` allows restarting only those Pods which
                         are in pending restart state as detected by the operation. Defaults to: `false`.
               # minorVersionUpgrade:
               #   type: object
@@ -218,9 +218,9 @@ spec:
               #         The method used to perform the minor version upgrade operation. Available methods are:
               # 
               #         * `InPlace`: the in-place method does not require more resources than those that are available.
-              #           In case only an instance of the StackGres cluster is present this mean the service disruption will
-              #           last longer so we encourage use the reduced impact restart and especially for a production environment.
-              #         * `ReducedImpact`: this procedure is the same as the in-place method but require additional
+              #           In case only an instance of the StackGres cluster is present this means the service disruption will
+              #           last longer so we encourage using the reduced impact restart and especially for a production environment.
+              #         * `ReducedImpact`: this procedure is the same as the in-place method but requires additional
               #           resources in order to spawn a new updated replica that will be removed when the procedure completes.
               securityUpgrade:
                 type: object
@@ -233,9 +233,9 @@ spec:
                       The method used to perform the security upgrade operation. Available methods are:
               
                       * `InPlace`: the in-place method does not require more resources than those that are available.
-                        In case only an instance of the StackGres cluster is present this mean the service disruption will
-                        last longer so we encourage use the reduced impact restart and especially for a production environment.
-                      * `ReducedImpact`: this procedure is the same as the in-place method but require additional
+                        In case only an instance of the StackGres cluster is present this means the service disruption will
+                        last longer so we encourage using the reduced impact restart and especially for a production environment.
+                      * `ReducedImpact`: this procedure is the same as the in-place method but requires additional
                         resources in order to spawn a new updated replica that will be removed when the procedure completes.
             required: ["sgShardedCluster", "op"]
           status:
