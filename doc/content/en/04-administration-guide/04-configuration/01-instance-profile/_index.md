@@ -44,6 +44,60 @@ spec:
   sgInstanceProfile: 'size-small'
 ```
 
+## Per-Container Resource Overrides
+
+The `containers` and `initContainers` sections allow you to set resource limits for individual sidecar containers and init containers. Each entry is a map keyed by container name with `cpu`, `memory`, and optionally `hugePages` fields.
+
+When only the top-level `cpu` and `memory` fields are specified, StackGres automatically populates per-container defaults. You can override any container's resources individually:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGInstanceProfile
+metadata:
+  name: custom-profile
+spec:
+  cpu: "4"
+  memory: 8Gi
+  containers:
+    envoy:
+      cpu: "2"
+      memory: 256Mi
+    cluster-controller:
+      cpu: 500m
+      memory: 1Gi
+  initContainers:
+    setup-scripts:
+      cpu: "2"
+      memory: 4Gi
+```
+
+You may set any `cpu` or `memory` value to `null` to remove the corresponding resource limit or request for that container.
+
+## Resource Requests and the Total Split Behavior
+
+The `requests` section controls the resource requests for each container. By default, `SGInstanceProfile.spec.requests.cpu` and `SGInstanceProfile.spec.requests.memory` represent the **total** resource requests for the entire Pod. The `patroni` container's requests are calculated by subtracting the requests of all other containers from this total.
+
+This behavior can be changed by setting `SGCluster.spec.pods.resources.disableResourcesRequestsSplitFromTotal` to `true`. When set, the `requests.cpu` and `requests.memory` values are assigned directly to the `patroni` container only, and the total Pod requests become the sum of all containers' requests.
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: cluster
+spec:
+  pods:
+    resources:
+      disableResourcesRequestsSplitFromTotal: true
+  sgInstanceProfile: custom-profile
+```
+
+The `disableResourcesRequestsSplitFromTotal` flag can also be set on the `SGShardedCluster` cutsom resource at the following paths:
+- `SGShardedCluster.spec.coordinator.pods.resources.disableResourcesRequestsSplitFromTotal`
+- `SGShardedCluster.spec.shards.pods.resources.disableResourcesRequestsSplitFromTotal`
+- `SGDistributedLogs.spec.resources.disableResourcesRequestsSplitFromTotal`
+
+Per-container requests can be customized under `requests.containers` and `requests.initContainers`, following the same key-per-container pattern as the limits sections.
+
 ## Resources
 
 When an SGInstanceProfile is created specifying only `cpu` and `memory` fields under section `SGInstanceProfile.spec` other sections will be created assigning values based on those:

@@ -83,6 +83,48 @@ spec:
 
 StackGres supports also backup based on Volume Snapshot that, in general, are faster than object storage for big volumes of data. This feature requires the VolumeSnapshot CRDs and controller to be installed in the Kubernetes cluster and to use a StorageClass for disks that supports the volume snapshot functionality. A backup based on VolumeSnapshot still requires WAL files that will be stored in the object storage defined by the SGObjectStorage.
 
+## Backup Timeouts and Retries
+
+You can configure timeout and retry behavior for backup operations at the cluster level or on individual SGBackup resources.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `timeout` | integer | disabled | Timeout in seconds for the backup creation. If not set or set to `0`, the backup runs until it completes or fails. Set to a high value to allow for unexpected delays (slow network, low disk throughput). |
+| `reconciliationTimeout` | integer | `300` (5 minutes) | Timeout in seconds for the reconciliation process that runs after a backup completes. Set to `0` to disable. Reconciliation failures do not fail the backup and will be retried on the next backup. |
+| `maxRetries` | integer | `3` | Maximum number of retries after a backup failure. Set to `0` to disable retries. |
+
+These fields can be set in the SGCluster backup configuration:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: cluster
+spec:
+  configurations:
+    backups:
+    - sgObjectStorage: my-storage
+      cronSchedule: '0 5 * * *'
+      retention: 5
+      timeout: 7200
+      reconciliationTimeout: 600
+      maxRetries: 5
+```
+
+They can also be set on individual SGBackup resources:
+
+```yaml
+apiVersion: stackgres.io/v1
+kind: SGBackup
+metadata:
+  name: manual-backup
+spec:
+  sgCluster: cluster
+  managedLifecycle: false
+  timeout: 3600
+  maxRetries: 2
+```
+
 ## Backups
 
 Backups metadata are stored using [SGBackup]({{% relref "06-crd-reference/06-sgbackup" %}}).
