@@ -225,40 +225,6 @@ The cache works with any configured repository.
 
 5. **Use fast storage**: SSD-backed storage improves performance
 
-## Troubleshooting
-
-### Cache Not Working
-
-**Symptom**: Extensions still downloading from repository.
-
-**Solution**: Verify cache is enabled:
-```bash
-kubectl get sgconfig stackgres-config -o yaml | grep -A10 cache
-kubectl get pods -n stackgres | grep cache
-```
-
-### Cache Volume Full
-
-**Symptom**: Extension downloads failing, disk full errors.
-
-**Solution**: Increase cache size or clean old versions:
-```yaml
-spec:
-  extensions:
-    cache:
-      persistentVolume:
-        size: 50Gi  # Increase size
-```
-
-### Pre-Load Failing
-
-**Symptom**: Pre-loaded extensions not appearing in cache.
-
-**Solution**: Check cache logs for download errors:
-```bash
-kubectl logs -n stackgres -l app=stackgres-extensions-cache | grep -i error
-```
-
 ## Related Documentation
 
 - [PostgreSQL Extensions Guide]({{% relref "04-administration-guide/07-postgres-extensions" %}})

@@ -346,47 +346,6 @@ stringData:
   password: readonly_password
 ```
 
-## Troubleshooting
-
-### Binding Secret Not Created
-
-**Symptom**: The binding secret doesn't exist.
-
-**Solution**: Check the cluster status:
-```bash
-kubectl get sgcluster my-cluster -o yaml | grep -A5 binding
-```
-
-The binding secret is created when the cluster is ready.
-
-### Application Cannot Connect
-
-**Symptom**: Application fails to connect using binding information.
-
-**Solution**:
-1. Verify the secret contents:
-```bash
-kubectl get secret my-cluster-binding -o yaml
-```
-
-2. Test connectivity from a pod:
-```bash
-kubectl run test --rm -it --image=postgres:16 -- \
-  psql "$(kubectl get secret my-cluster-binding -o jsonpath='{.data.uri}' | base64 -d)"
-```
-
-### Wrong Database in Binding
-
-**Symptom**: Binding points to wrong database.
-
-**Solution**: Configure the binding in SGCluster spec:
-```yaml
-spec:
-  configurations:
-    binding:
-      database: correct_database
-```
-
 ## Related Documentation
 
 - [Service Binding Specification](https://servicebinding.io/)

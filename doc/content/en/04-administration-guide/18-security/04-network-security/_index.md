@@ -428,38 +428,3 @@ spec:
 6. **Monitor and Audit**: Log and monitor all connection attempts
 
 7. **Regular Reviews**: Periodically review network policies and access
-
-## Troubleshooting
-
-### Connection Timeout
-
-**Symptom**: Application cannot connect to the database.
-
-**Solution**: Check network policies:
-```bash
-# List network policies
-kubectl get networkpolicies -n production
-
-# Describe specific policy
-kubectl describe networkpolicy allow-app-to-postgres -n production
-```
-
-### DNS Resolution Issues
-
-**Symptom**: Cannot resolve service names.
-
-**Solution**: Ensure DNS egress is allowed:
-```bash
-# Test DNS from pod
-kubectl exec -it myapp-pod -- nslookup my-cluster
-```
-
-### Service Not Accessible
-
-**Symptom**: Service is not reachable.
-
-**Solution**: Verify service and endpoints:
-```bash
-kubectl get svc my-cluster
-kubectl get endpoints my-cluster
-```

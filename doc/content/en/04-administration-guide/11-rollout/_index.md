@@ -395,21 +395,6 @@ In this case, the service disruption for read-write connections will last longer
 
 For single-instance clusters, the `InPlace` method will cause a complete service outage during the restart. Consider using `ReducedImpact` if you need to minimize downtime, as it will temporarily add a replica before restarting.
 
-### Troubleshooting
-
-If errors occur during restart, check the operation status:
-
-```bash
-kubectl describe sgdbops restart-my-cluster -n default
-```
-
-Common issues:
-- **Insufficient resources**: The `ReducedImpact` method requires resources to spawn an additional replica
-- **Timeout**: The operation may timeout if the cluster takes too long to stabilize
-- **Patroni issues**: Check Patroni logs if switchover fails
-
-For more troubleshooting information, refer to the [Cluster Restart Troubleshooting section]({{% relref "troubleshooting.md/_index.md" %}}).
-
 ## Related Documentation
 
 - [Manual Cluster Restart]({{% relref "04-administration-guide/11-rollout/01-manual-restart" %}})

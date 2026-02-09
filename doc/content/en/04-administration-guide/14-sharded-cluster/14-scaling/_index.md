@@ -274,33 +274,3 @@ kubectl get sgshardeddbops rebalance-after-scale -o yaml
 4. **Use ReducedImpact**: For vertical scaling, use reduced impact restarts
 5. **Backup before major changes**: Create a backup before significant scaling
 6. **Rebalance after adding shards**: Data doesn't automatically redistribute
-
-## Troubleshooting
-
-### New Shards Not Receiving Data
-
-**Symptom**: After adding shards, new shards remain empty.
-
-**Solution**: Run resharding operation to rebalance:
-```bash
-kubectl apply -f resharding-dbops.yaml
-```
-
-### Scaling Stuck
-
-**Symptom**: Scale operation doesn't complete.
-
-**Solution**: Check events and logs:
-```bash
-kubectl describe sgshardedcluster my-sharded-cluster
-kubectl logs -l stackgres.io/shardedcluster-name=my-sharded-cluster
-```
-
-### Insufficient Resources
-
-**Symptom**: New pods fail to schedule.
-
-**Solution**: Check node resources and consider smaller profiles or adding nodes:
-```bash
-kubectl describe nodes | grep -A5 "Allocated resources"
-```

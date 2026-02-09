@@ -503,48 +503,6 @@ spec:
             effect: "NoSchedule"
 ```
 
-## Troubleshooting
-
-### Pods Not Scheduling
-
-**Symptom**: Pods stuck in `Pending` state.
-
-**Diagnosis**:
-```bash
-kubectl describe pod my-cluster-0
-kubectl get events --field-selector reason=FailedScheduling
-```
-
-**Common causes**:
-- No nodes match nodeSelector
-- No nodes tolerate required taints
-- Affinity rules too restrictive
-- Insufficient resources on matching nodes
-
-### Uneven Pod Distribution
-
-**Symptom**: Pods clustered on same node/zone.
-
-**Solution**: Add topology spread constraints:
-```yaml
-topologySpreadConstraints:
-  - maxSkew: 1
-    topologyKey: topology.kubernetes.io/zone
-    whenUnsatisfiable: DoNotSchedule
-```
-
-### Backup Pods Competing with Database
-
-**Symptom**: Backup impacts database performance.
-
-**Solution**: Use separate backup scheduling:
-```yaml
-scheduling:
-  backup:
-    nodeSelector:
-      workload: backup
-```
-
 ## Related Documentation
 
 - [Instance Profiles]({{% relref "04-administration-guide/04-configuration/01-instance-profile" %}})

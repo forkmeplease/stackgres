@@ -177,32 +177,6 @@ spec:
 - **Fine-grained access**: Each cluster can use different GCP identities
 - **Audit logging**: Cloud Audit Logs track all access
 
-### Troubleshooting Workload Identity
-
-**Verify Workload Identity is enabled:**
-
-```bash
-kubectl describe pod -l app=StackGresCluster | grep serviceAccountName
-```
-
-**Check GCP SA binding:**
-
-```bash
-gcloud iam service-accounts get-iam-policy \
-  stackgres-backup-sa@stackgres-project.iam.gserviceaccount.com
-```
-
-**Test from a pod:**
-
-```bash
-kubectl run -it test-wi --image=google/cloud-sdk:slim \
-  --serviceaccount=stackgres-backup-ksa -- bash
-
-# Inside the pod:
-gcloud auth list
-gsutil ls gs://my-stackgres-bucket/
-```
-
 ## Choosing Between Methods
 
 | Method | Security | Complexity | Use Case |

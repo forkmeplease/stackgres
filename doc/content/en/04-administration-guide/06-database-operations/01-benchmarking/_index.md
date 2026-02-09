@@ -447,38 +447,6 @@ spec:
 
 7. **Monitor cluster resources**: Watch CPU, memory, and I/O during benchmarks
 
-## Troubleshooting
-
-### Benchmark Fails to Start
-
-**Symptom**: SGDbOps stuck in `Pending`.
-
-**Solution**: Check cluster health and available resources:
-```bash
-kubectl get sgcluster my-cluster -o yaml
-kubectl describe pod -l stackgres.io/cluster-name=my-cluster
-```
-
-### Low Performance Numbers
-
-**Symptom**: TPS lower than expected.
-
-**Solutions**:
-- Increase `threads` to match CPU cores
-- Check for resource contention
-- Verify storage performance
-- Review PostgreSQL configuration
-
-### Sampling Returns No Queries
-
-**Symptom**: Empty sampling results.
-
-**Solutions**:
-- Verify `pg_stat_statements` is enabled
-- Increase `topQueriesCollectDuration`
-- Check `targetDatabase` is correct
-- Ensure application is generating queries
-
 ## Related Documentation
 
 - [SGDbOps Reference]({{% relref "06-crd-reference/08-sgdbops" %}})

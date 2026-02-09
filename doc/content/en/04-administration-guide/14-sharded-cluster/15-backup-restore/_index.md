@@ -316,49 +316,6 @@ spec:
         path: /disaster-recovery
 ```
 
-## Troubleshooting
-
-### Backup Failed
-
-**Symptom**: SGShardedBackup shows Failed status.
-
-**Solution**: Check the failure message and individual backups:
-```bash
-kubectl get sgshardedbackup failed-backup -o jsonpath='{.status.process.failure}'
-
-# Check individual SGBackups
-kubectl get sgbackup -l stackgres.io/shardedbackup-name=failed-backup
-```
-
-### Backup Timeout
-
-**Symptom**: Backup fails with timeout.
-
-**Solution**: Increase timeout or tune performance:
-```yaml
-spec:
-  timeout: PT4H
-```
-
-### Storage Access Issues
-
-**Symptom**: Backup fails with storage errors.
-
-**Solution**: Verify SGObjectStorage configuration:
-```bash
-kubectl get sgobjectstorage my-backup-storage -o yaml
-kubectl get secret backup-credentials -o yaml
-```
-
-### Restore Fails
-
-**Symptom**: New cluster fails to restore.
-
-**Solution**: Check restore logs:
-```bash
-kubectl logs -l stackgres.io/shardedcluster-name=restored-cluster -c patroni
-```
-
 ## Best Practices
 
 1. **Test restores regularly**: Periodically restore to verify backups work

@@ -220,49 +220,6 @@ spec:
 | Analytics/OLAP | Good |
 | Extension-heavy | Verify availability |
 
-## Troubleshooting
-
-### Wrong Architecture Detected
-
-**Symptom**: Extensions fail to install with architecture mismatch.
-
-**Diagnosis**:
-```bash
-# Check detected architecture
-kubectl get sgcluster my-cluster -o jsonpath='{.status.arch}'
-
-# Check node architecture
-kubectl get nodes -o wide
-```
-
-**Solution**: Ensure pods are scheduled on nodes matching the expected architecture.
-
-### Extension Not Available
-
-**Symptom**: Extension shows as unavailable on ARM64.
-
-**Diagnosis**:
-```bash
-kubectl exec my-cluster-0 -c postgres-util -- psql -c \
-  "SELECT * FROM pg_available_extensions WHERE name = 'extension_name'"
-```
-
-**Solutions**:
-1. Check if a newer extension version supports ARM64
-2. Build a custom extension package
-3. Use x86_64 nodes for that specific cluster
-
-### Image Pull Errors
-
-**Symptom**: Pod fails to start with manifest errors.
-
-**Diagnosis**:
-```bash
-kubectl describe pod my-cluster-0
-```
-
-**Solution**: Ensure you're using recent StackGres images that include ARM64 support.
-
 ## Verification
 
 ### Check Operator Architecture

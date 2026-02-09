@@ -324,36 +324,6 @@ Some types map differently:
 4. **Monitor both protocols**: Track TDS and PostgreSQL connections
 5. **Plan for differences**: Some behavior may differ from SQL Server
 
-## Troubleshooting
-
-### Connection Failed
-
-**Symptom**: Cannot connect via TDS.
-
-**Solution**: Verify port and credentials:
-```bash
-# Check service
-kubectl get svc | grep babelfish
-
-# Test connectivity
-nc -zv babelfish-cluster 1433
-```
-
-### T-SQL Syntax Error
-
-**Symptom**: Query works in SQL Server but fails in Babelfish.
-
-**Solution**: Check Babelfish compatibility documentation for the specific feature.
-
-### Performance Issues
-
-**Symptom**: Queries slower than in SQL Server.
-
-**Solution**:
-- Analyze query plans using PostgreSQL EXPLAIN
-- Create appropriate indexes
-- Review Babelfish-specific settings
-
 ## Related Documentation
 
 - [Babelfish Feature]({{% relref "02-features/18-babelfish" %}})

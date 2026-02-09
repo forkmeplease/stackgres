@@ -302,47 +302,6 @@ For enhanced security, you can configure Azure Storage to use private endpoints.
 2. Configure your AKS cluster to use the same VNet or a peered VNet
 3. Use the same SGObjectStorage configuration - no changes required
 
-## Troubleshooting
-
-### Authentication Failed
-
-**Symptom**: Backup fails with "authentication failed" error.
-
-**Solution**: Verify the storage account name and access key:
-```bash
-# Test access with Azure CLI
-az storage blob list \
-  --account-name stackgresbackups \
-  --account-key "your-access-key" \
-  --container-name sgbackups
-```
-
-### Container Not Found
-
-**Symptom**: Backup fails with "container not found" error.
-
-**Solution**: Ensure the container exists:
-```bash
-az storage container show \
-  --name sgbackups \
-  --account-name stackgresbackups
-```
-
-### Permission Denied
-
-**Symptom**: Backup fails with permission errors.
-
-**Solution**: Ensure the access key has write permissions. Storage Account Keys have full access by default. If using SAS tokens or RBAC, ensure the "Storage Blob Data Contributor" role is assigned.
-
-### Network Connectivity
-
-**Symptom**: Timeout errors connecting to Azure Storage.
-
-**Solution**:
-- Check if the storage account allows access from your cluster's network
-- Verify firewall rules on the storage account
-- If using private endpoints, ensure DNS resolution works
-
 ## Azure Storage Tiers
 
 Azure Blob Storage supports different access tiers. StackGres uses the default tier (Hot) for backups. You can configure lifecycle management policies in Azure to move older backups to cooler tiers for cost optimization:

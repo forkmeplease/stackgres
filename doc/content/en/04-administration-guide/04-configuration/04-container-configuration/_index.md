@@ -274,42 +274,6 @@ Example:
 Total = (400 + 100 + 100 + 150) × 3 = 2.25GB
 ```
 
-## Troubleshooting
-
-### Container Not Starting
-
-**Symptom**: Pod stuck in ContainerCreating after config change.
-
-**Solution**: Check pod events:
-```bash
-kubectl describe pod my-cluster-0
-```
-
-### Metrics Not Available
-
-**Symptom**: Prometheus shows no metrics after enabling.
-
-**Solution**: Verify metrics are enabled:
-```bash
-kubectl get sgcluster my-cluster -o jsonpath='{.spec.configurations.observability}'
-```
-
-### Connection Pool Issues
-
-**Symptom**: Connections failing after disabling pooling.
-
-**Solution**: Increase PostgreSQL `max_connections`:
-```yaml
-apiVersion: stackgres.io/v1
-kind: SGPostgresConfig
-metadata:
-  name: high-connections
-spec:
-  postgresVersion: "16"
-  postgresql.conf:
-    max_connections: "500"
-```
-
 ## Related Documentation
 
 - [Instance Profiles]({{% relref "04-administration-guide/04-configuration/01-instance-profile" %}})

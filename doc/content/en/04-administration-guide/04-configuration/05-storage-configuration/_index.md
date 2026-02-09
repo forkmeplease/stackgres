@@ -303,57 +303,6 @@ spec:
       fsGroupChangePolicy: 'Always'  # Strict ownership enforcement
 ```
 
-## Troubleshooting
-
-### Volume Not Provisioning
-
-**Symptom**: PVC stuck in `Pending` state.
-
-**Diagnosis**:
-```bash
-kubectl describe pvc <cluster-name>-data-<pod-name>
-kubectl get events --field-selector reason=ProvisioningFailed
-```
-
-**Solutions**:
-- Verify storage class exists
-- Check storage quota limits
-- Ensure sufficient cluster resources
-
-### Slow Pod Startup
-
-**Symptom**: Pods take a long time to become ready.
-
-**Diagnosis**:
-```bash
-kubectl describe pod <cluster-name>-0 | grep -A5 "Events:"
-```
-
-**Solution**: Use `fsGroupChangePolicy: OnRootMismatch`:
-```yaml
-spec:
-  pods:
-    persistentVolume:
-      fsGroupChangePolicy: 'OnRootMismatch'
-```
-
-### Permission Denied Errors
-
-**Symptom**: PostgreSQL fails to write to data directory.
-
-**Diagnosis**:
-```bash
-kubectl exec <cluster-name>-0 -c patroni -- ls -la /var/lib/postgresql/data
-```
-
-**Solution**: Use `fsGroupChangePolicy: Always` temporarily:
-```yaml
-spec:
-  pods:
-    persistentVolume:
-      fsGroupChangePolicy: 'Always'
-```
-
 ## Related Documentation
 
 - [Instance Profiles]({{% relref "04-administration-guide/04-configuration/01-instance-profile" %}})

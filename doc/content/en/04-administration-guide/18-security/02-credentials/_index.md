@@ -323,27 +323,3 @@ rules:
 5. **Use separate credentials** for each application/environment
 
 6. **Principle of least privilege** - Create users with minimal required permissions
-
-## Troubleshooting
-
-### Authentication Failed
-
-**Symptom**: Connection fails with authentication error.
-
-**Solution**: Verify the password in the Secret matches PostgreSQL:
-```bash
-# Check Secret value
-kubectl get secret my-cluster -o jsonpath='{.data.superuser-password}' | base64 -d
-
-# Test connection
-kubectl exec my-cluster-0 -c postgres-util -- psql -U postgres -c "SELECT 1"
-```
-
-### Secret Not Found
-
-**Symptom**: Cluster fails to start due to missing secret.
-
-**Solution**: The secret is created automatically. If pre-creating, ensure it exists before the cluster:
-```bash
-kubectl get secret my-cluster
-```

@@ -352,28 +352,3 @@ rules:
 5. **Use Groups**: Bind roles to groups rather than individual users when possible
 
 6. **Document Access**: Maintain documentation of who has access to what
-
-## Troubleshooting
-
-### Permission Denied Errors
-
-**Symptom**: User cannot access StackGres resources.
-
-**Solution**: Check role bindings:
-```bash
-# Check user's permissions
-kubectl auth can-i get sgclusters --as=user@example.com
-
-# List role bindings
-kubectl get rolebindings,clusterrolebindings -o wide | grep stackgres
-```
-
-### Operator Permission Issues
-
-**Symptom**: Operator fails to create resources.
-
-**Solution**: Verify operator service account permissions:
-```bash
-kubectl auth can-i create statefulsets \
-  --as=system:serviceaccount:stackgres:stackgres-operator
-```
