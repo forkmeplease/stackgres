@@ -8,6 +8,8 @@ showToc: true
 
 A security upgrade updates the container images and operating system-level packages of a StackGres cluster without changing the PostgreSQL major or minor version. This is distinct from a [minor version upgrade]({{% relref "04-administration-guide/06-database-operations/06-minor-version-upgrade" %}}) which changes the PostgreSQL version itself. Security upgrades address vulnerabilities in the base container images, libraries, and system packages. StackGres allows you to perform security upgrades declaratively through [SGDbOps]({{% relref "06-crd-reference/08-sgdbops" %}}).
 
+> Since the SGCluster version is now updated on any restart, the `securityUpgrade` and `restart` SGDbOps operations are logically equivalent. You can also perform this operation without creating an SGDbOps by using the [rollout]({{% relref "04-administration-guide/11-rollout" %}}) functionality, which allows the operator to automatically roll out Pod updates based on the cluster's update strategy.
+
 ## When to Use
 
 - When new container images are available with security patches
@@ -70,5 +72,7 @@ The operation status is tracked in `SGDbOps.status.conditions`. When the operati
 ## Related Documentation
 
 - [SGDbOps CRD Reference]({{% relref "06-crd-reference/08-sgdbops" %}})
+- [Cluster Rollout]({{% relref "04-administration-guide/11-rollout" %}})
+- [Restart Operation]({{% relref "04-administration-guide/06-database-operations/05-restart" %}})
 - [Minor Version Upgrade]({{% relref "04-administration-guide/06-database-operations/06-minor-version-upgrade" %}})
 - [Major Version Upgrade]({{% relref "04-administration-guide/06-database-operations/07-major-version-upgrade" %}})

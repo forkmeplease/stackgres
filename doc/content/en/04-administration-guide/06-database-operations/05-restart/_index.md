@@ -8,6 +8,8 @@ showToc: true
 
 A controlled restart of a StackGres cluster can be performed declaratively through [SGDbOps]({{% relref "06-crd-reference/08-sgdbops" %}}). This is useful when configuration changes require a Pod restart to take effect, or when you need to perform a rolling restart of the cluster for maintenance purposes.
 
+> Since the SGCluster version is now updated on any restart, the `restart` and `securityUpgrade` SGDbOps operations are logically equivalent. You can also perform this operation without creating an SGDbOps by using the [rollout]({{% relref "04-administration-guide/11-rollout" %}}) functionality, which allows the operator to automatically roll out Pod updates based on the cluster's update strategy.
+
 ## When to Use
 
 - After configuration changes that require a Pod restart (indicated by pending restart status)

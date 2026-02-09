@@ -8,6 +8,8 @@ showToc: true
 
 SGShardedDbOps allows you to perform day-2 database operations on sharded clusters, including restarts, resharding, and security upgrades.
 
+> The `restart` and `securityUpgrade` operations are logically equivalent since the SGShardedCluster version is updated on any restart. These operations can also be performed without creating an SGShardedDbOps by using the [rollout]({{% relref "04-administration-guide/11-rollout" %}}) functionality, which allows the operator to automatically roll out Pod updates based on the cluster's update strategy.
+
 ## Available Operations
 
 | Operation | Description | Use Case |
@@ -360,48 +362,6 @@ kubectl delete sgshardeddbops cluster-restart
 
 Note: Cancellation may leave the cluster in an intermediate state. Review cluster status after cancellation.
 
-## Troubleshooting
-
-### Operation Stuck
-
-**Symptom**: Operation remains in Running state.
-
-**Solution**: Check pod status and logs:
-```bash
-kubectl get pods -l stackgres.io/shardedcluster-name=my-sharded-cluster
-kubectl describe sgshardeddbops stuck-operation
-```
-
-### Operation Failed
-
-**Symptom**: Operation shows Failed status.
-
-**Solution**: Check the failure reason:
-```bash
-kubectl get sgshardeddbops failed-op -o jsonpath='{.status.conditions[?(@.type=="Failed")]}'
-```
-
-### Timeout Exceeded
-
-**Symptom**: Operation fails with OperationTimedOut.
-
-**Solution**: Increase timeout and retry:
-```yaml
-spec:
-  timeout: PT6H  # Increase timeout
-```
-
-### Resharding Not Moving Data
-
-**Symptom**: Resharding completes but data distribution unchanged.
-
-**Solution**: Lower the threshold:
-```yaml
-resharding:
-  citus:
-    threshold: 0.0  # Force rebalance regardless of current distribution
-```
-
 ## Best Practices
 
 1. **Use ReducedImpact for production**: Minimizes downtime during operations
@@ -414,5 +374,6 @@ resharding:
 ## Related Documentation
 
 - [SGShardedDbOps CRD Reference]({{% relref "06-crd-reference/14-sgshardeddbops" %}})
+- [Cluster Rollout]({{% relref "04-administration-guide/11-rollout" %}})
 - [Scaling Sharded Clusters]({{% relref "04-administration-guide/14-sharded-cluster/14-scaling" %}})
 - [SGDbOps for Regular Clusters]({{% relref "06-crd-reference/08-sgdbops" %}})
