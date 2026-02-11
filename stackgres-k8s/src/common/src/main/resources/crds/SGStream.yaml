@@ -1407,10 +1407,6 @@ spec:
                   taskManagementTimeoutMs:
                     type: integer
                     description: Default `180000`. Time, in milliseconds, that the engine waits for a task’s lifecycle management operations (starting and stopping) to complete.
-              useDebeziumAsyncEngine:
-                type: boolean
-                description: When `true` use Debezium asynchronous engine. See https://debezium.io/blog/2024/07/08/async-embedded-engine/
-                default: true
           status:
             type: object
             description: |
