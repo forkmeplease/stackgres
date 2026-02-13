@@ -489,7 +489,7 @@ spec:
         columnMaskHash:
           SHA-256:
             salt123:
-              - "public\\.users\\.email"
+            - "public\\.users\\.email"
   target:
     type: SGCluster
     sgCluster:

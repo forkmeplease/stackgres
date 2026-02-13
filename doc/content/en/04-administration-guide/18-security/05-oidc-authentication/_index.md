@@ -16,7 +16,7 @@ StackGres supports [OpenID Connect (OIDC)](https://openid.net/connect/) authenti
 
 ## Configuration
 
-OIDC authentication is configured through the [SGConfig]({{% relref "06-crd-reference/14-sgconfig" %}}) CRD under the `spec.authentication.oidc` section.
+OIDC authentication is configured through the [SGConfig]({{% relref "06-crd-reference/12-sgconfig" %}}) CRD under the `spec.authentication.oidc` section.
 
 ```yaml
 apiVersion: stackgres.io/v1
@@ -105,5 +105,5 @@ spec:
 
 ## Related Documentation
 
-- [SGConfig CRD Reference]({{% relref "06-crd-reference/14-sgconfig" %}})
+- [SGConfig CRD Reference]({{% relref "06-crd-reference/12-sgconfig" %}})
 - [Security]({{% relref "04-administration-guide/18-security" %}})

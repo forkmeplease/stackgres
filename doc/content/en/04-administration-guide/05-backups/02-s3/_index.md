@@ -205,9 +205,9 @@ kind: SGCluster
 metadata:
   name: my-cluster
 spec:
-  pods:
-    metadata:
-      annotations:
+  metadata:
+    annotations:
+      clusterPods:
         # This annotation is added to pods
         eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/StackGresBackupRole
   configurations:

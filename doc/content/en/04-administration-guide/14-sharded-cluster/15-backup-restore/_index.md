@@ -65,7 +65,7 @@ metadata:
 spec:
   sgShardedCluster: my-sharded-cluster
   managedLifecycle: false    # Don't auto-delete with retention policy
-  timeout: PT2H              # 2 hour timeout
+  timeout: 7200              # 2 hour timeout (in seconds)
   maxRetries: 3              # Retry up to 3 times on failure
 ```
 
@@ -293,7 +293,7 @@ metadata:
   name: large-cluster-backup
 spec:
   sgShardedCluster: my-large-sharded-cluster
-  timeout: PT6H  # 6 hours
+  timeout: 21600  # 6 hours (in seconds)
 ```
 
 ## Cross-Region Backup

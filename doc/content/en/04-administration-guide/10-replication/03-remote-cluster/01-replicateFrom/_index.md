@@ -47,15 +47,9 @@ psql -U <USER> -p 5433 -h <HOST> -d <database>
 Then, the new StackGres Cluster will require the credentials for the users that will connect to the main Cluster. Since credentials are present here, they should be saved in a `Secret`.
 The next example helps to understand how to create it, using the same names from the example above:
 
+<!-- doc-check:skip -->
 ```yaml
 apiVersion: v1
-data:
-  authenticator-password: ***
-  authenticator-username: authenticator
-  replication-password: ***
-  replication-username: replicator
-  superuser-password: ***
-  superuser-username: postgres
 kind: Secret
 metadata:
   labels:
@@ -64,7 +58,13 @@ metadata:
   name: mysecrets-db
   namespace: my-namespace
 type: Opaque
-EOF
+data:
+  authenticator-password: ***
+  authenticator-username: authenticator
+  replication-password: ***
+  replication-username: replicator
+  superuser-password: ***
+  superuser-username: postgres
 ```
 
 In the new remote StackGres deployment, where a new StackGres Cluster will be created as Standby Leader, equivalent CRDs are required before proceeding. 
@@ -82,6 +82,8 @@ metadata:
   namespace: my-namespace
 spec:
   configurations:
+    observability:
+      prometheusAutobind: true
     backups:
     - compression: lz4
       cronSchedule: 0 0 1 * *
@@ -134,7 +136,6 @@ spec:
       enabled: true
       type: ClusterIP
   profile: production
-  prometheusAutobind: true
   replication:
     mode: async
     role: ha-read

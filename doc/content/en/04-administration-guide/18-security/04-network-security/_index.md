@@ -263,28 +263,6 @@ metadata:
     pod-security.kubernetes.io/warn: restricted
 ```
 
-### Security Context
-
-StackGres pods run with security contexts. You can customize pod security:
-
-```yaml
-apiVersion: stackgres.io/v1
-kind: SGCluster
-metadata:
-  name: my-cluster
-spec:
-  pods:
-    customPodSecurityContext:
-      runAsNonRoot: true
-      seccompProfile:
-        type: RuntimeDefault
-    customContainerSecurityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-```
-
 ## Service Mesh Integration
 
 ### Istio

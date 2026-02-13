@@ -33,11 +33,11 @@ spec:
   sgShardedCluster: stackgres
   managedLifecycle: true
 status:
+  sgBackups:
+  - backup-coord
+  - backup-shard0
+  - backup-shard1
   process:
-    sgBackups:
-    - backup-coord
-    - backup-shard0
-    - backup-shard1
     status: Completed
     jobPod: backup-backup-q79zq
     timing:

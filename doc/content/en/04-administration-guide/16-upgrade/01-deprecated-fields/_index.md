@@ -335,7 +335,7 @@ kubectl logs -n stackgres -l app=stackgres-operator | grep -i deprecated
 
 ## Related Documentation
 
-- [Managed SQL Scripts]({{% relref "04-administration-guide/06-sql-scripts" %}})
+- [Managed SQL Scripts]({{% relref "04-administration-guide/15-sql-scripts" %}})
 - [SGScript Reference]({{% relref "06-crd-reference/10-sgscript" %}})
 - [Container Configuration]({{% relref "04-administration-guide/04-configuration/04-container-configuration" %}})
 - [Monitoring]({{% relref "04-administration-guide/08-monitoring" %}})

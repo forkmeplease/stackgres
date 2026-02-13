@@ -22,7 +22,7 @@ metadata:
 spec:
   metadata:
     annotations:
-      pods:
+      clusterPods:
         sidecar.istio.io/inject: 'false'
 # [...]
 ```

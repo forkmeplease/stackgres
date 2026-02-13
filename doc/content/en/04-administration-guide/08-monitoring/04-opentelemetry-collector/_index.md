@@ -151,12 +151,11 @@ metadata:
 spec:
   collector:
     prometheusOperator:
-      enabled: true
+      # Allow discovery of Prometheus instances in all namespaces
+      allowDiscovery: true
       # Create monitors automatically
-      monitors:
-        enabled: true
-      # Allow all namespaces to be monitored
-      allowDiscoveryAllNamespaces: true
+      # monitors:
+      # - name: prometheus
 ```
 
 ### Prometheus Auto-Bind

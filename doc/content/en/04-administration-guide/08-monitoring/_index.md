@@ -245,5 +245,7 @@ spec:
   pods:
     persistentVolume:
       size: '5Gi'
-  prometheusAutobind: true
+  configurations:
+    observability:
+      prometheusAutobind: true
 ```

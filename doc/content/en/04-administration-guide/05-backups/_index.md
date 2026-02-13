@@ -74,11 +74,10 @@ spec:
   # fill the preferred storage method with
   # specific credentials and configurations
   type: # <s3|s3Compatible|gcs|azureBlob>
-  storage:
-    s3: {}
-    s3Compatible: {}
-    gcs: {}
-    azureBlob: {}
+  s3: {}
+  s3Compatible: {}
+  gcs: {}
+  azureBlob: {}
 ```
 
 StackGres supports also backup based on Volume Snapshot that, in general, are faster than object storage for big volumes of data. This feature requires the VolumeSnapshot CRDs and controller to be installed in the Kubernetes cluster and to use a StorageClass for disks that supports the volume snapshot functionality. A backup based on VolumeSnapshot still requires WAL files that will be stored in the object storage defined by the SGObjectStorage.

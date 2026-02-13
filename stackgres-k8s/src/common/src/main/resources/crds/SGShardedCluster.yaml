@@ -1087,7 +1087,7 @@ spec:
                     replicateFrom:
                       instance:
                         external:
-                          hosts: [${COORDINATOR_HOST_IP},${SHARD_0_HOST_IP},${SHARD_1_HOST_IP}]
+                          hosts: ["${COORDINATOR_HOST_IP}","${SHARD_0_HOST_IP}","${SHARD_1_HOST_IP}"]
                           ports: [5433,5433,5433]
                       users:
                         superuser:
@@ -1129,7 +1129,7 @@ spec:
                           name: backup-name
                     replicateFrom:
                       storage:
-                        paths: [${PG_ORIGIN_COORDINATOR_BACKUP_PATH},${PG_ORIGIN_SHARD_0_BACKUP_PATH},${PG_ORIGIN_SHARD_1_BACKUP_PATH}]
+                        paths: ["${PG_ORIGIN_COORDINATOR_BACKUP_PATH}","${PG_ORIGIN_SHARD_0_BACKUP_PATH}","${PG_ORIGIN_SHARD_1_BACKUP_PATH}"]
                         sgObjectStorage: stackgres-backups
                       users:
                         superuser:
@@ -1170,10 +1170,10 @@ spec:
                     replicateFrom:
                       instance:
                         external:
-                          hosts: [${COORDINATOR_HOST_IP},${SHARD_0_HOST_IP},${SHARD_1_HOST_IP}]
+                          hosts: ["${COORDINATOR_HOST_IP}","${SHARD_0_HOST_IP}","${SHARD_1_HOST_IP}"]
                           ports: [5433,5433,5433]
                       storage:
-                        paths: [${PG_ORIGIN_COORDINATOR_BACKUP_PATH},${PG_ORIGIN_SHARD_0_BACKUP_PATH},${PG_ORIGIN_SHARD_1_BACKUP_PATH}]
+                        paths: ["${PG_ORIGIN_COORDINATOR_BACKUP_PATH}","${PG_ORIGIN_SHARD_0_BACKUP_PATH}","${PG_ORIGIN_SHARD_1_BACKUP_PATH}"]
                         sgObjectStorage: stackgres-backups
                       users:
                         superuser:

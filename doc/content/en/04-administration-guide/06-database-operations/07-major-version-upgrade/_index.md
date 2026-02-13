@@ -116,7 +116,7 @@ spec:
   majorVersionUpgrade:
     postgresVersion: "17.4"
     sgPostgresConfig: postgres-17
-    extensions:
+    postgresExtensions:
     - name: pg_cron
       version: "1.6"
 ```

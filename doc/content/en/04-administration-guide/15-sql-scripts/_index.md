@@ -234,7 +234,6 @@ Whenever a script fails a failure message and a failure code will be set in the 
  and the corresponding SGScript `id`. Like in the following example:
 
 ```yaml
----
 apiVersion: stackgres.io/v1
 kind: SGScript
 metadata:
@@ -243,7 +242,9 @@ spec:
   scripts:
   - name: error-script
     script: "CREATE USER test WITH THE PASSWORD 'test'"
----
+```
+
+```yaml
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:

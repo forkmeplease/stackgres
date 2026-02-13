@@ -25,7 +25,7 @@ By default, the operator uses a ClusterRole with permissions to:
 
 For enhanced security, you can limit the operator to specific namespaces:
 
-```yaml
+```bash
 # During Helm installation
 helm install stackgres-operator stackgres-charts/stackgres-operator \
   --set cluster.create=false \
@@ -60,8 +60,7 @@ metadata:
   namespace: stackgres
 spec:
   allowedNamespaceLabelSelector:
-    matchLabels:
-      stackgres.io/enabled: "true"
+    stackgres.io/enabled: "true"
 ```
 
 Then label namespaces:
@@ -238,9 +237,6 @@ metadata:
 spec:
   authentication:
     type: jwt
-    jwt:
-      # Token expiration in seconds
-      tokenExpiration: 28800  # 8 hours
 ```
 
 #### OIDC Authentication
@@ -257,7 +253,7 @@ spec:
     type: oidc
     oidc:
       clientId: stackgres
-      clientSecret:
+      clientIdSecretRef:
         name: oidc-secret
         key: client-secret
       authServerUrl: https://keycloak.example.com/realms/stackgres
@@ -273,12 +269,10 @@ kind: SGConfig
 metadata:
   name: stackgres-config
 spec:
-  rbac:
-    admin:
-      username: admin
-      password:
-        name: stackgres-admin-secret
-        key: password
+  authentication:
+    user: admin
+    secretRef:
+      name: stackgres-admin-secret # Make sure the `user` field match the value of the `k8sUsername` key in the referenced Secret.
 ```
 
 ## Service Account for Applications

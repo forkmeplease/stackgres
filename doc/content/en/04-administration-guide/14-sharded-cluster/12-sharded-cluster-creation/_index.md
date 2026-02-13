@@ -79,7 +79,6 @@ All the required steps were performed to create our StackGres Cluster.
 Create the SGShardedCluster resource:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1alpha1
 kind: SGShardedCluster
 metadata:
@@ -113,14 +112,14 @@ spec:
       sgPostgresConfig: 'pgconfig'
       sgPoolingConfig: 'poolconfig'
   configurations:
+    observability:
+      prometheusAutobind: true
     backups:
     - sgObjectStorage: 'backupconfig'
       cronSchedule: '*/5 * * * *'
       retention: 6
   distributedLogs:
     sgDistributedLogs: 'distributedlogs'
-  prometheusAutobind: true
-EOF
 ```
 
 Notice that each resource has been defined with its own `name`, and is referenced in the StackGres sharded cluster definition.

@@ -155,7 +155,7 @@ spec:
 
                       **Example:**
 
-                      ``` yaml
+                      ```yaml
                       apiVersion: stackgres.io/v1
                       kind: SGCluster
                       metadata:
@@ -1223,7 +1223,7 @@ spec:
 
                   **Example:**
 
-                  ``` yaml
+                  ```yaml
                   apiVersion: stackgres.io/v1
                   kind: SGCluster
                   metadata:

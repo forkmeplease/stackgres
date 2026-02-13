@@ -169,7 +169,7 @@ No additional configuration is needed - the operator detects the node architectu
 
 For Kubernetes clusters with both amd64 and arm64 nodes:
 
-```yaml
+```bash
 # Operator on specific architecture
 helm install stackgres-operator \
   --namespace stackgres \

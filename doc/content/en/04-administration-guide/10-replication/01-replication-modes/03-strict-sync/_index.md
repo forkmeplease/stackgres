@@ -29,7 +29,8 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
+    observability:
+      prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:

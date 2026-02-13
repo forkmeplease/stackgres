@@ -138,7 +138,7 @@ EOF
 
 ### Using SGScript
 
-For managed, repeatable user creation, use [SGScript]({{% relref "04-administration-guide/06-sql-scripts" %}}):
+For managed, repeatable user creation, use [SGScript]({{% relref "04-administration-guide/15-sql-scripts" %}}):
 
 ```yaml
 apiVersion: stackgres.io/v1

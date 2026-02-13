@@ -29,7 +29,8 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
+    observability:
+      prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:
@@ -78,7 +79,6 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:
@@ -127,7 +127,6 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:
@@ -139,8 +138,8 @@ spec:
       role: readonly
       name: group1-sync-cluster
 EOF
-sgcluster.stackgres.io/sync-cluster configured
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+------------------+
@@ -179,7 +178,6 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:
