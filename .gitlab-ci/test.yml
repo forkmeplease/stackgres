@@ -27,8 +27,9 @@ doc yaml validations:
   tags:
     - stackgres-runner-v2
     - linux-amd64
+  dependencies:
+    - build documentation
   script:
-    - sh stackgres-k8s/ci/build/build-gitlab.sh extract documentation doc
     - sh doc/check-snippets.sh
   retry:
     max: 2
