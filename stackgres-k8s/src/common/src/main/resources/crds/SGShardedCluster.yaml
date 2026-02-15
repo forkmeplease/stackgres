@@ -1162,8 +1162,8 @@ spec:
                   From external instance and storage:
 
                   ```yaml
-                  apiVersion: stackgres.io/v1
-                  kind: SGCluster
+                  apiVersion: stackgres.io/v1alpha1
+                  kind: SGShardedCluster
                   metadata:
                     name: stackgres
                   spec:
