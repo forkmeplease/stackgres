@@ -489,11 +489,7 @@ spec:
         columnMaskHash:
           SHA-256:
             salt123:
-<<<<<<< HEAD
             - "public\\.users\\.email"
-=======
-              - "public\\.users\\.email"
->>>>>>> d2ea493362 (docs: add SGStream CDC streaming documentation)
   target:
     type: SGCluster
     sgCluster:
