@@ -22,20 +22,7 @@ A StackGres sharded cluster consists of:
 - **Coordinator**: Routes queries to appropriate shards
 - **Shards**: Individual PostgreSQL clusters holding data partitions
 
-```
-                    ┌─────────────┐
-                    │ Application │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │ Coordinator │
-                    └──────┬──────┘
-           ┌───────────────┼───────────────┐
-           │               │               │
-    ┌──────▼──────┐ ┌──────▼──────┐ ┌──────▼──────┐
-    │   Shard 0   │ │   Shard 1   │ │   Shard 2   │
-    └─────────────┘ └─────────────┘ └─────────────┘
-```
+![SG Sharded Architecture](SG_StackGres_ShardedCluster_Architecture.png "StackGres-Sharded_Architecture")
 
 ## Sharding Technologies
 
