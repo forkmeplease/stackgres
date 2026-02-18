@@ -14,7 +14,6 @@ Setting up the StackGres Cluster with asynchronous replica members is quite stra
 Nevertheless, the next box highlight the SGCluster CRD again:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -39,7 +38,6 @@ spec:
     mode: async
     role: ha-read
     syncInstances: 1
-EOF
 ```
 
 The result will be the next:

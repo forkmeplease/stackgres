@@ -127,8 +127,7 @@ kubectl -n stackgres create secret generic metis-user-password-secret --from-lit
 
 Let’s now create a script that will create a database named **_metis_** and a user **_metis_**:
 
-```bash
-cat << EOF | kubectl apply -f -
+```yaml
 apiVersion: stackgres.io/v1
 kind: SGScript
 metadata:
@@ -154,8 +153,6 @@ spec:
     database: metis
     script: |
             CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-EOF
-
 ```
 
 
@@ -163,8 +160,7 @@ We can see the script has five parts. First, we create the user with a password 
 
 We are now ready to create the Postgres cluster:
 
-```bash
-cat << EOF | kubectl apply -f -
+```yaml
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -180,8 +176,6 @@ spec:
   managedSql:
     scripts:
     - sgScript: cluster-scripts
-EOF
-
 ```
 
 

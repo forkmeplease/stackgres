@@ -116,7 +116,6 @@ In general, these steps are optional, but we do recommend to consider these feat
 You can create your cluster with different resources requirements using an [SGInstanceProfile]({{% relref "06-crd-reference/02-sginstanceprofile" %}}) custom resource (CR) as follows:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGInstanceProfile
 metadata:
@@ -125,7 +124,6 @@ metadata:
 spec:
   cpu: "2"
   memory: "4Gi"
-EOF
 ```
 
 By default the resources requests will be applied as the sum of the resources requests of all the containers of a cluster's Pod. Instead the resources limits will be applied for the `patroni` container that will run the Postgres process. For more advanced understanding see the [Instance Profile Configuration section]({{% relref "06-crd-reference/02-sginstanceprofile" %}}).
@@ -139,7 +137,6 @@ The next code snippets will show you how to use these CRs.
 Let's start with a custom PostgreSQL configuration, using `SGPostgresConfig`:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGPostgresConfig
 metadata:
@@ -152,7 +149,6 @@ spec:
     random_page_cost: '1.5'
     password_encryption: 'scram-sha-256'
     log_checkpoints: 'on'
-EOF
 ```
 
 You can configure the variables supported by StackGres.
@@ -170,7 +166,6 @@ For improved performance and stability, it is recommended to set the `pool_mode`
 The following command shows an example pooling configuration:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGPoolingConfig
 metadata:
@@ -183,7 +178,6 @@ spec:
         pool_mode: transaction
         max_client_conn: '1000'
         default_pool_size: '80'
-EOF
 ```
 
 ### Configuring Backups
@@ -193,7 +187,6 @@ The [SGObjectStorage]({{% relref "06-crd-reference/09-sgobjectstorage" %}}) CRs 
 The following command shows an example configuration using [Google Cloud Storage](https://cloud.google.com/storage/):
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1beta1
 kind: SGObjectStorage
 metadata:
@@ -208,13 +201,11 @@ spec:
         serviceAccountJSON: 
           name: gcp-backup-bucket-secret
           key: my-creds.json
-EOF
 ```
 
 Or alternatively, for [AWS S3](https://aws.amazon.com/s3/):
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1beta1
 kind: SGObjectStorage
 metadata:
@@ -228,7 +219,6 @@ spec:
       secretKeySelectors:
         accessKeyId: {name: 'aws-creds-secret', key: 'accessKeyId'}
         secretAccessKey: {name: 'aws-creds-secret', key: 'secretAccessKey'}
-EOF
 ```
 
 You will need to perform additional steps in order to configure backups in your cloud environment.
@@ -239,7 +229,6 @@ Have a look at the section [Backups]({{% relref "04-administration-guide/05-back
 You can create an [SGDistributedLogs]({{% relref "06-crd-reference/07-sgdistributedlogs" %}}) CR to create a distributed log cluster that will receive the logs from the SGCluster configured to do so and to be able to view logs directly from the [Admin UI]({{% relref "04-administration-guide/13-admin-ui" %}}):
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGDistributedLogs
 metadata:
@@ -248,7 +237,6 @@ metadata:
 spec:
   persistentVolume:
     size: 50Gi
-EOF
 ```
 
 ### Configuring Scripts
@@ -267,7 +255,6 @@ Then we reference the secret in a [SGScript]({{% relref "06-crd-reference/10-sgs
  owner:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGScript
 metadata:
@@ -283,7 +270,6 @@ spec:
   - name: create-pgbench-database
     script: |
       CREATE DATABASE pgbench OWNER pgbench;
-EOF
 ```
 
 The SGScript will be referenced in the `managedSql` definition of the cluster, shown below.
@@ -296,7 +282,6 @@ Note that we could equally well define the SQL script in a ConfigMap, however, s
 All the required steps were performed in order to allow creating our production ready SGCluster:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -324,7 +309,6 @@ spec:
     - sgScript: cluster-scripts
   distributedLogs:
     sgDistributedLogs: 'distributedlogs'
-EOF
 ```
 
 Notice that each resource has been defined with its own name, and is referenced in the SGCluster definition.

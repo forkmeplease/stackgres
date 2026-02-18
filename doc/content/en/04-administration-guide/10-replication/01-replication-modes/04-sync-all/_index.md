@@ -12,7 +12,6 @@ The `replication.mode` *sync-all* option allows creating or converting all clust
 Setting up such an option is quite simple as all the provided options. Look that the number of `syncInstances` is set to 1 intentionally to demonstrate that `sync-all` overrides the `syncInstances` variable.
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -37,8 +36,8 @@ spec:
     mode: sync-all
     role: ha-read
     syncInstances: 1
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+

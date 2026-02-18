@@ -1,5 +1,5 @@
 ---
-title: ShardingSphere sharding technology
+title: Apache ShardingSphere sharding technology
 weight: 2
 url: /administration/sharded-cluster/shardingsphere
 description: Details about ShardingSphere sharding technology.
@@ -39,7 +39,6 @@ First, ensure the ShardingSphere Operator is installed in your Kubernetes cluste
 Then create the SGShardedCluster resource:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1alpha1
 kind: SGShardedCluster
 metadata:
@@ -66,7 +65,6 @@ spec:
     pods:
       persistentVolume:
         size: '10Gi'
-EOF
 ```
 
 This configuration will create a ShardingSphere Proxy coordinator in Cluster mode using ZooKeeper for metadata persistence, and 4 PostgreSQL shards with 2 Pods each.

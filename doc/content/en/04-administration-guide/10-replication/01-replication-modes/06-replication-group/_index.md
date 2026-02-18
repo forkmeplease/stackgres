@@ -12,7 +12,6 @@ Please, read the [CRD reference]({{% relref "06-crd-reference/01-sgcluster/#sgcl
 The next example will help to understand the feature by creating a cluster with 6 members, where 3 members are part of a group with `ha-read` role. The `ha-read` role is the default one, therefore it does not add any specific attribute to these members.
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -41,8 +40,8 @@ spec:
     - instances: 3
       role: ha-read
       name: group1-sync-cluster
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+
@@ -62,7 +61,6 @@ $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list
 The next example include some changes to the cluster in order to show labels applied to a group with ha role:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -89,8 +87,8 @@ spec:
     - instances: 3
       role: ha 
       name: group1-sync-cluster
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+---------------------+
@@ -110,7 +108,6 @@ The primary instance will be elected among all the replication groups that are e
 ## Updating the cluster to `readonly` role:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -137,7 +134,6 @@ spec:
     - instances: 3
       role: readonly
       name: group1-sync-cluster
-EOF
 ```
 
 ```sh
@@ -161,7 +157,6 @@ The same as the latest example but using the `readonly` role that adds the Patro
 The next example explains how creating many groups within the cluster is supported.
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -194,8 +189,8 @@ spec:
     - instances: 1
       role: ha-read
       name: group3-sync-cluster
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+---------------------+

@@ -52,7 +52,6 @@ DDP provides functions to manage data distribution across shards:
 Create the SGShardedCluster resource:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1alpha1
 kind: SGShardedCluster
 metadata:
@@ -73,7 +72,6 @@ spec:
     pods:
       persistentVolume:
         size: '10Gi'
-EOF
 ```
 
 This configuration will create a coordinator with 2 Pods and 4 shards with 2 Pods each. The coordinator uses `postgres_fdw` to connect to the shard nodes and route queries.

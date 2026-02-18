@@ -22,7 +22,6 @@ In order to execute the process by using the CLI, you need to create the SGDbOps
 To execute the process create and apply the manifest with the next command:  
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGDbOps
 metadata:
@@ -34,7 +33,6 @@ spec:
     postgresVersion: "16.2"
   op: minorVersionUpgrade
   sgCluster: demo
-EOF
 ```
 
 Check each specific parameter on the manifest, they are all the same that you can specify when using the Web Console. 

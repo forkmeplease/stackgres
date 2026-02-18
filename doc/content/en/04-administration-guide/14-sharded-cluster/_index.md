@@ -39,7 +39,7 @@ StackGres sharded cluster uses the [Patroni integration for Citus](https://patro
 
 For more details about Citus sharding technology see the [official Citus documentation](https://docs.citusdata.com/) and have a look at the [Citus sharding technology]({{% relref "04-administration-guide/14-sharded-cluster/01-citus-sharding-technology" %}}) section.
 
-## ShardingSphere Sharding Technology
+## Apache ShardingSphere Sharding Technology
 
 Apache ShardingSphere is an ecosystem to transform any database into a distributed database system, and enhance it with sharding, elastic scaling, encryption features and more.
 
