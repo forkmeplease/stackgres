@@ -35,7 +35,6 @@ kubectl -n my-cluster create secret generic pgbench-user-password-secret \
 Then we reference the secret in a [SGScript]({{% relref "06-crd-reference/10-sgscript" %}}):
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGScript
 metadata:
@@ -63,7 +62,6 @@ spec:
     user: pgbench
     script: |
       SELECT create_distributed_table('pgbench_history', 'aid');
-EOF
 ```
 
 The scripts are defined both by the Secret created before and SQL instructions inline.

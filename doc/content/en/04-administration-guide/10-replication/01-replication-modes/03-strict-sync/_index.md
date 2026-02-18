@@ -12,7 +12,6 @@ The `replication.mode` *strict-sync* option instructs to create one or more clus
 Move forward to the next item, creating a synchronous replication cluster:
 
 ```yaml
-$ cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -37,8 +36,8 @@ spec:
     mode: strict-sync
     role: ha-read
     syncInstances: 2
-EOF        
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+

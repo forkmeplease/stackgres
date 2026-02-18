@@ -12,7 +12,6 @@ The `replication.mode` *strict-sync-all* option allow to create or convert all c
 Setting this replication mode is quite simple. Here is an example.
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -37,8 +36,8 @@ spec:
     mode: strict-sync-all
     role: ha-read
     syncInstances: 1
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+

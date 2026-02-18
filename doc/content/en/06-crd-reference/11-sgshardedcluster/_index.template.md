@@ -31,6 +31,8 @@ metadata:
 spec:
   postgres:
     version: 'latest'
+  type: citus
+  database: database
   coordinator:
     instances: 1
     pods:
@@ -44,6 +46,6 @@ spec:
         size: '5Gi'
 ```
 
-See also [Sharded Cluster Creation section]({{%  relref "04-administration-guide/14-sharded-cluster/12-sharded-cluster-creation" %}}).
+See also [Sharded Cluster Creation section]({{%  relref "04-administration-guide/14-sharded-cluster" %}}).
 
 {{% include "generated/SGShardedCluster.md" %}}

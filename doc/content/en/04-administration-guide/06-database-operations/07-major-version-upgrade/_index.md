@@ -48,7 +48,6 @@ In order to execute the process by using the `kubectl` CLI, you need to create t
 To execute the process create and apply the manifest with the next command:  
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGDbOps
 metadata:
@@ -64,7 +63,6 @@ spec:
   maxRetries: 0
   op: majorVersionUpgrade
   sgCluster: demo
-EOF
 ```
 
 >Note: You can check all the available options here [SGDbOps Major version upgrade]({{% relref "06-crd-reference/08-sgdbops/#sgdbopsspecmajorversionupgrade" %}})
