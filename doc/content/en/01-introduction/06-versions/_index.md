@@ -6,8 +6,6 @@ description: Details about StackGres versions.
 showToc: true
 ---
 
-=======
-
 ## StackGres 1.18.4
 
 | Component | Versions |

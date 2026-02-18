@@ -11,7 +11,7 @@ To connect to the database, you only need to be aware of two services: the prima
 
 The primary service is used to connect to the primary node, and the replica service is used to access any of the replica nodes.
 
-The service name follow a convention that is based on the cluster name and the function of the service:
+The service names follow a convention that is based on the cluster name and the function of the service:
 
  - `<cluster-name>` for the primary service
  - `<cluster-name>-replicas` for the replica service
@@ -21,7 +21,7 @@ Both services will accept connections to ports `5432` and `5433` where:
  - Port `5432` connects to pgbouncer - used by the application
  - Port `5433` connects to postgres - used for replication purposes
 
-Therefore, given a cluster with name `cluster` in the namespace `default`, the primary node will accessible through the URL: `cluster.default:5432`.
+Therefore, given a cluster with name `cluster` in the namespace `default`, the primary node will be accessible through the URL: `cluster.default:5432`.
 Meanwhile, the replica node is accessible through the URL: `cluster-replicas.default:5432`.
 
 ## Psql Example

@@ -8,7 +8,7 @@ showToc: true
 
 This section shows how to upgrade the StackGres operator using OperatorHub.
 
-## Upgrading the StackGres
+## Upgrading the StackGres Operator
 
 To proceed with the installation you will have to patch the `InstallPlan` that has been created by the OLM operator:
 

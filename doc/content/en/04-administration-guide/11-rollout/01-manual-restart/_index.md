@@ -1,8 +1,8 @@
 ---
 title: Manual Cluster Restart
 weight: 8
-url: /administration/manual-restart
-aliases: [ /install/restart , /install/manual-restart ]
+url: /administration/rollout/manual-restart
+aliases: [ /install/restart , /install/manual-restart, /administration/manual-restart ]
 description: Details about how to restart manually the database nodes.
 showToc: true
 ---
@@ -21,14 +21,18 @@ kubectl get sgclusters.stackgres.io -A --template '
   {{- end }}
 {{- end }}'
 ```
-<!-- TODO output -->
+
+Example output when a restart is pending:
+```
+default.my-cluster PendingRestart=True
+```
 
 **The restart procedure will generate a service disruption**. The service disruption will start for the
  read write connections when the primary pod is deleted and will end when Patroni elect the new
  primary. For read only connections the service disruption will start when only one replica exists
  and the replica pod is deleted and will end when Patroni set the role of the pod to replica.
 
-There are two restart strategy:
+There are two restart strategies:
 
 * In-Place Restart: this procedure does not require more resources than those that are available.
  In case only an instance of the StackGres cluster is present this mean the service disruption
@@ -51,11 +55,11 @@ NAMESPACE=default
 SGCLUSTER=example
 ```
 
-> **NOTE**: If any error arise at any point during restart of a cluster please refer to our [Cluster Restart Troubleshooting section]({{% relref "troubleshooting.md/_index.md" %}})
+> **NOTE**: If any error arises at any point during restart of a cluster please refer to our [Cluster Restart Troubleshooting section]({{% relref "troubleshooting.md/_index.md" %}})
 > to find solutions to common issues or, if [no similar issue exists](https://gitlab.com/ongresinc/stackgres/-/issues?scope=all&utf8=%E2%9C%93&state=all),
 > feel free to [open an issue on the StackGres project](https://gitlab.com/ongresinc/stackgres/-/issues/new?issue%5Bassignee_id%5D=&issue%5Bmilestone_id%5D=).
 
-## 1. \[Reduced-impact Restart\] - Add read-only instace
+## 1. \[Reduced-impact Restart\] - Add read-only instance
 
 **\[Optional, only for the reduced-impact restart\]**
 
@@ -63,7 +67,7 @@ Edit the `SGCluster` and increment by one the number of instances.
 
 ```
 INSTANCES="$(kubectl get sgcluster -n "$NAMESPACE" "$SGCLUSTER" --template "{{ .spec.instances }}")"
-echo "Inreasing cluster instances from $INSTANCES to $((INSTANCES+1))"
+echo "Increasing cluster instances from $INSTANCES to $((INSTANCES+1))"
 kubectl patch sgcluster -n "$NAMESPACE" "$SGCLUSTER" --type merge -p "spec: { instances: $((INSTANCES+1)) }"
 ```
 
@@ -179,7 +183,7 @@ echo "Waiting for pod $PRIMARY_POD"
 kubectl wait --for=condition=Ready -n "$NAMESPACE" pod "$PRIMARY_POD"
 ```
 
-## 8. \[Reduced-impact Restart\] - Scale back the cluster size, editing the
+## 8. \[Reduced-impact Restart\] - Scale back the cluster size
 
 **\[Optional, only for the small impact procedure\]**
 

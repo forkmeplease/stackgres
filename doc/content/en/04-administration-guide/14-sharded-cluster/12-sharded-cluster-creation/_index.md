@@ -8,7 +8,7 @@ showToc: true
 
 ## Customizing Your Postgres Sharded Clusters
 
-Refer to [Customizing Your Postgres Clusters]({{% relref "04-administration-guide/02-cluster-creation" %}}#customizing-your-postgres-clusters) section for more details on the configuraion used
+Refer to [Customizing Your Postgres Clusters]({{% relref "04-administration-guide/02-cluster-creation" %}}#customizing-your-postgres-clusters) section for more details on the configuration used
  for the sharded cluster. In particular you will end up creating the following custom resources in the `my-cluster` namespace:
 
 * An [SGInstanceProfile]({{% relref "04-administration-guide/04-configuration/01-instance-profile" %}}) called `size-small`
@@ -19,7 +19,7 @@ Refer to [Customizing Your Postgres Clusters]({{% relref "04-administration-guid
 
 ## Creating a Citus Sharded Cluster
 
-This section will guide you though the creation of a production-ready StackGres sharded cluster using Citus and your custom configuration.
+This section will guide you through the creation of a production-ready StackGres sharded cluster using Citus and your custom configuration.
 
 ### Configuring Scripts
 
@@ -79,7 +79,6 @@ All the required steps were performed to create our StackGres Cluster.
 Create the SGShardedCluster resource:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1alpha1
 kind: SGShardedCluster
 metadata:
@@ -113,14 +112,14 @@ spec:
       sgPostgresConfig: 'pgconfig'
       sgPoolingConfig: 'poolconfig'
   configurations:
+    observability:
+      prometheusAutobind: true
     backups:
     - sgObjectStorage: 'backupconfig'
       cronSchedule: '*/5 * * * *'
       retention: 6
   distributedLogs:
     sgDistributedLogs: 'distributedlogs'
-  prometheusAutobind: true
-EOF
 ```
 
 Notice that each resource has been defined with its own `name`, and is referenced in the StackGres sharded cluster definition.

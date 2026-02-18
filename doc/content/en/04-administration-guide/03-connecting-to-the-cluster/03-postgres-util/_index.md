@@ -5,15 +5,15 @@ url: /administration/cluster/connection/pgutil
 description: Describes how to connect on the cluster using kubectl and the postgres-util sidecar container.
 ---
 
-Local Connection to the database has to be through the `postgres-utils` sidecar.
+Local connection to the database has to be through the `postgres-util` sidecar.
 This sidecar has all PostgreSQL binaries that are not present in the main container called `patroni` like the `psql` command.
 
-This main container only have the required binaries and utilities to be able to configure the postgres cluster and the HA configuration.
+This main container only has the required binaries and utilities to be able to configure the postgres cluster and the HA configuration.
 
 
 ## Access to postgres-util sidecar
 
-First we'll check the if the container is present in the pods, for these example we have a cluster named `stackgres`, composed of three pods and installed in the `default` namespace:
+First we'll check if the container is present in the pods, for these example we have a cluster named `stackgres`, composed of three pods and installed in the `default` namespace:
 
 ```
 kubectl get pods -n default -l app=StackGresCluster,stackgres.io/cluster=true

@@ -67,7 +67,7 @@ spec:
                 type: string
                 default: production
                 description: |
-                  The profile allow to change in a convenient place a set of configuration defaults that affect how the cluster is generated.
+                  The profile allows changing in a convenient place a set of configuration defaults that affect how the cluster is generated.
                   
                   All those defaults can be overwritten by setting the correspoinding fields.
                   
@@ -220,7 +220,7 @@ spec:
                         type: boolean
                         default: true
                         description: |
-                          Allow to enable SSL for connections to Postgres. By default is `true`.
+                          Allows enabling SSL for connections to Postgres. By default is `true`.
                           
                           If `true` certificate and private key will be auto-generated unless fields `certificateSecretKeySelector` and `privateKeySecretKeySelector` are specified.
                       duration:
@@ -340,13 +340,13 @@ spec:
                   initialization:
                     type: object
                     description: |
-                      Allow to specify how the replicas are initialized.
+                      Allows specifying how the replicas are initialized.
                     properties:
                       mode:
                         type: string
                         default: FromExistingBackup
                         description: |
-                          Allow to specify how the replicas are initialized.
+                          Allows specifying how the replicas are initialized.
                           
                           Possible values are:
                           
@@ -485,22 +485,22 @@ spec:
                           
                           The names of target ports will be prefixed with the string `c-` so that the ports
                             that can be referenced in this section will be only those defined under
-                            .spec.pods.customContainers[].ports sections were names are also prepended with the same
+                            .spec.pods.customContainers[].ports sections where names are also prepended with the same
                             prefix.
-                          
+
                           **Changing this field may require a restart.**
 
                           See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#serviceport-v1-core
                         items:
                           description: |
                             A custom port that will be exposed by the Postgres coordinator services.
-                            
+
                             The name of the custom port will be prefixed with the string `c-` so it does not
                               conflict with ports defined for the coordinator services.
-                            
+
                             The name of target port will be prefixed with the string `c-` so that the port
                               that can be referenced in this section will be only those defined under
-                              .spec.pods.customContainers[].ports sections were names are also prepended with the same
+                              .spec.pods.customContainers[].ports sections where names are also prepended with the same
                               prefix.
                               
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#serviceport-v1-core
@@ -533,22 +533,22 @@ spec:
                           
                           The names of target ports will be prefixed with the string `c-` so that the ports
                             that can be referenced in this section will be only those defined under
-                            .spec.pods.customContainers[].ports sections were names are also prepended with the same
+                            .spec.pods.customContainers[].ports sections where names are also prepended with the same
                             prefix.
-                          
+
                           **Changing this field may require a restart.**
 
                           See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#serviceport-v1-core
                         items:
                           description: |
                             A custom port that will be exposed by the Postgres shards services.
-                            
+
                             The name of the custom port will be prefixed with the string `c-` so it does not
                               conflict with ports defined for the shards services.
-                            
+
                             The name of target port will be prefixed with the string `c-` so that the port
                               that can be referenced in this section will be only those defined under
-                              .spec.pods.customContainers[].ports sections were names are also prepended with the same
+                              .spec.pods.customContainers[].ports sections where names are also prepended with the same
                               prefix.
                               
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#serviceport-v1-core
@@ -585,11 +585,11 @@ spec:
                           
                           The queries defined here will overwrite those created by the operator.
                           
-                          **WARNING**: Changing this may beak some of the functionality that depend on the query overwritten.
+                          **WARNING**: Changing this may break some of the functionality that depend on the query overwritten.
                         "x-kubernetes-preserve-unknown-fields": true
                   observability:
                     type: object
-                    description: Allow to specify Observability configuration (related to logs, metrics and traces)
+                    description: Allows specifying Observability configuration (related to logs, metrics and traces)
                     properties:
                       disableMetrics:
                         type: boolean
@@ -662,7 +662,7 @@ spec:
                               type: integer
                               minimum: 1
                               description: |
-                                Backup storage may use several concurrent streams to read the data. This parameter configures the number of parallel streams to use. By default, it's set to the minimum between the number of file to read and 10.
+                                Backup storage may use several concurrent streams to read the data. This parameter configures the number of parallel streams to use. By default, it's set to the minimum between the number of files to read and 10.
                         retention:
                           type: integer
                           minimum: 1
@@ -675,16 +675,16 @@ spec:
                         sgObjectStorage:
                           type: string
                           description: |
-                            Name of the [SGObjectStorage](https://stackgres.io/doc/latest/reference/crd/sgobjectstorage) to use for the cluster. It defines the location in which the the backups will be stored.
+                            Name of the [SGObjectStorage](https://stackgres.io/doc/latest/reference/crd/sgobjectstorage) to use for the cluster. It defines the location in which the backups will be stored.
                         paths:
                           type: array
                           items:
                             type: string
                             nullable: true
                           description: |
-                            The paths were the backups are stored. If not set this field is filled up by the operator.
+                            The paths where the backups are stored. If not set this field is filled up by the operator.
 
-                            When provided will indicate were the backups and WAL files will be stored.
+                            When provided will indicate where the backups and WAL files will be stored.
                             
                             The first path indicate the coordinator path and the other paths indicate the shards paths
 
@@ -701,7 +701,7 @@ spec:
                         volumeSnapshotClass:
                           type: string
                           description: |
-                            The name of the VolumeSnaphostClass to use to create the VolumeSnapshot for backups.
+                            The name of the VolumeSnapshotClass to use to create the VolumeSnapshot for backups.
                             
                             See also https://kubernetes.io/docs/concepts/storage/volume-snapshots/
                         fastVolumeSnapshot:
@@ -713,16 +713,16 @@ spec:
                         timeout:
                           type: integer
                           description: |
-                            Allow to set a timeout for the backup creation.
-                            
+                            Allows setting a timeout for the backup creation.
+
                             If not set it will be disabled and the backup operation will continue until the backup completes or fail. If set to 0 is the same as not being set.
-                            
+
                             Make sure to set a reasonable high value in order to allow for any unexpected delays during backup creation (network low bandwidth, disk low throughput and so forth).
                         reconciliationTimeout:
                           type: integer
                           default: 300
                           description: |
-                            Allow to set a timeout for the reconciliation process that take place after the backup.
+                            Allows setting a timeout for the reconciliation process that take place after the backup.
                             
                             If not set defaults to 300 (5 minutes). If set to 0 it will disable timeout.
                             
@@ -735,7 +735,7 @@ spec:
                   credentials:
                     type: object
                     description: |
-                      Allow to specify custom credentials for Postgres users and Patroni REST API
+                      Allows specifying custom credentials for Postgres users and Patroni REST API
 
                       **Changing this field may require a restart.**
                     properties:
@@ -885,7 +885,7 @@ spec:
                   binding:
                     type: object
                     description: |
-                      This section allows to specify the properties of [Service Binding spec for provisioned service](https://servicebinding.io/spec/core/1.0.0/#provisioned-service).
+                      This section allows specifying the properties of [Service Binding spec for provisioned service](https://servicebinding.io/spec/core/1.0.0/#provisioned-service).
                        If not specified, then some default will be used.
                       
                       For more information see https://servicebinding.io/spec/core/1.0.0/
@@ -895,13 +895,13 @@ spec:
                         description: It's the reference of custom provider name. If not specified, then the default value will be `stackgres`
                       database:
                         type: string
-                        description: Allow to specify the database name. If not specified, then the default value is `postgres`
+                        description: Allows specifying the database name. If not specified, then the default value is `postgres`
                       username:
                         type: string
-                        description: Allow to specify the username. If not specified, then the superuser username will be used.
+                        description: Allows specifying the username. If not specified, then the superuser username will be used.
                       password:
                         type: object
-                        description: Allow to reference Secret that contains the user's password. If not specified, then the superuser password will be used.
+                        description: Allows referencing a Secret that contains the user's password. If not specified, then the superuser password will be used.
                         properties:
                           name:
                             type: string
@@ -1052,7 +1052,7 @@ spec:
               replicateFrom:
                 type: object
                 description: |
-                  Make the sharded cluster a read-only standby replica allowing to replicate from another sharded cluster and acting as a rely.
+                  Make the sharded cluster a read-only standby replica allowing replication from another sharded cluster and acting as a relay.
                   
                   Changing this section is allowed to fix issues or to change the replication source.
                   
@@ -1072,7 +1072,7 @@ spec:
                       instance:
                         sgShardedCluster: my-cluster
                   ```
-                  > **Note:** The above example allow to replicate from another SGShardedCluster instance that in the same namespace and the same K8s cluster.
+                  > **Note:** The above example allows replicating from another SGShardedCluster instance that in the same namespace and the same K8s cluster.
                   > 
                   > This option cannot be combined with external sharded cluster instance, storage and users.
 
@@ -1087,7 +1087,7 @@ spec:
                     replicateFrom:
                       instance:
                         external:
-                          hosts: [${COORDINATOR_HOST_IP},${SHARD_0_HOST_IP},${SHARD_1_HOST_IP}]
+                          hosts: ["${COORDINATOR_HOST_IP}","${SHARD_0_HOST_IP}","${SHARD_1_HOST_IP}"]
                           ports: [5433,5433,5433]
                       users:
                         superuser:
@@ -1129,7 +1129,7 @@ spec:
                           name: backup-name
                     replicateFrom:
                       storage:
-                        paths: [${PG_ORIGIN_COORDINATOR_BACKUP_PATH},${PG_ORIGIN_SHARD_0_BACKUP_PATH},${PG_ORIGIN_SHARD_1_BACKUP_PATH}]
+                        paths: ["${PG_ORIGIN_COORDINATOR_BACKUP_PATH}","${PG_ORIGIN_SHARD_0_BACKUP_PATH}","${PG_ORIGIN_SHARD_1_BACKUP_PATH}"]
                         sgObjectStorage: stackgres-backups
                       users:
                         superuser:
@@ -1162,18 +1162,18 @@ spec:
                   From external instance and storage:
 
                   ```yaml
-                  apiVersion: stackgres.io/v1
-                  kind: SGCluster
+                  apiVersion: stackgres.io/v1alpha1
+                  kind: SGShardedCluster
                   metadata:
                     name: stackgres
                   spec:
                     replicateFrom:
                       instance:
                         external:
-                          hosts: [${COORDINATOR_HOST_IP},${SHARD_0_HOST_IP},${SHARD_1_HOST_IP}]
+                          hosts: ["${COORDINATOR_HOST_IP}","${SHARD_0_HOST_IP}","${SHARD_1_HOST_IP}"]
                           ports: [5433,5433,5433]
                       storage:
-                        paths: [${PG_ORIGIN_COORDINATOR_BACKUP_PATH},${PG_ORIGIN_SHARD_0_BACKUP_PATH},${PG_ORIGIN_SHARD_1_BACKUP_PATH}]
+                        paths: ["${PG_ORIGIN_COORDINATOR_BACKUP_PATH}","${PG_ORIGIN_SHARD_0_BACKUP_PATH}","${PG_ORIGIN_SHARD_1_BACKUP_PATH}"]
                         sgObjectStorage: stackgres-backups
                       users:
                         superuser:
@@ -1254,7 +1254,7 @@ spec:
                             type: integer
                             minimum: 1
                             description: |
-                              Backup storage may use several concurrent streams to read the data. This parameter configures the number of parallel streams to use. By default, it's set to the minimum between the number of file to read and 10.
+                              Backup storage may use several concurrent streams to read the data. This parameter configures the number of parallel streams to use. By default, it's set to the minimum between the number of files to read and 10.
                       sgObjectStorage:
                         type: string
                         description: The SGObjectStorage name to replicate from.
@@ -1362,7 +1362,7 @@ spec:
               coordinator:
                 type: object
                 description: |
-                  The coordinator is a StackGres cluster responsible of coordinating data storage and access from the shards.
+                  The coordinator is a StackGres cluster responsible for coordinating data storage and access from the shards.
                 required: ["instances", "pods"]
                 properties:
                   instances:
@@ -1378,16 +1378,16 @@ spec:
                   autoscaling: &autoscaling
                     type: object
                     description: |
-                      This section allows to configure vertical Pod autoscaling for the SGCluster's Pods.
-                      
+                      This section allows configuring vertical Pod autoscaling for the SGCluster's Pods.
+
                       Vertical Pod Autoscaling will use cpu and memory usage as the metric to control the upscale or downscale of the Pod requests and limits resources.
-                      Vertical Pod Autoscaling requires the [Vertical Pod Autoscaler operator](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) to be installed in the Kuberentes cluster.
+                      Vertical Pod Autoscaling requires the [Vertical Pod Autoscaler operator](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) to be installed in the Kubernetes cluster.
                     properties:
                       mode:
                         type: string
                         default: vertical
                         description: |
-                          Allow to enable or disable any of horizontal and vertical Pod autoscaling.
+                          Allows enabling or disabling any of horizontal and vertical Pod autoscaling.
                           
                           Possible values are:
                           * `vertical`: only vertical Pod autoscaling will be enabled (default)
@@ -1396,12 +1396,12 @@ spec:
                       minAllowed:
                         type: object
                         description: |
-                          Allow to define the lower bound for Pod resources of patroni, pgbouncer and envoy containers
+                          Defines the lower bound for Pod resources of patroni, pgbouncer and envoy containers
                         properties:
                           patroni:
                             type: object
                             description: |
-                              Allow to define the lower bound for Pod resources of patroni container
+                              Defines the lower bound for Pod resources of patroni container
                             properties:
                               cpu:
                                 type: string
@@ -1412,7 +1412,7 @@ spec:
                           pgbouncer:
                             type: object
                             description: |
-                              Allow to define the lower bound for Pod resources of pgbouncer container
+                              Defines the lower bound for Pod resources of pgbouncer container
                             properties:
                               cpu:
                                 type: string
@@ -1423,7 +1423,7 @@ spec:
                           envoy:
                             type: object
                             description: |
-                              Allow to define the lower bound for Pod resources of envoy container
+                              Defines the lower bound for Pod resources of envoy container
                             properties:
                               cpu:
                                 type: string
@@ -1434,12 +1434,12 @@ spec:
                       maxAllowed:
                         type: object
                         description: |
-                          Allow to define the higher bound for Pod resources of patroni, pgbouncer and envoy containers
+                          Defines the higher bound for Pod resources of patroni, pgbouncer and envoy containers
                         properties:
                           patroni:
                             type: object
                             description: |
-                              Allow to define the higher bound for Pod resources of patroni container
+                              Defines the higher bound for Pod resources of patroni container
                             properties:
                               cpu:
                                 type: string
@@ -1450,7 +1450,7 @@ spec:
                           pgbouncer:
                             type: object
                             description: |
-                              Allow to define the higher bound for Pod resources of pgbouncer container
+                              Defines the higher bound for Pod resources of pgbouncer container
                             properties:
                               cpu:
                                 type: string
@@ -1461,7 +1461,7 @@ spec:
                           envoy:
                             type: object
                             description: |
-                              Allow to define the higher bound for Pod resources of envoy container
+                              Defines the higher bound for Pod resources of envoy container
                             properties:
                               cpu:
                                 type: string
@@ -1516,11 +1516,11 @@ spec:
                   managedSql:
                     type: object
                     description: |
-                      This section allows to reference SQL scripts that will be applied to the cluster live.
-                      
+                      This section allows referencing SQL scripts that will be applied to the cluster live.
+
                       If sharding type is `shardingsphere` then this section will be applied to the first cluster shard.
                        In this case the database postgres will also provide a foreign server called `shardingsphere` and
-                       the superuser user mappings that will allow to run DistQL queries using command like the following:
+                       the superuser user mappings that will allow running DistQL queries using command like the following:
                       
                       ```
                       SELECT * FROM dblink('shardingsphere', 'SHOW STORAGE UNITS')
@@ -1613,7 +1613,7 @@ spec:
                       disableEnvoy:
                         type: boolean
                         description: |
-                          If set to `false`, creates the `envoy` sidecar. This sidecar is used as the endge proxy for the cluster's Pods providing extra metrics to the monitoring layer.
+                          If set to `false`, creates the `envoy` sidecar. This sidecar is used as the edge proxy for the cluster's Pods providing extra metrics to the monitoring layer.
 
                           **Changing this field may require a restart.**
                       resources:
@@ -1632,7 +1632,7 @@ spec:
                           enableClusterLimitsRequirements:
                             type: boolean
                             description: |
-                              When enabled resource limits for containers other than the patroni container wil be set just like for patroni contianer as specified in the SGInstanceProfile.
+                              When enabled resource limits for containers other than the patroni container will be set just like for patroni container as specified in the SGInstanceProfile.
 
                               **Changing this field may require a restart.**
                           disableResourcesRequestsSplitFromTotal:
@@ -1640,16 +1640,16 @@ spec:
                             description: |
                               When set to `true` the resources requests values in fields `SGInstanceProfile.spec.requests.cpu` and `SGInstanceProfile.spec.requests.memory` will represent the resources
                                requests of the patroni container and the total resources requests calculated by adding the resources requests of all the containers (including the patroni container).
-        
+
                               **Changing this field may require a restart.**
                           failWhenTotalIsHigher:
                             type: boolean
                             description: |
                               When set to `true` the reconciliation of the cluster will fail if `disableResourcesRequestsSplitFromTotal` is not set or set to `false` and the sum of the CPU or memory
-                               of all the containers except patroni is equals or higher than the total specified in `SGInstanceProfile.spec.requests.cpu` or `SGInstanceProfile.spec.requests.memory`.
-                              
+                               of all the containers except patroni is equal to or higher than the total specified in `SGInstanceProfile.spec.requests.cpu` or `SGInstanceProfile.spec.requests.memory`.
+
                               When `false` (the default) and `disableResourcesRequestsSplitFromTotal` is not set or set to `false` and the sum of the CPU or memory
-                               of all the containers except patroni is equals or higher than the total specified in `SGInstanceProfile.spec.requests.cpu` or `SGInstanceProfile.spec.requests.memory`
+                               of all the containers except patroni is equal to or higher than the total specified in `SGInstanceProfile.spec.requests.cpu` or `SGInstanceProfile.spec.requests.memory`
                                then the patroni container resources will be set to 0.
                       scheduling: &scheduling
                         type: object
@@ -1758,7 +1758,7 @@ spec:
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the customInitContainers or customContainers sections the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
                           
                           Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                             gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -1774,7 +1774,7 @@ spec:
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the customInitContainers or customContainers sections the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                              gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -1811,12 +1811,12 @@ spec:
                         type: array
                         description: |
                           A list of custom application init containers that run within the shards cluster's Pods. The
-                            custom init containers will run following the defined sequence as the end of
+                            custom init containers will run following the defined sequence at the end of
                             cluster's Pods init containers.
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the .spec.containers section of SGInstanceProfile the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
                           
                           **Changing this field may require a restart.**
 
@@ -1824,13 +1824,13 @@ spec:
                         items:
                           type: object
                           description: |
-                            A custom application init container that run within the cluster's Pods. The custom init
-                             containers will run following the defined sequence as the end of cluster's Pods init
+                            A custom application init container that runs within the cluster's Pods. The custom init
+                             containers will run following the defined sequence at the end of cluster's Pods init
                              containers.
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the .spec.containers section of SGInstanceProfile the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
     
@@ -1845,19 +1845,19 @@ spec:
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the .spec.containers section of SGInstanceProfile the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
                             
                           See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core
                         items:
                           type: object
                           description: |
-                            A custom application container that run within the cluster's Pods. The custom
-                             containers will run following the defined sequence as the end of cluster's Pods
+                            A custom application container that runs within the cluster's Pods. The custom
+                             containers will run following the defined sequence at the end of cluster's Pods
                              containers.
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the .spec.containers section of SGInstanceProfile the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
     
@@ -2022,14 +2022,14 @@ spec:
                       patroni: &patroni
                         type: object
                         description: |
-                          Allow to specify Patroni configuration that will extend the generated one
+                          Allows specifying Patroni configuration that will extend the generated one
                   
                           If sharding type is `shardingsphere` then this section is ignored.
                         properties:
                           dynamicConfig:
                             type: object
                             description: |
-                              Allow to specify Patroni dynamic configuration that will overwrite the generated one. See https://patroni.readthedocs.io/en/latest/dynamic_configuration.html
+                              Allows specifying Patroni dynamic configuration that will overwrite the generated one. See https://patroni.readthedocs.io/en/latest/dynamic_configuration.html
                               
                               The following configuration fields will be ignored:
                               
@@ -2043,7 +2043,7 @@ spec:
                           initialConfig:
                             type: object
                             description: |
-                              Allow to specify Patroni configuration that will overwrite the generated one. See https://patroni.readthedocs.io/en/latest/yaml_configuration.html
+                              Allows specifying Patroni configuration that will overwrite the generated one. See https://patroni.readthedocs.io/en/latest/yaml_configuration.html
                               
                               The following configuration fields will be ignored:
                               
@@ -2065,7 +2065,7 @@ spec:
                       shardingSphere:
                         type: object
                         description: |
-                          Allow to specify Sharding Sphere Proxy configuration that will extend the generated one.
+                          Allows specifying Sharding Sphere Proxy configuration that will extend the generated one.
                   
                           This section is required when sharding type is `shardingsphere` otherwise is ignored.
                         required: [ mode ]
@@ -2075,13 +2075,13 @@ spec:
                             description: The version of the ShardingSphere Proxy. If not specified latest version available will be used.
                           mode:
                             type: object
-                            description: Allow to configure the Sharding Shpere Proxy mode.
+                            description: Allows configuring the Sharding Sphere Proxy mode.
                             required: [ type, repository ]
                             properties:
                               type:
                                 type: string
                                 description: |
-                                  Allow to configure the Sharding Shpere Proxy mode type. Options available are:
+                                  Allows configuring the Sharding Sphere Proxy mode type. Options available are:
                                   
                                   * `Standalone`
                                   * `Cluster`
@@ -2104,7 +2104,7 @@ spec:
                                   type:
                                     type: string
                                     description: |
-                                      Allow to configure the Sharding Shpere Proxy repository type. Options available are:
+                                      Allows configuring the Sharding Sphere Proxy repository type. Options available are:
                                       
                                       * `Memory`
                                       * `ZooKeeper`
@@ -2123,7 +2123,7 @@ spec:
                                     "x-kubernetes-preserve-unknown-fields": true
                                   zooKeeper:
                                     type: object
-                                    description: Allow to configure ZooKeeper repository for Sharding Shpere Proxy.
+                                    description: Allows configuring ZooKeeper repository for Sharding Sphere Proxy.
                                     required: [ serverList ]
                                     properties:
                                       serverList:
@@ -2134,7 +2134,7 @@ spec:
                                           description: ZooKeeper server to connect to.
                                   etcd:
                                     type: object
-                                    description: Allow to configure Etcd repository for Sharding Shpere Proxy.
+                                    description: Allows configuring Etcd repository for Sharding Sphere Proxy.
                                     required: [ serverList ]
                                     properties:
                                       serverList:
@@ -2154,18 +2154,18 @@ spec:
                             "x-kubernetes-preserve-unknown-fields": true
                           authority:
                             type: object
-                            description: Allow to configure the Sharding Shpere Proxy authority.
+                            description: Allows configuring the Sharding Sphere Proxy authority.
                             properties:
                               users:
                                 type: array
                                 description: |
-                                  Allow to configure extra users other than the superuser (by default superuser username is postgres).
+                                  Allows configuring extra users other than the superuser (by default superuser username is postgres).
                                   
                                   See also https://shardingsphere.apache.org/document/current/en/user-manual/shardingsphere-proxy/yaml-config/authority/#authentication-configuration
                                 items:
                                   type: object
                                   description: |
-                                    Allow to configure extra user other than the superuser (by default superuser username is postgres).
+                                    Allows configuring an extra user other than the superuser (by default superuser username is postgres).
                                   required: [ user, password ]
                                   properties:
                                     user:
@@ -2194,18 +2194,18 @@ spec:
                                           description: The key of the secret to select from. Must be a valid secret key.
                               privilege:
                                 type: object
-                                description: Allow to configure the Sharding Shpere Proxy authority privilege.
+                                description: Allows configuring the Sharding Sphere Proxy authority privilege.
                                 properties:
                                   type:
                                     type: string
                                     description: |
-                                      Allow to configure the Sharding Shpere Proxy authority privilege type.
+                                      Allows configuring the Sharding Sphere Proxy authority privilege type.
                                       
                                       See also https://shardingsphere.apache.org/document/current/en/user-manual/shardingsphere-proxy/yaml-config/authority/#authorization-configuration
                                   userDatabaseMappings:
                                     type: string
                                     description: |
-                                      Allow to configure the mappings between users and databases.
+                                      Allows configuring the mappings between users and databases.
                                       
                                       See also https://shardingsphere.apache.org/document/current/en/user-manual/shardingsphere-proxy/yaml-config/authority/#database_permitted
                           serviceAccount:
@@ -2306,13 +2306,13 @@ spec:
                       initialization:
                         type: object
                         description: |
-                          Allow to specify how the replicas are initialized.
+                          Allows specifying how the replicas are initialized.
                         properties:
                           mode:
                             type: string
                             default: FromExistingBackup
                             description: |
-                              Allow to specify how the replicas are initialized.
+                              Allows specifying how the replicas are initialized.
                               
                               Possible values are:
                               
@@ -2433,7 +2433,7 @@ spec:
                 description: |
                   The shards are a group of StackGres clusters where the partitioned data chunks are stored.
                   
-                  When referring to the cluster in the descriptions belove it apply to any shard's StackGres cluster.
+                  When referring to the cluster in the descriptions below it applies to any shard's StackGres cluster.
                 required: ["clusters", "instancesPerCluster", "pods"]
                 properties:
                   clusters:
@@ -2584,7 +2584,7 @@ spec:
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the customInitContainers or customContainers sections the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
                           
                           Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                             gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -2600,7 +2600,7 @@ spec:
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the customInitContainers or customContainers sections the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                              gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -2613,12 +2613,12 @@ spec:
                         type: array
                         description: |
                           A list of custom application init containers that run within the coordinator cluster's Pods. The
-                            custom init containers will run following the defined sequence as the end of
+                            custom init containers will run following the defined sequence at the end of
                             cluster's Pods init containers.
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the .spec.containers section of SGInstanceProfile the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
 
                           **Changing this field may require a restart.**
 
@@ -2626,13 +2626,13 @@ spec:
                         items:
                           type: object
                           description: |
-                            A custom application init container that run within the cluster's Pods. The custom init
-                             containers will run following the defined sequence as the end of cluster's Pods init
+                            A custom application init container that runs within the cluster's Pods. The custom init
+                             containers will run following the defined sequence at the end of cluster's Pods init
                              containers.
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the .spec.containers section of SGInstanceProfile the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
     
@@ -2646,7 +2646,7 @@ spec:
                           
                           The name used in this section will be prefixed with the string `c-` so that when
                             referencing them in the .spec.containers section of SGInstanceProfile the name used
-                            have to be prepended with the same prefix.
+                            has to be prepended with the same prefix.
 
                           **Changing this field may require a restart.**
 
@@ -2654,13 +2654,13 @@ spec:
                         items:
                           type: object
                           description: |
-                            A custom application container that run within the cluster's Pods. The custom
-                             containers will run following the defined sequence as the end of cluster's Pods
+                            A custom application container that runs within the cluster's Pods. The custom
+                             containers will run following the defined sequence at the end of cluster's Pods
                              containers.
                             
                             The name used in this section will be prefixed with the string `c-` so that when
                              referencing them in the .spec.containers section of SGInstanceProfile the name used
-                             have to be prepended with the same prefix.
+                             has to be prepended with the same prefix.
                             
                             See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
     
@@ -2827,11 +2827,11 @@ spec:
                   overrides:
                     type: array
                     description: |
-                      Any shard can be overriden by this section.
+                      Any shard can be overridden by this section.
                     items:
                       type: object
                       description: |
-                        Any shard can be overriden by this section.
+                        Any shard can be overridden by this section.
                       required: ["index"]
                       properties:
                         index:
@@ -2975,7 +2975,7 @@ spec:
                                 
                                 The name used in this section will be prefixed with the string `c-` so that when
                                   referencing them in the customInitContainers or customContainers sections the name used
-                                  have to be prepended with the same prefix.
+                                  has to be prepended with the same prefix.
                                 
                                 Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                                   gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -2991,7 +2991,7 @@ spec:
                                   
                                   The name used in this section will be prefixed with the string `c-` so that when
                                    referencing them in the customInitContainers or customContainers sections the name used
-                                   have to be prepended with the same prefix.
+                                   has to be prepended with the same prefix.
                                   
                                   Only the following volume types are allowed: configMap, downwardAPI, emptyDir,
                                    gitRepo, glusterfs, hostPath, nfs, projected and secret
@@ -3004,12 +3004,12 @@ spec:
                               type: array
                               description: |
                                 A list of custom application init containers that run within the coordinator cluster's Pods. The
-                                  custom init containers will run following the defined sequence as the end of
+                                  custom init containers will run following the defined sequence at the end of
                                   cluster's Pods init containers.
                                 
                                 The name used in this section will be prefixed with the string `c-` so that when
                                   referencing them in the .spec.containers section of SGInstanceProfile the name used
-                                  have to be prepended with the same prefix.
+                                  has to be prepended with the same prefix.
 
                                 **Changing this field may require a restart.**
 
@@ -3017,13 +3017,13 @@ spec:
                               items:
                                 type: object
                                 description: |
-                                  A custom application init container that run within the cluster's Pods. The custom init
-                                   containers will run following the defined sequence as the end of cluster's Pods init
+                                  A custom application init container that runs within the cluster's Pods. The custom init
+                                   containers will run following the defined sequence at the end of cluster's Pods init
                                    containers.
                                   
                                   The name used in this section will be prefixed with the string `c-` so that when
                                    referencing them in the .spec.containers section of SGInstanceProfile the name used
-                                   have to be prepended with the same prefix.
+                                   has to be prepended with the same prefix.
                                   
                                   See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
           
@@ -3037,7 +3037,7 @@ spec:
                                 
                                 The name used in this section will be prefixed with the string `c-` so that when
                                   referencing them in the .spec.containers section of SGInstanceProfile the name used
-                                  have to be prepended with the same prefix.
+                                  has to be prepended with the same prefix.
 
                                 **Changing this field may require a restart.**
 
@@ -3045,13 +3045,13 @@ spec:
                               items:
                                 type: object
                                 description: |
-                                  A custom application container that run within the cluster's Pods. The custom
-                                   containers will run following the defined sequence as the end of cluster's Pods
+                                  A custom application container that runs within the cluster's Pods. The custom
+                                   containers will run following the defined sequence at the end of cluster's Pods
                                    containers.
                                   
                                   The name used in this section will be prefixed with the string `c-` so that when
                                    referencing them in the .spec.containers section of SGInstanceProfile the name used
-                                   have to be prepended with the same prefix.
+                                   has to be prepended with the same prefix.
                                   
                                   See: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#container-v1-core\n
           
@@ -3116,7 +3116,7 @@ spec:
                             customInitEnvFrom:
                               type: object
                               description: |
-                                A list of custom environment variables from souce for the specified init container.
+                                A list of custom environment variables from source for the specified init container.
 
                                 **Changing this field may require a restart.**
                                   
@@ -3219,7 +3219,7 @@ spec:
               distributedLogs:
                 type: object
                 description: |
-                  StackGres features a functionality for all pods to send Postgres, Patroni and PgBouncer logs to a central (distributed) location, which is in turn another Postgres database. Logs can then be accessed via SQL interface or from the web UI. This section controls whether to enable this feature or not. If not enabled, logs are send to the pod's standard output.
+                  StackGres features a functionality for all pods to send Postgres, Patroni and PgBouncer logs to a central (distributed) location, which is in turn another Postgres database. Logs can then be accessed via SQL interface or from the web UI. This section controls whether to enable this feature or not. If not enabled, logs are sent to the pod's standard output.
 
                   **Example:**
 
@@ -3256,7 +3256,7 @@ spec:
                     description: |
                       It is a best practice, on non-containerized environments, when running production workloads, to run each database server on a different server (virtual or physical), i.e., not to co-locate more than one database server per host.
 
-                      The same best practice applies to databases on containers. By default, StackGres will not allow to run more than one StackGres pod on a given Kubernetes node. Set this property to true to allow more than one StackGres pod per node.
+                      The same best practice applies to databases on containers. By default, StackGres will not allow running more than one StackGres pod on a given Kubernetes node. Set this property to true to allow more than one StackGres pod per node.
                       
                       This property default value may be changed depending on the value of field `.spec.profile`.
                       
@@ -3283,8 +3283,8 @@ spec:
                     description: |
                       **Deprecated** this value is ignored and you can consider it as always `true`.
 
-                      On containerized environments, when running production workloads, enforcing container's cpu requirements request to be equals to the limit allow to achieve the highest level of performance. Doing so, reduces the chances of leaving
-                        the workload with less cpu than it requires. It also allow to set [static CPU management policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy) that allows to guarantee a pod the usage exclusive CPUs on the node.
+                      On containerized environments, when running production workloads, enforcing container's cpu requirements request to be equals to the limit allows achieving the highest level of performance. Doing so, reduces the chances of leaving
+                        the workload with less cpu than it requires. It also allows setting [static CPU management policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy) that allows to guarantee a pod the usage exclusive CPUs on the node.
 
                       By default, StackGres will configure cpu requirements to have the same limit and request for the patroni container. Set this property to true to prevent StackGres from setting patroni container's cpu requirements request equals to the limit
                         when `.spec.requests.cpu` is configured in the referenced `SGInstanceProfile`.
@@ -3294,8 +3294,8 @@ spec:
                     description: |
                       **Deprecated** this value is ignored and you can consider it as always `true`.
 
-                      On containerized environments, when running production workloads, enforcing container's cpu requirements request to be equals to the limit allow to achieve the highest level of performance. Doing so, reduces the chances of leaving
-                        the workload with less cpu than it requires. It also allow to set [static CPU management policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy) that allows to guarantee a pod the usage exclusive CPUs on the node.
+                      On containerized environments, when running production workloads, enforcing container's cpu requirements request to be equals to the limit allows achieving the highest level of performance. Doing so, reduces the chances of leaving
+                        the workload with less cpu than it requires. It also allows setting [static CPU management policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy) that allows to guarantee a pod the usage exclusive CPUs on the node.
 
                       By default, StackGres will configure cpu requirements to have the same limit and request for all the containers. Set this property to true to prevent StackGres from setting container's cpu requirements request equals to the limit (except for patroni container, see `enablePatroniCpuRequests`)
                         when `.spec.requests.containers.<container name>.cpu` `.spec.requests.initContainers.<container name>.cpu` is configured in the referenced `SGInstanceProfile`.
@@ -3305,7 +3305,7 @@ spec:
                     description: |
                       **Deprecated** this value is ignored and you can consider it as always `true`.
 
-                      On containerized environments, when running production workloads, enforcing container's memory requirements request to be equals to the limit allow to achieve the highest level of performance. Doing so, reduces the chances of leaving
+                      On containerized environments, when running production workloads, enforcing container's memory requirements request to be equals to the limit allows achieving the highest level of performance. Doing so, reduces the chances of leaving
                         the workload with less memory than it requires.
 
                       By default, StackGres will configure memory requirements to have the same limit and request for the patroni container. Set this property to true to prevent StackGres from setting patroni container's memory requirements request equals to the limit
@@ -3316,7 +3316,7 @@ spec:
                     description: |
                       **Deprecated** this value is ignored and you can consider it as always `true`.
 
-                      On containerized environments, when running production workloads, enforcing container's memory requirements request to be equals to the limit allow to achieve the highest level of performance. Doing so, reduces the chances of leaving
+                      On containerized environments, when running production workloads, enforcing container's memory requirements request to be equals to the limit allows achieving the highest level of performance. Doing so, reduces the chances of leaving
                         the workload with less memory than it requires.
 
                       By default, StackGres will configure memory requirements to have the same limit and request for all the containers. Set this property to true to prevent StackGres from setting container's memory requirements request equals to the limit (except for patroni container, see `enablePatroniCpuRequests`)
@@ -3327,10 +3327,10 @@ spec:
                       A list of StackGres feature gates to enable (not suitable for a production environment).
                       
                       Available feature gates are:
-                      * `babelfish-flavor`: Allow to use `babelfish` flavor.
+                      * `babelfish-flavor`: Allows using the `babelfish` flavor.
                     items:
                       type: string
-                      description: The name of the fature gate to enable.
+                      description: The name of the feature gate to enable.
               initialData:
                 type: object
                 description: |
@@ -3379,10 +3379,10 @@ spec:
                             type: object
                             description: |
                               It is possible to restore the database to its state at any time since your backup was taken using Point-in-Time Recovery (PITR) as long as another
-                                backup newer than the PITR requested restoration date does not exists.
+                                backup newer than the PITR requested restoration date does not exist.
 
-                              Point In Time Recovery (PITR). PITR allow to restore the database state to an arbitrary point of time in the past, as long as you specify a backup
-                                older than the PITR requested restoration date and does not exists a backup newer than the same restoration date.
+                              Point In Time Recovery (PITR). PITR allows restoring the database state to an arbitrary point of time in the past, as long as you specify a backup
+                                older than the PITR requested restoration date and does not exist a backup newer than the same restoration date.
 
                               See also: https://www.postgresql.org/docs/current/continuous-archiving.html
                             properties:
@@ -3423,7 +3423,7 @@ spec:
                       type: string
               postgresVersion:
                 type: string
-                description: The Postgres version used used to generate the SGShardedCluster's SGClusters
+                description: The Postgres version used to generate the SGShardedCluster's SGClusters
               buildVersion:
                 type: string
                 description: The Postgres build version used to generate the SGShardedCluster's SGClusters

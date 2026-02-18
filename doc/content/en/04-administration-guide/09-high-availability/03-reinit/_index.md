@@ -7,18 +7,18 @@ description: Details about how to use Patroni to reinit the database replicas no
 
 ## Performing a re-initialization of a Replica
 
-Re-initialization of a Replica have to be performed when Postgres is not able to catch-up with the primary database and Patroni is not capable of recovering it automatically.
+Re-initialization of a replica has to be performed when Postgres is not able to catch-up with the primary database and Patroni is not capable of recovering it automatically.
 The re-initialization of a Replica allows you to copy its data from scratch directly from the primary and recover it completely.
 
 To perform this we will use the `patronictl reinit` command:
 
-As we can see in the cluster status shown before the primary node is the one called `stackgres-0` with the leader role and we going to reinit the node called `stackgres-1` so we run:
+As we can see in the cluster status shown before the primary node is the one called `stackgres-0` with the leader role and we are going to reinit the node called `stackgres-1` so we run:
 
 ```
-bash-4.4$ patronictl switchover stackgres
+bash-4.4$ patronictl reinit stackgres
 ```
 
-Then this show us the current status and we will be asked for the replica node (note that the command already give us the replica node name):
+Then this show us the current status and we will be asked for the replica node (note that the command already gives us the replica node name):
 
 ```
 + Cluster: stackgres -------------+---------+---------+----+-----------+
@@ -36,7 +36,7 @@ And as a final question and warning asks if we want to proceed with the change:
 Are you sure you want to reinitialize members stackgres-1? [y/N]:
 ```
 
-After accept the change Patroni will output the operation status:
+After accepting the change Patroni will output the operation status:
 
 ```
 Success: reinitialize for member stackgres-1
@@ -54,4 +54,4 @@ bash-4.4$ patronictl list
 +--------------+------------------+---------+---------+----+-----------+
 ```
 
-> **IMPORTANT NOTE:** We strongly recommend to not manipulate the cluster with any other `patronictl` to avoid data lost or damage the entire configuration. Use the command explained above only if you know what are you doing.
+> **IMPORTANT NOTE:** We strongly recommend to not manipulate the cluster with any other `patronictl` to avoid data loss or damage to the entire configuration. Use the command explained above only if you know what you are doing.

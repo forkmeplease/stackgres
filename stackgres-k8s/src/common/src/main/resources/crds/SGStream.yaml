@@ -35,17 +35,17 @@ spec:
             description: |
               Specification of the desired behavior of a StackGres stream.
               
-              A stream represent the process of performing a change data capture (CDC) operation on a data source that generates a stream of event containing information about the changes happening (or happened) to the database in real time (or from the beginning).
+              A stream represents the process of performing a change data capture (CDC) operation on a data source that generates a stream of events containing information about the changes happening (or happened) to the database in real time (or from the beginning).
               
-              The stream allow to specify different types for the target of the CDC operation. See `SGStream.spec.target.type`.
+              The stream allows specifying different types for the target of the CDC operation. See `SGStream.spec.target.type`.
               
-              The stream perform two distinct operation to generate data source changes for the target:
+              The stream performs two distinct operation to generate data source changes for the target:
               
-              * Snapshotting: allows to capture the content of the data source in a specific point in time and stream it as if they were changes, thus providing a stream of events as they were an aggregate from the beginning of the existence of the data source.
-              * Streaming: allows to capture the changes that are happening in real time in the data source and stream them as changes continuously.
+              * Snapshotting: allows capturing the content of the data source in a specific point in time and stream it as if they were changes, thus providing a stream of events as they were an aggregate from the beginning of the existence of the data source.
+              * Streaming: allows capturing the changes that are happening in real time in the data source and stream them as changes continuously.
 
-              The CDC is performed using [Debezium Engine](https://debezium.io/documentation/reference/stable/development/engine.html). SGStream extends functionality of Debezium by providing a [custom signaling channel](https://debezium.io/documentation/reference/stable/configuration/signalling.html#debezium-custom-signaling-channel) that allow to send signals by simply adding annotation to the SGStream resources.
-              To send a signal simply create an annotation with the following formar:
+              The CDC is performed using [Debezium Engine](https://debezium.io/documentation/reference/stable/development/engine.html). SGStream extends functionality of Debezium by providing a [custom signaling channel](https://debezium.io/documentation/reference/stable/configuration/signalling.html#debezium-custom-signaling-channel) that allows sending signals by simply adding annotation to the SGStream resources.
+              To send a signal simply create an annotation with the following format:
               
               ```
               metadata:
@@ -53,10 +53,10 @@ spec:
                   debezium-signal.stackgres.io/<signal type>: <signal data>
               ```
               
-              Also, SGStream provide the following custom singals implementations:
+              Also, SGStream provide the following custom signals implementations:
                 
-                * `tombstone`: allow to stop completely Debezium streaming and the SGStream. This signal is useful to give an end to the streaming in a graceful way allowing for the removal of the logical slot created by Debezium.
-                * `command`: allow to execute any SQL command on the target database. Only available then the target type is `SGCluster`.
+                * `tombstone`: allows stopping completely Debezium streaming and the SGStream. This signal is useful to give an end to the streaming in a graceful way allowing for the removal of the logical slot created by Debezium.
+                * `command`: allows executing any SQL command on the target database. Only available then the target type is `SGCluster`.
             required: ["source", "target", "pods"]
             properties:
               source:
@@ -123,23 +123,23 @@ spec:
                       includes: &source-includes
                         type: array
                         description: |
-                          A list of regular expressions that allow to match one or more `<schema>.<table>.<column>` entries to be filtered before sending to the target.
+                          A list of regular expressions that allow matching one or more `<schema>.<table>.<column>` entries to be filtered before sending to the target.
                           
                           This property is mutually exclusive with `excludes`.
                         items:
                           type: string
                           description: |
-                            A regular expressions that allow to match one or more `<schema>.<table>.<column>` entries to be filtered before sending to the target.
+                            A regular expression that allows matching one or more `<schema>.<table>.<column>` entries to be filtered before sending to the target.
                       excludes: &source-excludes
                         type: array
                         description: |
-                          A list of regular expressions that allow to match one or more `<schema>.<table>.<column>` entries to be filtered out before sending to the target.
+                          A list of regular expressions that allow matching one or more `<schema>.<table>.<column>` entries to be filtered out before sending to the target.
                           
                           This property is mutually exclusive with `includes`.
                         items:
                           type: string
                           description: |
-                            A regular expressions that allow to match one or more `<schema>.<table>.<column>` entries to be filtered out before sending to the target.
+                            A regular expression that allows matching one or more `<schema>.<table>.<column>` entries to be filtered out before sending to the target.
                       skipDropReplicationSlotAndPublicationOnTombstone:
                         type: boolean
                         description: When set to `true` replication slot and publication will not be dropped after receiving the tombstone signal.
@@ -169,7 +169,7 @@ spec:
                           slotFailover:
                             type: boolean
                             description: |
-                              Default `false'. Specifies whether the connector creates a failover slot. If you omit this setting, or if the primary server runs PostgreSQL 16 or earlier, the connector does not create a failover slot.
+                              Default `false`. Specifies whether the connector creates a failover slot. If you omit this setting, or if the primary server runs PostgreSQL 16 or earlier, the connector does not create a failover slot.
                               
                               PostgreSQL uses the `synchronized_standby_slots` parameter to configure replication slot synchronization between primary and standby servers. Set this parameter on the primary server to specify the physical replication slots that it synchronizes with on standby servers. 
                           publicationName:
@@ -240,40 +240,38 @@ spec:
                           columnMaskHash:
                             type: object
                             description: |
-                               An optional section, that allow to specify, for an hash algorithm and a salt, a list of regular expressions that match the fully-qualified names of character-based columns. Fully-qualified names for columns are of the form <schemaName>.<tableName>.<columnName>.
+                               An optional section, that allows specifying, for a hash algorithm and a salt, a list of regular expressions that match the fully-qualified names of character-based columns. Fully-qualified names for columns are of the form <schemaName>.<tableName>.<columnName>.
                                 To match the name of a column Debezium applies the regular expression that you specify as an anchored regular expression. That is, the specified expression is matched against the entire name string of the column; the expression does not match substrings that might be present in a column name. In the resulting change event record, the values for the specified columns are replaced with pseudonyms.
                                 A pseudonym consists of the hashed value that results from applying the specified hashAlgorithm and salt. Based on the hash function that is used, referential integrity is maintained, while column values are replaced with pseudonyms. Supported hash functions are described in the [MessageDigest section](https://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#MessageDigest) of the Java Cryptography Architecture Standard Algorithm Name Documentation.
                                 In the following example, CzQMA0cB5K is a randomly selected salt.
                                 columnMaskHash.SHA-256.CzQMA0cB5K=[inventory.orders.customerName,inventory.shipment.customerName]
                                 If necessary, the pseudonym is automatically shortened to the length of the column. The connector configuration can include multiple properties that specify different hash algorithms and salts.
                                 Depending on the hash algorithm used, the salt selected, and the actual data set, the resulting data set might not be completely masked.
+                                
+                                The hash algorithm (e.g. SHA-256) type and configuration.
                             additionalProperties:
                               type: object
-                              description: The hash algorithm (e.g. SHA-256) type and configuration.
+                              description: The salt (e.g. CzQMA0cB5K) value and configuration.
                               additionalProperties:
-                                type: object
-                                description: The salt (e.g. CzQMA0cB5K) value and configuration.
-                                additionalProperties:
-                                  type: array
-                                  items:
-                                    type: string
-                                  description: The list of regular expressions that match the fully-qualified names of character-based columns (e.g. inventory.orders.customerName)
+                                type: array
+                                items:
+                                  type: string
+                                description: The list of regular expressions that match the fully-qualified names of character-based columns (e.g. inventory.orders.customerName)
                           columnMaskHashV2:
                             type: object
                             description: |
-                              Similar to also columnMaskHash but using hashing strategy version 2.
+                              Similar to columnMaskHash but using hashing strategy version 2.
                                Hashing strategy version 2 should be used to ensure fidelity if the value is being hashed in different places or systems.
+                              
+                              The hash algorithm (e.g. SHA-256) type and configuration.
                             additionalProperties:
                               type: object
-                              description: The hash algorithm (e.g. SHA-256) type and configuration.
+                              description: The salt (e.g. CzQMA0cB5K) value and configuration.
                               additionalProperties:
-                                type: object
-                                description: The salt (e.g. CzQMA0cB5K) value and configuration.
-                                additionalProperties:
-                                  type: array
-                                  items:
-                                    type: string
-                                  description: The list of regular expressions that match the fully-qualified names of character-based columns (e.g. inventory.orders.customerName)
+                                type: array
+                                items:
+                                  type: string
+                                description: The list of regular expressions that match the fully-qualified names of character-based columns (e.g. inventory.orders.customerName)
                           columnPropagateSourceType:
                             type: array
                             items:
@@ -310,7 +308,7 @@ spec:
                             items:
                               type: string
                             description: |
-                              A list of expressions that specify the columns that the connector uses to form custom message keys for change event records that are publishes to the topics for specified tables.
+                              A list of expressions that specify the columns that the connector uses to form custom message keys for change event records that are published to the topics for specified tables.
                                By default, Debezium uses the primary key column of a table as the message key for records that it emits. In place of the default, or to specify a key for tables that lack a primary key, you can configure custom message keys based on one or more columns.
                                To establish a custom message key for a table, list the table, followed by the columns to use as the message key. Each list entry takes the following format:
                                <fully-qualified_tableName>:<keyColumn>,<keyColumn>
@@ -320,7 +318,7 @@ spec:
                                The property can include entries for multiple tables. Use a semicolon to separate table entries in the list.
                                The following example sets the message key for the tables inventory.customers and purchase.orders:
                                inventory.customers:pk1,pk2;(.*).purchaseorders:pk3,pk4
-                               For the table inventory.customer, the columns pk1 and pk2 are specified as the message key. For the purchaseorders tables in any schema, the columns pk3 and pk4 server as the message key.
+                               For the table inventory.customer, the columns pk1 and pk2 are specified as the message key. For the purchaseorders tables in any schema, the columns pk3 and pk4 serve as the message key.
                                There is no limit to the number of columns that you use to create custom message keys. However, it’s best to use the minimum number that are required to specify a unique key.
                                Note that having this property set and REPLICA IDENTITY set to DEFAULT on the tables, will cause the tombstone events to not be created properly if the key columns are not part of the primary key of the table. Setting REPLICA IDENTITY to FULL is the only solution.
                           publicationAutocreateMode:
@@ -643,7 +641,7 @@ spec:
 
                               Set one of the following options:
 
-                              * `true` : The connector emits change events for all partitions to a topic with the name of the base table. When the connector creates a publication, it submits a `CREATE PUBLICATION` statement in which the publish_via_`partition_root parameter` is set to true. As a result, the publication ignores the partition in which changes originate, and only records the name of the name of the source table.
+                              * `true` : The connector emits change events for all partitions to a topic with the name of the base table. When the connector creates a publication, it submits a `CREATE PUBLICATION` statement in which the publish_via_`partition_root parameter` is set to true. As a result, the publication ignores the partition in which changes originate, and only records the name of the source table.
                               * `false`: The connector emits changes from each source partition to a topic that reflects the name of the partition. When the connector creates the publication, the `CREATE PUBLICATION` statement omits the `publish_via_partition_root parameter` so that the publication always uses the name of the source partition to publish change events.
                           flushLsnSource:
                             type: boolean
@@ -702,7 +700,7 @@ spec:
                           xminFetchIntervalMs:
                             type: integer
                             description: |
-                              Default `0`. How often, in milliseconds, the XMIN will be read from the replication slot. The XMIN value provides the lower bounds of where a new replication slot could start from. The default value of 0 disables tracking XMIN tracking.
+                              Default `0`. How often, in milliseconds, the XMIN will be read from the replication slot. The XMIN value provides the lower bounds of where a new replication slot could start from. The default value of 0 disables XMIN tracking.
                           topicNamingStrategy:
                             type: string
                             description: |
@@ -798,7 +796,7 @@ spec:
               target:
                 type: object
                 description: |
-                  The target of this sream.
+                  The target of this stream.
                 required: ["type"]
                 properties:
                   type:
@@ -808,7 +806,7 @@ spec:
                       
                       * `CloudEvent`: events will be sent to a cloud event receiver.
                       * `PgLambda`: events will trigger the execution of a lambda script by integrating with [Knative Service](https://knative.dev/docs/serving/) (Knative must be already installed).
-                      * `SGCluster`: events will be sinked to an SGCluster allowing migration of data.
+                      * `SGCluster`: events will be sunk to an SGCluster allowing migration of data.
                   cloudEvent:
                     type: object
                     description: |
@@ -930,7 +928,7 @@ spec:
                               type: string
                           http:
                             type: object
-                            description: PgLambda uses a CloudEvent http binding to send events to the Knative Service. This section allow to modify the configuration of this binding.
+                            description: PgLambda uses a CloudEvent http binding to send events to the Knative Service. This section allows modifying the configuration of this binding.
                             properties: *cloud-event-http-properties
                   sgCluster:
                     type: object
@@ -945,7 +943,7 @@ spec:
                       database: &target-postgres-database
                         type: string
                         description: |
-                          The target database name to which the data will be migrated to.
+                          The target database name to which the data will be migrated.
                           
                           If not specified the default postgres database will be targeted.
                       username: &target-username
@@ -997,7 +995,7 @@ spec:
                       skipDropIndexesAndConstraints:
                         type: boolean
                         description: |
-                          When `true` disable drop of indexes and constraints. Indexes and constrinats are dropped in order to improve snapshotting performance.
+                          When `true` disable drop of indexes and constraints. Indexes and constraints are dropped in order to improve snapshotting performance.
                       skipRestoreIndexesAfterSnapshot:
                         type: boolean
                         description: |
@@ -1014,7 +1012,7 @@ spec:
                           connectionUrlParameters:
                             type: string
                             description: |
-                              Paremeters that are set in the JDBC connection URL. See https://jdbc.postgresql.org/documentation/use/
+                              Parameters that are set in the JDBC connection URL. See https://jdbc.postgresql.org/documentation/use/
                           detectInsertMode:
                             type: boolean
                             description: |
@@ -1080,13 +1078,13 @@ spec:
                               Default `record_key`. Specifies how the connector resolves the primary key columns from the event.
                               * `none`: Specifies that no primary key columns are created.
                               * `record_key`: Specifies that the primary key columns are sourced from the event’s record key. If the record key is a primitive type, the `primaryKeyFields` property is required to specify the name of the primary key column. If the record key is a struct type, the `primaryKeyFields` property is optional, and can be used to specify a subset of columns from the event’s key as the table’s primary key.
-                              * `record_value`: Specifies that the primary key columns is sourced from the event’s value. You can set the `primaryKeyFields` property to define the primary key as a subset of fields from the event’s value; otherwise all fields are used by default.
+                              * `record_value`: Specifies that the primary key columns are sourced from the event's value. You can set the `primaryKeyFields` property to define the primary key as a subset of fields from the event’s value; otherwise all fields are used by default.
                           primaryKeyFields:
                             type: array
                             description: |
                               Either the name of the primary key column or a comma-separated list of fields to derive the primary key from.
                               When `primaryKeyMode` is set to `record_key` and the event’s key is a primitive type, it is expected that this property specifies the column name to be used for the key.
-                              When the `primaryKeyMode` is set to `record_key` with a non-primitive key, or record_value, it is expected that this property specifies a comma-separated list of field names from either the key or value. If the primary.key.mode is set to record_key with a non-primitive key, or record_value, and this property is not specifies, the connector derives the primary key from all fields of either the record key or record value, depending on the specified mode.
+                              When the `primaryKeyMode` is set to `record_key` with a non-primitive key, or record_value, it is expected that this property specifies a comma-separated list of field names from either the key or value. If the primary.key.mode is set to record_key with a non-primitive key, or record_value, and this property is not specified, the connector derives the primary key from all fields of either the record key or record value, depending on the specified mode.
                             items:
                               type: string
                           quoteIdentifiers:
@@ -1118,7 +1116,7 @@ spec:
                             type: integer
                             description: |
                               Default `500`. Specifies how many records to attempt to batch together into the destination table.
-                              > Note that if you set `consumerMaxPollRecords` in the Connect worker properties to a value lower than `batchSize`, batch processing will be caped by `consumerMaxPollRecords` and the desired `batchSize` won’t be reached. You can also configure the connector’s underlying consumer’s `maxPollRecords` using `consumerOverrideMaxPollRecords` in the connector configuration.
+                              > Note that if you set `consumerMaxPollRecords` in the Connect worker properties to a value lower than `batchSize`, batch processing will be capped by `consumerMaxPollRecords` and the desired `batchSize` won’t be reached. You can also configure the connector’s underlying consumer’s `maxPollRecords` using `consumerOverrideMaxPollRecords` in the connector configuration.
                           useReductionBuffer:
                             type: boolean
                             description: |
@@ -1302,7 +1300,7 @@ spec:
                   offsetCommitPolicy:
                     type: string
                     description: |
-                      Default `io.debezium.engine.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy`. The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface OffsetCommitPolicy. The default is a periodic commity policy based upon time intervals.
+                      Default `io.debezium.engine.spi.OffsetCommitPolicy.PeriodicCommitOffsetPolicy`. The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface OffsetCommitPolicy. The default is a periodic commit policy based upon time intervals.
                   offsetFlushIntervalMs:
                     type: integer
                     description: |
@@ -1400,7 +1398,7 @@ spec:
 
                       * `UNORDERED`
 
-                        Records are processed non-sequentially; that is, they can be produced in an different order than in the source database.
+                        Records are processed non-sequentially; that is, they can be produced in a different order than in the source database.
 
                       The non-sequential processing of the `UNORDERED` option results in better throughput, because records are produced immediately after any SMT processing and message serialization is complete, without waiting for other records. This option doesn’t have any effect when the ChangeConsumer method is provided to the engine.
                   recordProcessingWithSerialConsumer:
@@ -1411,7 +1409,7 @@ spec:
                     description: Default `180000`. Time, in milliseconds, that the engine waits for a task’s lifecycle management operations (starting and stopping) to complete.
               useDebeziumAsyncEngine:
                 type: boolean
-                description: When `true` use Debezium asyncronous engine. See https://debezium.io/blog/2024/07/08/async-embedded-engine/
+                description: When `true` use Debezium asynchronous engine. See https://debezium.io/blog/2024/07/08/async-embedded-engine/
                 default: true
           status:
             type: object
@@ -1473,7 +1471,7 @@ spec:
                   queueTotalCapacity:
                     type: integer
                     description: |
-                      The length the queue used to cache events from the snapshotter.
+                      The length of the queue used to cache events from the snapshotter.
                   queueRemainingCapacity:
                     type: integer
                     description: |
@@ -1585,7 +1583,7 @@ spec:
                   queueTotalCapacity:
                     type: integer
                     description: |  
-                      The length the queue used to cache events from the streamer.
+                      The length of the queue used to cache events from the streamer.
                   queueRemainingCapacity:
                     type: integer  
                     description: |
@@ -1597,7 +1595,7 @@ spec:
                   milliSecondsBehindSource:
                     type: integer
                     description: |
-                      The number of milliseconds between the last change event’s timestamp and the connector processing it. The values will incoporate any differences between the clocks on the machines where the database server and the connector are running.
+                      The number of milliseconds between the last change event’s timestamp and the connector processing it. The values will incorporate any differences between the clocks on the machines where the database server and the connector are running.
                   numberOfCommittedTransactions:
                     type: integer  
                     description: |  

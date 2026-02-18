@@ -45,7 +45,7 @@ spec:
   - sgScript: script
 ```
 
-> **NOTE:** For sensitive data like credentials, create the scrpint inside a Secret and reference the
+> **NOTE:** For sensitive data like credentials, create the script inside a Secret and reference the
 >  Secret in the SGScript definition, instead (see below).
 
 ### ConfigMaps
@@ -89,7 +89,7 @@ kubectl create secret generic database-user \
   --from-literal=create-user.sql="CREATE USER demo PASSWORD 'demo'"
 ```
 
-You can reference the Secret in the SGScript definition as follow:
+You can reference the Secret in the SGScript definition as follows:
 
 ```yaml
 apiVersion: stackgres.io/v1
@@ -107,7 +107,7 @@ spec:
 
 ## Referencing an SGScript
 
-You may reference an SGScript in an SGCluster as follow:
+You may reference an SGScript in an SGCluster as follows:
 
 ```yaml
 apiVersion: stackgres.io/v1
@@ -178,7 +178,7 @@ Each script entry in the SGCluster under the section `SGCluster.spec.managedSql.
 
 ## SGScript identifier
 
-The SGScript identifier (`id`) is usually managed by the operator itself so an user do not need to specify it.
+The SGScript identifier (`id`) is usually managed by the operator itself so a user does not need to specify it.
  But in case the server-side apply method is used to patch or create the SGCluster resource you will need to
  set an unique positive integer (greater than 0 for an SGCluster and greater than 10 for an SGShardedCluster)
  value for each SGScript entry.
@@ -189,12 +189,12 @@ The SGScript identifier is used internally to map an SGScript with the SGCluster
 
 ## Script identifier
 
-The script identifier (`id`) is usually managed by the operator itself so an user do not need to specify it.
+The script identifier (`id`) is usually managed by the operator itself so a user does not need to specify it.
  But in case the server-side apply method is used to patch or create the SGScript resource you will need to
  set an unique positive integer value for each script entry.
 
 The script identifier is used internally to map a SGScript's script entry with the SGCluster status (see below)
- and to allow as user to move an SGScript's script entry in the `SGScript.spec.scripts` section without losing
+ and to allow a user to move an SGScript's script entry in the `SGScript.spec.scripts` section without losing
  its status.
  
 ## Script versioning
@@ -234,7 +234,6 @@ Whenever a script fails a failure message and a failure code will be set in the 
  and the corresponding SGScript `id`. Like in the following example:
 
 ```yaml
----
 apiVersion: stackgres.io/v1
 kind: SGScript
 metadata:
@@ -243,7 +242,9 @@ spec:
   scripts:
   - name: error-script
     script: "CREATE USER test WITH THE PASSWORD 'test'"
----
+```
+
+```yaml
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
