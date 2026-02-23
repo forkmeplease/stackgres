@@ -503,6 +503,9 @@ class DebeziumUtilTest {
         assertEntryInProperties(props, Map.entry("flush.max.retries", streamProperties.getFlushMaxRetries())),
         assertEntryInProperties(props, Map.entry("remove.placeholders", streamProperties.getRemovePlaceholders())),
         assertEntryInProperties(props, Map.entry("detect.insert.mode", streamProperties.getDetectInsertMode())),
+        assertEntryInProperties(props, Map.entry(
+            "connection.restart.on.errors",
+            streamProperties.getConnectionRestartOnErrors())),
         Map.entry("|", streamProperties)
         ));
     props.forEach((key, value) -> {
