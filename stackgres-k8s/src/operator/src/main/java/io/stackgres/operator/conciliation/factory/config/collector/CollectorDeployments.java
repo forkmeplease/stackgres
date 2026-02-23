@@ -287,6 +287,18 @@ public class CollectorDeployments
         .withLabels(labelFactory.collectorLabels(config))
         .endMetadata()
         .withNewSpec()
+        .withAffinity(collector
+            .map(StackGresConfigCollector::getAffinity)
+            .orElse(null))
+        .withTolerations(collector
+            .map(StackGresConfigCollector::getTolerations)
+            .stream()
+            .flatMap(List::stream)
+            .map(Toleration.class::cast)
+            .toList())
+        .withNodeSelector(collector
+            .map(StackGresConfigCollector::getNodeSelector)
+            .orElse(null))
         .withServiceAccount(name(config))
         .withSecurityContext(collectorPodSecurityContext.createCollectorPodSecurityContext(context))
         .withShareProcessNamespace()
