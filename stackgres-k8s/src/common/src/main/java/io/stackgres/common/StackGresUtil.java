@@ -414,14 +414,14 @@ public interface StackGresUtil {
         .get();
     return List.of(
         pgMajorVersionIndex <= pg15Index
-        ? new ExtensionTuple("citus", "13.2.0")
+        ? new ExtensionTuple("citus", "14.0.0")
             : pgMajorVersionIndex <= pg14Index
             ? new ExtensionTuple("citus", "12.1.6")
                 : pgMajorVersionIndex <= pg13Index
                 ? new ExtensionTuple("citus", "11.3-1")
                     : new ExtensionTuple("citus", "10.2-5"),
         pgMajorVersionIndex <= pg15Index
-        ? new ExtensionTuple("citus_columnar", "13.2.0")
+        ? new ExtensionTuple("citus_columnar", "14.0.0")
             : pgMajorVersionIndex <= pg14Index
             ? new ExtensionTuple("citus_columnar", "12.1.6")
                 : pgMajorVersionIndex <= pg13Index

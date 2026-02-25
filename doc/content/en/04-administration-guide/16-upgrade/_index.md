@@ -28,7 +28,7 @@ In order for the existing SGClusters, SGShardedClusters and SGDistributedLogs to
 The security upgrade operation will change the version of the SGCluster, SGShardedCluster or SGDistributedLogs resources to the latest one and will perform a restart of the all the Pods by re-creating them.
 There are two methods to perform such a security upgrade: *InPlace* and *ReducedImpact*. While both methods are similar in what they accomplish, they differ in the impact they have on the throughput of the read-only connections.
 The *InPlace* method restarts one pod at a time without increasing the total number of running Pods.
-The *ReducedImpact* method update create one additional temporary Pod during operation (*n + 1*), so that the impact on read-only throughput is reduced.
+The *ReducedImpact* method creates one additional temporary Pod during operation (*n + 1*), so that the impact on read-only throughput is reduced.
 
 ### Upgrade custom resources for external YAMLs
 

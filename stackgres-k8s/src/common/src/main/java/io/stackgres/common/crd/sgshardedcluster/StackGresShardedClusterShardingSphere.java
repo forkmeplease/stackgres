@@ -12,21 +12,29 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.stackgres.common.StackGresUtil;
 import io.stackgres.common.crd.ShardingSphereServiceAccount;
-import io.sundr.builder.annotations.Buildable;
 
 @RegisterForReflection
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Buildable(editableEnabled = false, validationEnabled = false, generateBuilderPackage = false,
-    lazyCollectionInitEnabled = false, lazyMapInitEnabled = false,
-    builderPackage = "io.fabric8.kubernetes.api.builder")
 public class StackGresShardedClusterShardingSphere {
+
+  private String version;
 
   private StackGresShardedClusterShardingSphereMode mode;
 
   private StackGresShardedClusterShardingSphereAuthority authority;
 
   private ShardingSphereServiceAccount serviceAccount;
+
+  private StackGresShardedClusterShardingSphereProperties properties;
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
 
   public StackGresShardedClusterShardingSphereMode getMode() {
     return mode;
@@ -52,9 +60,17 @@ public class StackGresShardedClusterShardingSphere {
     this.serviceAccount = serviceAccount;
   }
 
+  public StackGresShardedClusterShardingSphereProperties getProperties() {
+    return properties;
+  }
+
+  public void setProperties(StackGresShardedClusterShardingSphereProperties properties) {
+    this.properties = properties;
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(authority, mode, serviceAccount);
+    return Objects.hash(authority, mode, properties, serviceAccount, version);
   }
 
   @Override
@@ -67,7 +83,9 @@ public class StackGresShardedClusterShardingSphere {
     }
     StackGresShardedClusterShardingSphere other = (StackGresShardedClusterShardingSphere) obj;
     return Objects.equals(authority, other.authority) && Objects.equals(mode, other.mode)
-        && Objects.equals(serviceAccount, other.serviceAccount);
+        && Objects.equals(properties, other.properties)
+        && Objects.equals(serviceAccount, other.serviceAccount)
+        && Objects.equals(version, other.version);
   }
 
   @Override

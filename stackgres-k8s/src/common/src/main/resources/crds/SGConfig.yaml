@@ -32,7 +32,7 @@ spec:
 
           > **WARNING**: Creating more than one SGConfig is forbidden.
            The single SGConfig should be created automatically during installation.
-           More SGConfig may exists only when allowedNamespaces or allowedNamespaceLabelSelector is used.
+           More SGConfig may exist only when allowedNamespaces or allowedNamespaceLabelSelector is used.
         properties:
           spec:
             description: Spec defines the desired state of SGConfig
@@ -85,7 +85,7 @@ spec:
                 type: boolean
                 description: |
                   When set to `true` the creation of the operator ClusterRole and ClusterRoleBinding is disabled.
-                   Also, when `true`, some features that rely on unnamespaced resources premissions will be disabled:
+                   Also, when `true`, some features that rely on unnamespaced resources permissions will be disabled:
                   
                   * Creation and upgrade of CustomResourceDefinitions
                   * Set CA bundle for Webhooks
@@ -376,7 +376,7 @@ spec:
                         description: |
                           The type used for the service of the UI:
                           * Set to LoadBalancer to create a load balancer (if supported by the kubernetes cluster)
-                            to allow connect from Internet to the UI. Note that enabling this feature will probably incurr in
+                            to allow connect from Internet to the UI. Note that enabling this feature will probably incur
                             some fee that depend on the host of the kubernetes cluster (for example this is true for EKS, GKE
                             and AKS).
                           * Set to NodePort to expose admin UI from kubernetes nodes.
@@ -480,7 +480,7 @@ spec:
                   name:
                     type: string
                     default: stackgres-collector
-                    description: OpenTelemetry Collector Deploymnet/Deamonset base name
+                    description: OpenTelemetry Collector Deployment/DaemonSet base name
                   receivers:
                     type: object
                     description: |
@@ -650,7 +650,7 @@ spec:
                           If set to false or monitors is set automatic bind to Prometheus
                            created using the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator) will be disabled.
                           
-                          If disabled the cluster will not be binded to Prometheus automatically and will require manual configuration.
+                          If disabled the cluster will not be bound to Prometheus automatically and will require manual configuration.
                           
                           Will be ignored if monitors is set.
                       monitors:
@@ -690,7 +690,7 @@ spec:
                                 annotations:
                                   type: object
                                   x-kubernetes-preserve-unknown-fields: true
-                                  description: The labels to set for the PodMonitor
+                                  description: The annotations to set for the PodMonitor
                                 ownerReferences:
                                   type: array
                                   description: The ownerReferences to set for the PodMonitor in order to be garbage collected by the specified object.
@@ -958,7 +958,7 @@ spec:
   
                       If set to false disable automatic bind to Prometheus
                         created using the [Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator).
-                      If disabled the cluster will not be binded to Prometheus automatically and will require manual
+                      If disabled the cluster will not be bound to Prometheus automatically and will require manual
                         intervention by the Kubernetes cluster administrator.
               grafana:
                 type: object
@@ -1069,7 +1069,7 @@ spec:
                       Other URL parameters are:
                       
                       * `skipHostnameVerification`: set it to `true` in order to use a server or a proxy with a self signed certificate
-                      * `retry`: set it to `<max retriex>[:<sleep before next retry>]` in order to retry a request on failure
+                      * `retry`: set it to `<max retries>[:<sleep before next retry>]` in order to retry a request on failure
                       * `setHttpScheme`: set it to `true` in order to force using HTTP scheme
                     items:
                       type: string
@@ -1093,10 +1093,10 @@ spec:
                         type: array
                         default:
                         - x86_64/linux/timescaledb-1\.7\.4-pg12
-                        description: An array of extensions pattern used to pre-loaded estensions into the extensions cache
+                        description: An array of extensions pattern used to pre-loaded extensions into the extensions cache
                         items:
                           type: string
-                          description: An extension pattern used to pre-loaded estensions into the extensions cache
+                          description: An extension pattern used to pre-loaded extensions into the extensions cache
                       persistentVolume:
                         type: object
                         description: Section to configure the extensions cache PersistentVolume
@@ -1132,7 +1132,7 @@ spec:
                       Section to configure ServiceAccount used by ShardingSphere operator.
                       
                       You may configure a specific value for a sharded cluster under section
-                       `SGShardedCluster.speccoordinator.configurations.shardingSphere.serviceAccount`.
+                       `SGShardedCluster.spec.coordinator.configurations.shardingSphere.serviceAccount`.
                     required: [namespace,name]
                     properties:
                       namespace:
@@ -1321,9 +1321,6 @@ spec:
               version:
                 type: string
                 description: Latest version of the operator used to check for updates
-              removeOldOperatorBundleResources:
-                type: boolean
-                description: Indicate when the old operator bundle resources has been removed
               grafana:
                 type: object
                 properties:

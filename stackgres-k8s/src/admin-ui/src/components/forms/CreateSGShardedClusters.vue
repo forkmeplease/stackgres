@@ -1162,7 +1162,7 @@
                                             <fieldset
                                                 class="noMargin"
                                                 :data-field="'spec.coordinator.pods.customVolumes[' + index + '].configMap.items'"
-                                                v-if="vol.configMap.items.length"
+                                                v-if="vol.configMap.items && vol.configMap.items.length"
                                             >
                                                 <template v-for="(item, itemIndex) in vol.configMap.items">
                                                     <div class="section" :key="itemIndex" :data-field="'spec.coordinator.pods.customVolumes[' + index + '].configMap.items[' + itemIndex + ']'">
@@ -1191,10 +1191,10 @@
                                                     </div>
                                                 </template>
                                             </fieldset>
-                                            <div class="fieldsetFooter" :class="!vol.configMap.items.length && 'topBorder'">
+                                            <div class="fieldsetFooter" :class="!(vol.configMap.items || []).length && 'topBorder'">
                                                 <a
                                                     class="addRow"
-                                                    @click="vol.configMap.items.push({
+                                                    @click="(vol.configMap.items = vol.configMap.items || []).push({
                                                         key: null,
                                                         mode: null,
                                                         path: null,
@@ -1245,7 +1245,7 @@
                                             <fieldset
                                                 class="noMargin"
                                                 :data-field="'spec.coordinator.pods.customVolumes[' + index + '].secret.items'"
-                                                v-if="vol.secret.items.length"
+                                                v-if="vol.secret.items && vol.secret.items.length"
                                             >
                                                 <template v-for="(item, itemIndex) in vol.secret.items">
                                                     <div class="section" :key="itemIndex" :data-field="'spec.coordinator.pods.customVolumes[' + index + '].secret.items[' + itemIndex + ']'">
@@ -1274,10 +1274,10 @@
                                                     </div>
                                                 </template>
                                             </fieldset>
-                                            <div class="fieldsetFooter" :class="!vol.secret.items.length && 'topBorder'">
+                                            <div class="fieldsetFooter" :class="!(vol.secret.items || []).length && 'topBorder'">
                                                 <a
                                                     class="addRow"
-                                                    @click="vol.secret.items.push({
+                                                    @click="(vol.secret.items = vol.secret.items || []).push({
                                                         key: '',
                                                         mode: '',
                                                         path: '',
@@ -3220,7 +3220,7 @@
                                                 <fieldset
                                                     class="noMargin"
                                                     :data-field="'spec.shards.pods.customVolumes[' + index + '].configMap.items'"
-                                                    v-if="vol.configMap.items.length"
+                                                    v-if="vol.configMap.items && vol.configMap.items.length"
                                                 >
                                                     <template v-for="(item, itemIndex) in vol.configMap.items">
                                                         <div class="section" :key="itemIndex" :data-field="'spec.shards.pods.customVolumes[' + index + '].configMap.items[' + itemIndex + ']'">
@@ -3249,10 +3249,10 @@
                                                         </div>
                                                     </template>
                                                 </fieldset>
-                                                <div class="fieldsetFooter" :class="!vol.configMap.items.length && 'topBorder'">
+                                                <div class="fieldsetFooter" :class="!(vol.configMap.items || []).length && 'topBorder'">
                                                     <a
                                                         class="addRow"
-                                                        @click="vol.configMap.items.push({
+                                                        @click="(vol.configMap.items = vol.configMap.items || []).push({
                                                             key: null,
                                                             mode: null,
                                                             path: null,
@@ -3303,7 +3303,7 @@
                                                 <fieldset
                                                     class="noMargin"
                                                     :data-field="'spec.shards.pods.customVolumes[' + index + '].secret.items'"
-                                                    v-if="vol.secret.items.length"
+                                                    v-if="vol.secret.items && vol.secret.items.length"
                                                 >
                                                     <template v-for="(item, itemIndex) in vol.secret.items">
                                                         <div class="section" :key="itemIndex" :data-field="'spec.shards.pods.customVolumes[' + index + '].secret.items[' + itemIndex + ']'">
@@ -3332,10 +3332,10 @@
                                                         </div>
                                                     </template>
                                                 </fieldset>
-                                                <div class="fieldsetFooter" :class="!vol.secret.items.length && 'topBorder'">
+                                                <div class="fieldsetFooter" :class="!(vol.secret.items || []).length && 'topBorder'">
                                                     <a
                                                         class="addRow"
-                                                        @click="vol.secret.items.push({
+                                                        @click="(vol.secret.items = vol.secret.items || []).push({
                                                             key: '',
                                                             mode: '',
                                                             path: '',
@@ -5255,7 +5255,7 @@
                                                 <fieldset
                                                     class="noMargin"
                                                     :data-field="'spec.shards.overrides[' + overrideIndex + '].pods.customVolumes[' + index + '].configMap.items'"
-                                                    v-if="vol.configMap.items.length"
+                                                    v-if="vol.configMap.items && vol.configMap.items.length"
                                                 >
                                                     <template v-for="(item, itemIndex) in vol.configMap.items">
                                                         <div class="section" :key="itemIndex" :data-field="'spec.shards.overrides[' + overrideIndex + '].pods.customVolumes[' + index + '].configMap.items[' + itemIndex + ']'">
@@ -5284,10 +5284,10 @@
                                                         </div>
                                                     </template>
                                                 </fieldset>
-                                                <div class="fieldsetFooter" :class="!vol.configMap.items.length && 'topBorder'">
+                                                <div class="fieldsetFooter" :class="!(vol.configMap.items || []).length && 'topBorder'">
                                                     <a
                                                         class="addRow"
-                                                        @click="vol.configMap.items.push({
+                                                        @click="(vol.configMap.items = vol.configMap.items || []).push({
                                                             key: null,
                                                             mode: null,
                                                             path: null,
@@ -5338,7 +5338,7 @@
                                                 <fieldset
                                                     class="noMargin"
                                                     :data-field="'spec.shards.overrides[' + overrideIndex + '].pods.customVolumes[' + index + '].secret.items'"
-                                                    v-if="vol.secret.items.length"
+                                                    v-if="vol.secret.items && vol.secret.items.length"
                                                 >
                                                     <template v-for="(item, itemIndex) in vol.secret.items">
                                                         <div class="section" :key="itemIndex" :data-field="'spec.shards.overrides[' + overrideIndex + '].pods.customVolumes[' + index + '].secret.items[' + itemIndex + ']'">
@@ -5367,10 +5367,10 @@
                                                         </div>
                                                     </template>
                                                 </fieldset>
-                                                <div class="fieldsetFooter" :class="!vol.secret.items.length && 'topBorder'">
+                                                <div class="fieldsetFooter" :class="!(vol.secret.items || []).length && 'topBorder'">
                                                     <a
                                                         class="addRow"
-                                                        @click="vol.secret.items.push({
+                                                        @click="(vol.secret.items = vol.secret.items || []).push({
                                                             key: '',
                                                             mode: '',
                                                             path: '',
@@ -7405,8 +7405,14 @@
                                         vm.customVolumesType[type].push('emptyDir');
                                     } else if(v.hasOwnProperty('configMap')) {
                                         vm.customVolumesType[type].push('configMap');
+                                        if(!v.configMap.hasOwnProperty('items')) {
+                                            v.configMap.items = [];
+                                        }
                                     } else if(v.hasOwnProperty('secret')) {
                                         vm.customVolumesType[type].push('secret');
+                                        if(!v.secret.hasOwnProperty('items')) {
+                                            v.secret.items = [];
+                                        }
                                     }
                                 });
                             }
@@ -7510,8 +7516,14 @@
                                             vm.customVolumesType.overrides[index].push('emptyDir');
                                         } else if(v.hasOwnProperty('configMap')) {
                                             vm.customVolumesType.overrides[index].push('configMap');
+                                            if(!v.configMap.hasOwnProperty('items')) {
+                                                v.configMap.items = [];
+                                            }
                                         } else if(v.hasOwnProperty('secret')) {
                                             vm.customVolumesType.overrides[index].push('secret');
+                                            if(!v.secret.hasOwnProperty('items')) {
+                                                v.secret.items = [];
+                                            }
                                         }
                                     });
                                 }

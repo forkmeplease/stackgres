@@ -47,7 +47,7 @@ See also [Postgres Configuration section]({{%  relref "04-administration-guide/0
 
 These are the default values of the `postgresql.conf` property:
 
-```yaml
+```
 listen_addresses: localhost
 superuser_reserved_connections: 8
 max_prepared_transactions: 32

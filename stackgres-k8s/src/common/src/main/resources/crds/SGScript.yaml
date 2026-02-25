@@ -46,7 +46,7 @@ spec:
               continueOnError:
                 type: boolean
                 description: |
-                  If `true`, when any script entry fail will not prevent subsequent script entries from being executed. `false` by default.
+                  If `true`, when any script entry fails, it will not prevent subsequent script entries from being executed. `false` by default.
               scripts:
                 type: array
                 description: |
@@ -80,7 +80,7 @@ spec:
                     user:
                       type: string
                       description: |
-                        User that will execute the script. Defaults to the superuser username when not set (that by default is `postgres`) user.
+                        User that will execute the script. Defaults to the superuser username when not set (that by default is `postgres`).
                     wrapInTransaction:
                       type: string
                       description: |
@@ -97,7 +97,7 @@ spec:
                         When set to `true` the script entry execution will include storing the status of the execution of this
                           script entry in the table `managed_sql.status` that will be created in the specified `database`. This
                           will avoid an operation that fails partially to be unrecoverable requiring the intervention from the user
-                          if user in conjunction with `retryOnError`.
+                          if used in conjunction with `retryOnError`.
 
                         If set to `true` then `wrapInTransaction` field must be set.
 

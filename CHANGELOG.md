@@ -1,3 +1,60 @@
+# :rocket: Release 1.18.5 (2026-02-23)
+
+## :notepad_spiral: NOTES
+
+StackGres 1.18.5 is out! :confetti_ball: :champagne: 
+
+> This patch release aims at hardening and stability but it also brings components updates with newer versions.
+> This release also add support for Postgres 18.2, 17.8, 16.12, 15.16 and 14.21. If you are still running Postgres 13 or less this is a good time to perform a major version upgrade.
+
+So, what you are waiting for to try this release and have a look to the future of StackGres! 
+
+## :sparkles: NEW FEATURES AND CHANGES
+
+* Postgres 18.2, 17.8, 16.12, 15.16
+* Babelfish for Postgres 16.10
+* postgres_exporter 0.19.0
+* fluentbit 4.2.3
+* kubectl 1.34.4
+* OTEL contrib collector 0.146.1
+
+## Web Console
+
+Nothing new here! :eyes:
+
+## :bug: FIXES
+
+* Node selector, affinity and tolerations are not set for collector
+* StatefulSet is reconcilied when backup Pod has wrong ownerReference
+* Few CRD fields were not read correctly (now enforced by unit tests):
+    * Removed field `SGConfig.status.removeOldOperatorBundleResources`
+    * Removed field `SGDistributedLogs.spec.metadata.annotations.pods`
+    * Renamed field `SGShardedCluster.spec.coordinator.autoscaling.horizontal.eplicasConnectionsUsageTarget` to `SGShardedCluster.spec.coordinator.autoscaling.horizontal.replicasConnectionsUsageTarget`
+    * Removed field `SGStream.spec.useDebeziumAsyncEngine`
+
+## Web Console
+
+* For customVolumeMounts, make sure items array on configMaps and secrets is an actual array before interacting with it
+
+## :construction: KNOWN ISSUES
+
+* Backups may be restored with inconsistencies when performed with a Postgres instance running on a different architecture ([#1539](https://gitlab.com/ongresinc/stackgres/-/issues/1539))
+
+## :up: UPGRADE
+
+To upgrade from a previous installation of the StackGres operator's helm chart you will have to upgrade the helm chart release.
+ For more detailed information please refer to [our documentation](https://stackgres.io/doc/latest/install/helm/upgrade/#upgrade-operator).
+
+To upgrade StackGres operator's (upgrade only works starting from 1.1 version or above) helm chart issue the following commands (replace namespace and release name if you used something different):
+
+`helm upgrade -n "stackgres" "stackgres-operator" https://stackgres.io/downloads/stackgres-k8s/stackgres/1.18.5/helm/stackgres-operator.tgz`
+
+> IMPORTANT: This release is incompatible with previous `alpha` or `beta` versions. Upgrading from those versions will require uninstalling completely StackGres including all clusters and StackGres CRDs (those in `stackgres.io` group) first.
+
+Thank you for all the issues created, ideas, and code contributions by the StackGres Community!
+
+## :twisted_rightwards_arrows: [FULL LIST OF COMMITS](https://gitlab.com/ongresinc/stackgres/-/commits/1.18.5)
+
 # :rocket: Release 1.18.4 (2026-01-29)
 
 ## :notepad_spiral: NOTES

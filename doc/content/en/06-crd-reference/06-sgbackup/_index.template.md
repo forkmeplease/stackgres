@@ -35,7 +35,8 @@ spec:
 status:
   internalName: base_00000002000000000000000E
   sgBackupConfig:
-    compression: lz4
+    baseBackups:
+      compression: lz4
     storage:
       s3Compatible:
         awsCredentials:

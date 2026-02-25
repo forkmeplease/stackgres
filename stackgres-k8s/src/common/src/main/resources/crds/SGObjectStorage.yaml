@@ -64,8 +64,8 @@ spec:
                         description: |
                           To configure encryption and decryption with libsodium an algorithm that only requires
                            a secret key is used. libsodium keys are fixed-size keys of 32 bytes. For optimal
-                           cryptographic security, it is recommened to use a random 32 byte key. To generate a
-                           random key, you can something like `openssl rand -hex 32` (set `keyTransform` to `hex`)
+                           cryptographic security, it is recommended to use a random 32 byte key. To generate a
+                           random key, you can use something like `openssl rand -hex 32` (set `keyTransform` to `hex`)
                            or `openssl rand -base64 32` (set `keyTransform` to `base64`).
                         properties:
                           name:
@@ -79,7 +79,7 @@ spec:
                         description: |
                           The transform that will be applied to the `key` to get the required 32 byte key.
                            Supported transformations are `base64`, `hex` or `none` (default). The option
-                           none exists for backwards compatbility, the user input will be converted to 32
+                           none exists for backwards compatibility, the user input will be converted to 32
                            byte either via truncation or by zero-padding.
                         default: none
                   openpgp:
@@ -102,7 +102,7 @@ spec:
                       keyPassphrase:
                         type: object
                         description: |
-                          If your private key is encrypted with a passphrase, you should set passphrase for decrypt.
+                          If your private key is encrypted with a passphrase, you should set the passphrase for decryption.
                         properties:
                           name:
                             type: string
@@ -329,7 +329,7 @@ spec:
                         type: object
                         required: [ "storageAccount", "accessKey" ]
                         description: |
-                          Kubernetes [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#secretkeyselector-v1-core)(s) to reference the Secret(s) that contain the information about the `azureCredentials`. . Note that you may use the same or different Secrets for the `storageAccount` and the `accessKey`. In the former case, the `keys` that identify each must be, obviously, different.
+                          Kubernetes [SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/#secretkeyselector-v1-core)(s) to reference the Secret(s) that contain the information about the `azureCredentials`. Note that you may use the same or different Secrets for the `storageAccount` and the `accessKey`. In the former case, the `keys` that identify each must be, obviously, different.
                         properties:
                           storageAccount:
                             type: object
