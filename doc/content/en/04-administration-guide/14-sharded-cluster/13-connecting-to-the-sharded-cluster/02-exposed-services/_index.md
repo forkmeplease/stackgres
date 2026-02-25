@@ -123,9 +123,9 @@ psql -h 172.18.0.102 -U postgres
 
 #### Internal Load Balancer
 
-By default, the service type `LoadBalancer` create an external IP that is publicly accessible, so it is not a recommended option to expose the database service, but there's an option to create `internal` load balancers that create External IP but only accesible from your private network, so you can take advantage of load balance functionality without risking your database.
+By default, the service type `LoadBalancer` create an external IP that is publicly accessible, so it is not a recommended option to expose the database service, but there's an option to create `internal` load balancers that create External IP but only accessible from your private network, so you can take advantage of load balance functionality without risking your database.
 
-To configure this type or LoadBalancer is usually by setting some annotations to the services. The annotations are provided by each cloud provider, check the examples below and make sure you add them to your [SGShardedCluster]({{% relref "06-crd-reference/11-sgshardedcluster" %}}) manifest:
+To configure this type of LoadBalancer is usually by setting some annotations to the services. The annotations are provided by each cloud provider, check the examples below and make sure you add them to your [SGShardedCluster]({{% relref "06-crd-reference/11-sgshardedcluster" %}}) manifest:
 
 
 **[GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing):**

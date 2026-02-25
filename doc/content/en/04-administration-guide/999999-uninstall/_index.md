@@ -41,8 +41,8 @@ my-db-cluster-2   5/5     Running   0          74s
 
 > **IMPORTANT**: before deleting the cluster make sure all the PersistentVolume are going to be removed
 > (if that is your intention). To do so set the field `.spec.persistentVolumeReclaimPolicy` to
-> `Delete` for the PersistentVolume that are associated to the PersisitentVolumeClaim of the cluster.
-> To find out which are the PersisitentVolume use the the following command:
+> `Delete` for the PersistentVolume that are associated to the PersistentVolumeClaim of the cluster.
+> To find out which are the PersistentVolume use the the following command:
 > 
 > ```
 > kubectl get pvc -l app=StackGresCluster
@@ -98,8 +98,8 @@ my-db-cluster-shard1-1  5/5     Running   0          74s
 
 > **IMPORTANT**: before deleting the cluster make sure all the PersistentVolume are going to be removed
 > (if that is your intention). To do so set the field `.spec.persistentVolumeReclaimPolicy` to
-> `Delete` for the PersistentVolume that are associated to the PersisitentVolumeClaim of the cluster.
-> To find out which are the PersisitentVolume use the the following command:
+> `Delete` for the PersistentVolume that are associated to the PersistentVolumeClaim of the cluster.
+> To find out which are the PersistentVolume use the the following command:
 > 
 > ```
 > kubectl get pvc -l app=StackGresShardedCluster
@@ -153,8 +153,8 @@ my-dl-cluster-0   5/5     Running   1          2m59s
 
 > **IMPORTANT**: before deleting the cluster make sure all the PersistentVolume are going to be removed
 > (if that is your intention). To do so set the field `.spec.persistentVolumeReclaimPolicy` to
-> `Delete` for the PersistentVolume that are associated to the PersisitentVolumeClaim of the cluster.
-> To find out which are the PersisitentVolume use the the following command:
+> `Delete` for the PersistentVolume that are associated to the PersistentVolumeClaim of the cluster.
+> To find out which are the PersistentVolume use the the following command:
 > 
 > ```
 > kubectl get pvc -l app=StackGresCluster
@@ -255,7 +255,7 @@ sgpoolingconfig.stackgres.io "generated-from-default-1609864616550" deleted
 
 ## Uninstall the Operator
 
-See also the section about [uninstalling unamespaced resources](#cleanup-unamespaced-resources)
+See also the section about [uninstalling unnamespaced resources](#cleanup-unnamespaced-resources)
 
 ### When installed with Helm
 
@@ -332,9 +332,9 @@ Finally delete the SGConfig StackGres custom resource:
 kubectl delete sgconfig -n openshift-operators stackgres
 ```
 
-## Cleanup unamespaced resources
+## Cleanup unnamespaced resources
 
-Follow this section in order to remove unamesapced resources.
+Follow this section in order to remove unnamespaced resources.
 
 ### Webhooks
 
@@ -404,7 +404,7 @@ customresourcedefinition.apiextensions.k8s.io "sgpoolconfigs.stackgres.io" delet
 
 ### Cluster Role Bindings
 
-Execute the commands below to find and remove the Custom Resource Definitions (CRDs):
+Execute the commands below to find and remove the Cluster Role Bindings:
 
 List all StackGres ClusterRoleBindings:
 
@@ -434,7 +434,7 @@ clusterrolebinding.rbac.authorization.k8s.io "stackgres-restapi-admin" deleted
 
 ### Cluster Roles
 
-Execute the commands below to find and remove the Custom Resource Definitions (CRDs):
+Execute the commands below to find and remove the Cluster Roles:
 
 List all StackGres ClusterRoles:
 

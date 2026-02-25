@@ -14,7 +14,6 @@ Setting up the StackGres Cluster with asynchronous replica members is quite stra
 Nevertheless, the next box highlight the SGCluster CRD again:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -22,23 +21,23 @@ metadata:
   name: cluster
 spec:
   postgres:
-	version: '16.1'
+    version: '16.1'
   instances: 3
   sgInstanceProfile: 'size-s'
   pods:
-	persistentVolume:
-  	size: '10Gi'
+    persistentVolume:
+      size: '10Gi'
   configurations:
-	sgPostgresConfig: 'pgconfig1'
-	sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
+    sgPostgresConfig: 'pgconfig1'
+    sgPoolingConfig: 'poolconfig1'
+    observability:
+      prometheusAutobind: true
   nonProductionOptions:
-	disableClusterPodAntiAffinity: true
+    disableClusterPodAntiAffinity: true
   replication:
-	mode: async
-	role: ha-read
-	syncInstances: 1
-EOF
+    mode: async
+    role: ha-read
+    syncInstances: 1
 ```
 
 The result will be the next:
@@ -46,11 +45,11 @@ The result will be the next:
 ```sh
 $ kubectl -n failover exec -it cluster-0 -c patroni -- bash - patronictl list
 + Cluster: cluster (7369933339677233777) +-----------+----+-----------+
-| Member	| Host         	| Role	| State 	| TL | Lag in MB |
+| Member    | Host             | Role    | State     | TL | Lag in MB |
 +-----------+------------------+---------+-----------+----+-----------+
-| cluster-0 | 10.244.0.8:7433  | Leader  | running   |  1 |       	|
-| cluster-1 | 10.244.0.10:7433 | Replica | streaming |  1 |     	0 |
-| cluster-2 | 10.244.0.12:7433 | Replica | streaming |  1 |     	0 |
+| cluster-0 | 10.244.0.8:7433  | Leader  | running   |  1 |           |
+| cluster-1 | 10.244.0.10:7433 | Replica | streaming |  1 |         0 |
+| cluster-2 | 10.244.0.12:7433 | Replica | streaming |  1 |         0 |
 +-----------+------------------+---------+-----------+----+-----------+
 ```
 
@@ -59,7 +58,6 @@ Maybe the variable `syncInstances` caught your attention. As shown above the clu
 Nevertheless, an example is included to demonstrate that updating the variable is harmless if sync mode is not enabled:
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -67,33 +65,30 @@ metadata:
   name: async-cluster
 spec:
   postgres:
-	version: '16.1'
+    version: '16.1'
   instances: 3
   sgInstanceProfile: 'size-s'
   pods:
-	persistentVolume:
-  	size: '10Gi'
+    persistentVolume:
+      size: '10Gi'
   configurations:
-	sgPostgresConfig: 'pgconfig1'
-	sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
+    sgPostgresConfig: 'pgconfig1'
+    sgPoolingConfig: 'poolconfig1'
   nonProductionOptions:
-	disableClusterPodAntiAffinity: true
+    disableClusterPodAntiAffinity: true
   replication:
-	mode: async
-	role: ha-read
-	syncInstances: 3
-EOF
-sgcluster.stackgres.io/async-cluster created
+    mode: async
+    role: ha-read
+    syncInstances: 3
 ```
+
 ```sh
 kubectl -n failover exec -it async-cluster-0 -c patroni -- bash - patronictl list
 + Cluster: async-cluster (7369943621678699243) +-----------+----+-----------+
-| Member      	| Host         	| Role	| State 	| TL | Lag in MB |
+| Member          | Host             | Role    | State     | TL | Lag in MB |
 +-----------------+------------------+---------+-----------+----+-----------+
-| async-cluster-0 | 10.244.0.14:7433 | Leader  | running   |  1 |       	|
-| async-cluster-1 | 10.244.0.16:7433 | Replica | streaming |  1 |     	0 |
-| async-cluster-2 | 10.244.0.18:7433 | Replica | streaming |  1 |     	0 |
+| async-cluster-0 | 10.244.0.14:7433 | Leader  | running   |  1 |           |
+| async-cluster-1 | 10.244.0.16:7433 | Replica | streaming |  1 |         0 |
+| async-cluster-2 | 10.244.0.18:7433 | Replica | streaming |  1 |         0 |
 +-----------------+------------------+---------+-----------+----+-----------+
 ```
-

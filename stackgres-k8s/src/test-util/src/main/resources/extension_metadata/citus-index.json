@@ -61,6 +61,27 @@
               "build": "6.43"
             }
           ]
+        },
+        {
+          "version": "14.0.0",
+          "availableFor": [
+            {
+              "postgresVersion": "15",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "16",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "17",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "18",
+              "build": "6.49"
+            }
+          ]
         }
       ]
     },
@@ -114,6 +135,27 @@
             {
               "postgresVersion": "17",
               "build": "6.43"
+            }
+          ]
+        },
+        {
+          "version": "14.0.0",
+          "availableFor": [
+            {
+              "postgresVersion": "15",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "16",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "17",
+              "build": "6.43"
+            },
+            {
+              "postgresVersion": "18",
+              "build": "6.49"
             }
           ]
         }

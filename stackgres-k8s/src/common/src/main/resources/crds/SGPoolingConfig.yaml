@@ -85,5 +85,5 @@ spec:
                     additionalProperties:
                       type: string
                     description: |
-                      The `pgbouncer.ini` default parameters parameters which are used if not set.
+                      The `pgbouncer.ini` default parameters which are used if not set.
                 required: ["defaultParameters"]

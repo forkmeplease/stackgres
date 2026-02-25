@@ -14,7 +14,7 @@ The replicas correspond to pods in the StackGres cluster, and can be listed usin
 
 ```
 kubectl get pods -n default -l app=StackGresCluster,stackgres.io/cluster=true
-````
+```
 
 > **Note:** Change `-n` param to point to your namespace, in this example we use default.
 
@@ -29,7 +29,7 @@ stackgres-2   5/5     Running   0          162m
 
 ## Identifying the Master and Replica Nodes
 
-One of the most important task is to be able to identify which node is the current primary and which ones the replica nodes.
+One of the most important tasks is to be able to identify which node is the current primary and which ones the replica nodes.
 
 There are two different ways to accomplish this. The first one is with the `kubectl` command using the pod labels:
 

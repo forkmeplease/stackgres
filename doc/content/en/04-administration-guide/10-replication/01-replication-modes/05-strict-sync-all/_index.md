@@ -5,14 +5,13 @@ url: /administration/replication/modes/strict-sync-all
 description: This section describes the involved steps and concepts of the strict sync all replication mode.
 ---
 
-The `replication.mode` *strict-sync-all* option allow to create or convert all cluster members as synchronous replicas and enables at the same time the Patroni `synchronous_mode_strict`. This is a combination of the `strict-all` and `sync-all` replication modes and the cluster works with the highest HA possible in Postgres.
+The `replication.mode` *strict-sync-all* option allow to create or convert all cluster members as synchronous replicas and enables at the same time the Patroni `synchronous_mode_strict`. This is a combination of the `strict-sync` and `sync-all` replication modes and the cluster works with the highest HA possible in Postgres.
 
 ## Setting up a Cluster with Strict-sync-all replica
 
 Setting this replication mode is quite simple. Here is an example.
 
 ```yaml
-cat << EOF | kubectl apply -f -
 apiVersion: stackgres.io/v1
 kind: SGCluster
 metadata:
@@ -29,15 +28,16 @@ spec:
   configurations:
     sgPostgresConfig: 'pgconfig1'
     sgPoolingConfig: 'poolconfig1'
-  prometheusAutobind: true
+    observability:
+      prometheusAutobind: true
   nonProductionOptions:
     disableClusterPodAntiAffinity: true
   replication:
     mode: strict-sync-all
     role: ha-read
     syncInstances: 1
-EOF
 ```
+
 ```sh
 $ kubectl -n failover exec -it sync-cluster-0 -c patroni -- patronictl list 
 + Cluster: sync-cluster (7373750354182599290) -----+-----------+----+-----------+

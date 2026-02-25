@@ -7,7 +7,7 @@ description: Contains details about the metrics collected by the postgres_export
 showToc: true
 ---
 
-The next tables contains details about the metrics collected by the postgres_exporter.
+The next tables contain details about the metrics collected by the postgres_exporter.
 
 ## Postgres cluster metrics
 
@@ -118,12 +118,12 @@ The next tables contains details about the metrics collected by the postgres_exp
 |   |              | active | GAUGE | Boolean flag indicating whether this slot has a consumer streaming from it |
 |   |              | xmin_age |GAUGE | Age of oldest transaction that cannot be vacuumed due to this replica |
 |   |              | catalog_xmin_age | GAUGE | Age of oldest transaction that cannot be vacuumed from catalogs due to this replica (used by logical replication) |
-|   |              | restart_lsn_bytes | GAUGE | Amount of data on in xlog that must be this replica may need to complete recovery |
-|   |              | confirmed_flush_lsn_bytes | GAUGE | Amount of data on in xlog that must be this replica has not yet received |
+|   |              | restart_lsn_bytes | GAUGE | Amount of data in the xlog that this replica may need to complete recovery |
+|   |              | confirmed_flush_lsn_bytes | GAUGE | Amount of data in the xlog that this replica has not yet received |
 | 21| pg_stat_ssl  |  | | |
 |   |              | pid | LABEL | Process ID of a backend or WAL sender process |
 |   |              | active | GAUGE | Boolean flag indicating if SSL is used on this connection |
-|   |              | bits | GAUGE | Number of bits in the encryption algorithm is in use |
+|   |              | bits | GAUGE | Number of bits in the encryption algorithm in use |
 |   |              | compression | GAUGE | Boolean flag indicating if SSL compression is in use |
 | 22| pg_table_bloat  |  | | |
 |   |              | datname | LABEL | Database name |
@@ -135,7 +135,7 @@ The next tables contains details about the metrics collected by the postgres_exp
 |   |              | fillfactor | GAUGE | Table fillfactor |
 |   |              | bloat_size | GAUGE | Estimated size of the bloat without the extra space kept for the fillfactor |
 |   |              | bloat_ratio | GAUGE | Estimated ratio of the real size used by bloat_size |
-|   |              | is_na | GAUGE | Estimation not aplicable, If true, do not trust the stats |
+|   |              | is_na | GAUGE | Estimation not applicable, If true, do not trust the stats |
 | 23| pg_index  |  | | |
 |   |              | datname | LABEL | Database name |
 |   |              | schema_name | LABEL | Schema name |
@@ -147,7 +147,7 @@ The next tables contains details about the metrics collected by the postgres_exp
 |   |              | fillfactor | GAUGE | Fillfactor |
 |   |              | bloat_size | GAUGE | Estimate index bloat size |
 |   |              | bloat_ratio | GAUGE | Estimate index bloat size ratio |
-|   |              | is_na | GAUGE | Estimate Not aplicable, bad statistic |
+|   |              | is_na | GAUGE | Estimate not applicable, bad statistic |
 | 24| pg_replication_status  |  | | |
 |   |              | application_name | LABEL | Application or node name |
 |   |              | client_addr | LABEL | Client ip address |

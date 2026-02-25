@@ -57,7 +57,7 @@ See also [Coonection Pooling Configuration section]({{%  relref "04-administrati
 
 These are the default values of the `pgbouncer.ini` property:
 
-```yaml
+```
   admin_users: "postgres",
   application_name_add_host: "1",
   auth_query: "SELECT usename, passwd FROM pg_shadow WHERE usename=$1",

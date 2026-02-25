@@ -21,9 +21,19 @@ import io.sundr.builder.annotations.Buildable;
     builderPackage = "io.fabric8.kubernetes.api.builder")
 public class StackGresConfigDeploy {
 
+  private Boolean operator;
+
   private Boolean restapi;
 
   private Boolean collector;
+
+  public Boolean getOperator() {
+    return operator;
+  }
+
+  public void setOperator(Boolean operator) {
+    this.operator = operator;
+  }
 
   public Boolean getRestapi() {
     return restapi;
@@ -43,7 +53,7 @@ public class StackGresConfigDeploy {
 
   @Override
   public int hashCode() {
-    return Objects.hash(collector, restapi);
+    return Objects.hash(collector, operator, restapi);
   }
 
   @Override
@@ -55,7 +65,8 @@ public class StackGresConfigDeploy {
       return false;
     }
     StackGresConfigDeploy other = (StackGresConfigDeploy) obj;
-    return Objects.equals(collector, other.collector) && Objects.equals(restapi, other.restapi);
+    return Objects.equals(collector, other.collector) && Objects.equals(operator, other.operator)
+        && Objects.equals(restapi, other.restapi);
   }
 
   @Override

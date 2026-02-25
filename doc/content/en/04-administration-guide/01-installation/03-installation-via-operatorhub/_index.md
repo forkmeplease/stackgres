@@ -40,9 +40,9 @@ spec:
 EOF
 ```
 
-> You can specify the version in the startingCSV field. For example, you may set it to `stackgres.v1.0.0` to install verion `1.0.0`.
+> You can specify the version in the startingCSV field. For example, you may set it to `stackgres.v1.0.0` to install version `1.0.0`.
 
-The field `installPlanApproval` is set to `Manual` to prevent automatic upgrades of the operator in order to avoid having the operator upgraded before the StackGres custom resources are not upgraded to the latest version (for more info see the [upgrade section]({{% relref "16-upgrade" %}})).
+The field `installPlanApproval` is set to `Manual` to prevent automatic upgrades of the operator in order to avoid having the operator upgraded before the StackGres custom resources are upgraded to the latest version (for more info see the [upgrade section]({{% relref "16-upgrade" %}})).
 
 To proceed with the installation you will have to patch the `InstallPlan` that has been created by the OLM operator:
 
@@ -82,7 +82,7 @@ spec:
 EOF
 ```
 
-> In some managed Kubernetes clusters and Kubernetes distribution a LoadBalancer may not be available, in such case replace `LoadBalancer` for `NodePort` and
+> In some managed Kubernetes clusters and Kubernetes distributions a LoadBalancer may not be available, in such case replace `LoadBalancer` with `NodePort` and
 >  you will be able to connect directly to the node port that will be assigned to the service. To retrieve such port use the following command:
 
 ```
@@ -117,7 +117,7 @@ EOF
      >     ![Search the StackGres Operator from the OperatorHub tab](operator-hub-openshift-install.jpeg)
 > 2. After selecting it click on the "Install" button
      >     ![Search the StackGres Operator from the OperatorHub tab](operator-hub-openshift-install-2.jpeg)
-> 3. Then use the default setting and click on "Install" button
+> 3. Then use the default setting and click on the "Install" button
      >     ![Search the StackGres Operator from the OperatorHub tab](operator-hub-openshift-install-3.jpeg)
 
 To proceed with the installation you will have to patch the `InstallPlan` that has been created by the OLM operator:
@@ -160,7 +160,7 @@ spec:
 EOF
 ```
 
-> In some managed Kubernetes clusters and Kubernetes distribution a LoadBalancer may not be available, in such case replace `LoadBalancer` for `NodePort` and
+> In some managed Kubernetes clusters and Kubernetes distributions a LoadBalancer may not be available, in such case replace `LoadBalancer` with `NodePort` and
 >  you will be able to connect directly to the node port that will be assigned to the service. To retrieve such port use the following command:
 
 ```

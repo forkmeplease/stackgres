@@ -17,7 +17,7 @@ If no custom pooling configuration is specified at cluster creation, StackGres w
  This default configuration will also be used for those parameters that are not specified during the
  creation or modification of the resource.
 
-Some of the configuration's parameters are part of a blocklist and specifying them will is possible during
+Some of the configuration's parameters are part of a blocklist and specifying them is possible during
  the creation or modification of the resource but those values will be ignored. For the complete list of those
  parameters see the [blocked parameters table](#blocked-parameters).
 
@@ -70,17 +70,15 @@ Check the following sections for more insights related to how to configure the c
 
 {{% children style="li" depth="1" description="true" %}}
 
-<!--
-TODO keep?
-If you happen to be reading this, it's because you are aware of your application characteristics and needs
- for scaling connections on a production environment.
+### Pool Mode Considerations
 
-A simple way to target this correctly, is to verify the usage of Prepared Statements, on top of which
- `session` mode will be the only compatible.
+When configuring connection pooling, consider your application's characteristics:
 
-Some applications, do not handle connection closing properly, which may require to add certain timeouts
- for releasing server connections.
--->
+- **Session mode**: Required if your application uses prepared statements or session-level features
+- **Transaction mode**: Recommended for most web applications; provides better connection efficiency
+- **Statement mode**: Most aggressive pooling; use only if your application doesn't rely on transactions
+
+Some applications don't handle connection closing properly, which may require adding timeouts for releasing server connections.
 
 ## Apply Configuration changes
 

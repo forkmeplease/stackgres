@@ -40,16 +40,11 @@ spec:
     image:
       pullPolicy: IfNotPresent
   adminui:
-    name: stackgres-adminui
     image:
       pullPolicy: IfNotPresent
     service:
       exposeHTTP: false
       type: ClusterIP
-  jobs:
-    name: stackgres-jobs
-    image:
-      pullPolicy: IfNotPresent
   authentication:
     type: jwt
     user: admin
